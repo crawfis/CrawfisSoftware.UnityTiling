@@ -1,0 +1,11 @@
+{
+  "name": "Unity.com.crawfissoftware.CrawfisSoftware.UnityTiling.Editor.Tests",
+  "references": [
+    "Unity.com.crawfissoftware.CrawfisSoftware.UnityTiling"
+  ],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": []
+}
