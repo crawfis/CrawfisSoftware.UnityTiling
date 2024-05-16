@@ -1,20 +1,10 @@
 {
     "name": "CrawfisSoftware.UnityTiling",
+    "rootNamespace": "",
     "references": [
-        "UnityEngine.Addressables",
         "CrawfisSoftware",
-        "CrawfisSoftware.AssetManagement",
-        "CrawfisSoftware.Tiling",
-        "CrawfisSoftware.Tiling.TileSets",
-        "CrawfisSoftware.Tiling.TilingBuilders",
-        "CrawfisSoftware.Tiling.TilingEnumerators",
-        "CrawfisSoftware.Collections",
-        "CrawfisSoftware.Collections.Graph",
-        "CrawfisSoftware.Collections.Maze",
-        "CrawfisSoftware.Collections.Path",
-        "CrawfisSoftware.Noise",
-        "CrawfisSoftware.PCG",
-        "CrawfisSoftware.Utility"
+        "Unity.Addressables",
+        "com.crawfissoftware.assetmanagement"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
