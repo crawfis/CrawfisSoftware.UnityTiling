@@ -1,6 +1,8 @@
 {
     "name": "CrawfisSoftware.UnityTiling.Editor",
-    "references": [],
+    "references": [
+        "CrawfisSoftware.UnityTiling"
+    ],
     "includePlatforms": [
         "Editor"
     ],
