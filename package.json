@@ -1,7 +1,7 @@
 {
   "name": "com.crawfissoftware.unitytiling",
   "displayName": "CrawfisSoftware - UnityTiling",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "unity": "2022.3",
   "description": "Wrapper for CrawfisSoftware.Tiling and the various PCG tools.",
   "keywords": [
@@ -23,5 +23,8 @@
   "author": "CrawfisSoftware (https://crawfis.com)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "com.crawfissoftware.assetmanagement": "1.2.8"
   }
 }
