@@ -9,7 +9,7 @@ on:
     inputs:
       unity-version:
         description: 'Unity version'
-        default: 2019.4.1f1
+        default: 2022.3
         required: true
 
 jobs:

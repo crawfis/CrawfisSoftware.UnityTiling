@@ -1,6 +1,8 @@
 {
     "name": "CrawfisSoftware.UnityTiling",
-    "references": [],
+    "references": [
+        "UnityEngine.Addressables"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
