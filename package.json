@@ -24,4 +24,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   }
+  "dependencies": { 
+	"com.crawfissoftware.assetmanagement": "1.2.8"
+  }
 }
