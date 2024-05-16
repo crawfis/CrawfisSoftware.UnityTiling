@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CrawfisSoftware.MazeTilings</name>
+    </assembly>
+    <members>
+        <member name="M:CrawfisSoftware.Tiling.IMazeTileSelector.GetTile(CrawfisSoftware.Tiling.ITileSet,CrawfisSoftware.Collections.Graph.Direction,System.Int32,System.Int32)">
+            <summary>
+            Select and return a tile based on edge constraints.
+            </summary>
+            <param name="TileSet">The tileset that is being searched.</param>
+            <param name="direction">The set of directions for the cell.</param>
+            <param name="row">The tiling row if applicable.</param>
+            <param name="column">The tiling column if applicable.</param>
+            <returns>An ITile2D</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.IPathTile">
+            <summary>
+            Extends ITile2D to include a (possibly directed) path through the tile
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.IPathTile.PathCenterPositions">
+            <summary>
+            The list of path positions from ToEdge to FromEdge
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.IPathTile.FromEdge">
+            <summary>
+            Get the edge the path starts from
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.IPathTile.ToEdge">
+            <summary>
+            Get the edge the path exists or ends at
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder">
+            <summary>
+            Takes as input a maze and a tileset and creates a tiling based on the maze.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.TilingEnumerator">
+            <summary>
+            Get or set the order and the set of tile locations in which each tile is visited.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.TileSelector">
+            <summary>
+            Get or set the algorithm for how a tile is selected for a tile location.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.#ctor(CrawfisSoftware.Collections.Maze.Maze{System.Int32,System.Int32},CrawfisSoftware.Tiling.ITiling2D)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="maze">The maze graph.</param>
+            <param name="existingTiling">An existing tiling used as a starting point.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.UpdateTiling(CrawfisSoftware.Tiling.ITileSet,System.Boolean)">
+            <summary>
+            Set or optionally replace tiles in the tiling based on the current TilingEnumerator and TileSelector.
+            </summary>
+            <param name="tileSet">The tileset to use in creating the tiling</param>
+            <param name="noReplace">Indicates whether to only update tiles that have not been already set</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.SetTile(System.Int32,System.Int32,CrawfisSoftware.Tiling.ITile2D)">
+            <summary>
+            Utility to set an individual tile at the specified location.
+            </summary>
+            <param name="i">The column location.</param>
+            <param name="j">The row location.</param>
+            <param name="tile">An ITile2D.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.GetTiling">
+            <summary>
+            Create a concrete instance of a tiling (or partial tiling).
+            </summary>
+            <returns>A tiling</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.PathTile">
+            <summary>
+            Concrete implementation of IPathTile (and ITile2D)
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.PathTile.PathCenterPositions">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.PathTile.TileSetName">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.PathTile.ID">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.PathTile.LeftColor">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.PathTile.RightColor">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.PathTile.TopColor">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.PathTile.BottomColor">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.PathTile.FromEdge">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.PathTile.ToEdge">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.PathTile.#ctor(System.String,System.Int32,CrawfisSoftware.Collections.Graph.Direction,CrawfisSoftware.Collections.Graph.Direction,System.Collections.Generic.IList{UnityEngine.Vector3})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="name">The name of the tile</param>
+            <param name="id">A unique tile ID</param>
+            <param name="fromEdge">The edge the path definition starts at</param>
+            <param name="toEdge">The edge the path definition ends at</param>
+            <param name="positions">A list of positions along the path</param>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Straight0101">
+            <summary>
+            A vertical path tile in a straight line. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Straight1010">
+            <summary>
+            A horizontal path tile in a straight line. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Circle0011">
+            <summary>
+            Path tile that turns from right edge to bottom edge in an arc. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Circle0110">
+            <summary>
+            Path tile that turns from top edge to right edge in an arc. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Circle1001">
+            <summary>
+            Path tile that turns from left edge to bottom edge in an arc. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Circle1100">
+            <summary>
+            Path tile that turns from left edge to top edge in an arc. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Manhattan0011">
+            <summary>
+            Path tile that turns from right edge to bottom edge along axes. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Manhattan0110">
+            <summary>
+            Path tile that turns from top edge to right edge along axes. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Manhattan1001">
+            <summary>
+            Path tile that turns from left edge to bottom edge along axes. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTile.Manhattan1100">
+            <summary>
+            Path tile that turns from left edge to bottom top along axes. Numbering goes left,top,right,bottom
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.PathTileSetBuilder">
+            <summary>
+            Class to create an arc-based path tileset or a manhattan like path tileset
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.PathTileSetBuilder.#ctor(System.Single,System.Single)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="tileWidth">The desired tile width</param>
+            <param name="tileHeight">The desired tile height</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.PathTileSetBuilder.GenerateArcTileSet">
+            <summary>
+            Create a path tile set (6 tiles) with circle arc turns and straight aways
+            </summary>
+            <returns>An <paramref>ITileSet</paramref></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.PathTileSetBuilder.GenerateManhattanTileSet">
+            <summary>
+            Create a path tile set (6 tiles) with sharp turns
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSizePathTileDecorator">
+            <summary>
+            A decorator for an IPathTile that changes the tile size
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSizePathTileDecorator.PathCenterPositions">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSizePathTileDecorator.TileSetName">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSizePathTileDecorator.ID">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSizePathTileDecorator.LeftColor">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSizePathTileDecorator.RightColor">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSizePathTileDecorator.TopColor">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSizePathTileDecorator.BottomColor">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSizePathTileDecorator.FromEdge">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSizePathTileDecorator.ToEdge">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSizePathTileDecorator.#ctor(CrawfisSoftware.Tiling.IPathTile,UnityEngine.Vector3)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="pathTile">The real path tile</param>
+            <param name="scale">A scale transform to apply to all of the path positions</param>
+        </member>
+    </members>
+</doc>
