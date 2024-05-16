@@ -2,6 +2,7 @@
     "name": "CrawfisSoftware.UnityTiling",
     "references": [
         "UnityEngine.Addressables",
+        "CrawfisSoftware",
         "CrawfisSoftware.AssetManagement",
         "CrawfisSoftware.Tiling",
         "CrawfisSoftware.Tiling.TileSets",
@@ -13,7 +14,7 @@
         "CrawfisSoftware.Collections.Path",
         "CrawfisSoftware.Noise",
         "CrawfisSoftware.PCG",
-        "CrawfisSoftware.Utility",
+        "CrawfisSoftware.Utility"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
