@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿using CrawfisSoftware.AssetManagement;
+
+using System.Threading.Tasks;
+
+using UnityEngine;
+
 namespace CrawfisSoftware.UnityTiling
 {
     public class UnityTile : IUnityTile
@@ -16,7 +21,24 @@ namespace CrawfisSoftware.UnityTiling
 
         public int BottomColor { get; private set; }
         public CrawfisSoftware.AssetManagement.ScriptableAssetProviderBase<GameObject> Prefab { get; private set; }
-        public UnityTile(string name, string tileSetName, int id, AssetManagement.ScriptableAssetProviderBase<GameObject> prefab, int left, int top, int right, int bottom)
+
+#if UNITY_EDITOR && SPAWN_PREFABS
+        public async Task<GameObject> SpawnPrefabAsync()
+        {
+            return await Prefab.GetAsync(Name);
+        }
+#endif
+        public async Task<GameObject> SpawnInstanceAsync()
+        {
+            return await Prefab.GetAsync(Name);
+        }
+
+        public async Task Initialize()
+        {
+            await Prefab.Initialize();
+        }
+        //public AssetReference Prefab { get; private set; }
+        public UnityTile(string name, string tileSetName, int id, ScriptableAssetProviderBase<GameObject> prefab, int left, int top, int right, int bottom)
         {
             TileSetName = tileSetName;
             Name = name;

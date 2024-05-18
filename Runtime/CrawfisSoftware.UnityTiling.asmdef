@@ -4,7 +4,8 @@
     "references": [
         "CrawfisSoftware",
         "Unity.Addressables",
-        "com.crawfissoftware.assetmanagement"
+        "com.crawfissoftware.assetmanagement",
+        "Unity.ResourceManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
