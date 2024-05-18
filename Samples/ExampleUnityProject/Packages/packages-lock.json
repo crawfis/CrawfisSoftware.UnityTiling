@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "b494ca6b87a906aed355b735116faf30f3cd9623"
     },
+    "com.crawfissoftware.unitytiling": {
+      "version": "https://github.com/crawfis/CrawfisSoftware.UnityTiling.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "602a2c98ea2bde81022b57b6cb35de7e37e89550"
+    },
     "com.unity.addressables": {
       "version": "2.0.8",
       "depth": 0,

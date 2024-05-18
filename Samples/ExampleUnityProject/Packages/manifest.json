@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.crawfissoftware.assetmanagement": "https://github.com/crawfis/AssetManagement.git",
+    "com.crawfissoftware.unitytiling": "https://github.com/crawfis/CrawfisSoftware.UnityTiling.git",
     "com.unity.addressables": "2.0.8",
     "com.unity.ai.navigation": "2.0.0",
     "com.unity.collab-proxy": "2.2.0",
