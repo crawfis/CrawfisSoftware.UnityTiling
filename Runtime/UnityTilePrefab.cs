@@ -22,8 +22,8 @@ namespace CrawfisSoftware.UnityTiling
             if (createPrefabs)
             {
 #if UNITY_EDITOR
-                GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-                return Task.FromResult(instance);
+                GameObject newPrefab = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                return Task.FromResult(newPrefab);
 #endif
             }
             var instance = GameObject.Instantiate(prefab);
