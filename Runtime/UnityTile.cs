@@ -22,13 +22,7 @@ namespace CrawfisSoftware.UnityTiling
         public int BottomColor { get; private set; }
         public CrawfisSoftware.AssetManagement.ScriptableAssetProviderBase<GameObject> Prefab { get; private set; }
 
-#if UNITY_EDITOR && SPAWN_PREFABS
-        public async Task<GameObject> SpawnPrefabAsync()
-        {
-            return await Prefab.GetAsync(Name);
-        }
-#endif
-        public async Task<GameObject> SpawnInstanceAsync()
+        public async Task<GameObject> SpawnInstanceAsync(bool createPrefabs = false)
         {
             return await Prefab.GetAsync(Name);
         }

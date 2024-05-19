@@ -2,7 +2,9 @@
 
 using System.Threading.Tasks;
 
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 using UnityEngine;
 
@@ -15,15 +17,15 @@ namespace CrawfisSoftware.UnityTiling
 
         public GameObject Prefab { get { return prefab; } set { prefab = value; } }
 
-#if UNITY_EDITOR && SPAWN_PREFABS
-        public override Task<GameObject> SpawnPrefabAsync()
+        public override Task<GameObject> SpawnInstanceAsync(bool createPrefabs = false)
         {
-            GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
-            return Task.FromResult(instance);
-        }
+            if (createPrefabs)
+            {
+#if UNITY_EDITOR
+                GameObject instance = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
+                return Task.FromResult(instance);
 #endif
-        public override Task<GameObject> SpawnInstanceAsync()
-        {
+            }
             var instance = GameObject.Instantiate(prefab);
             return Task.FromResult(instance);
         }

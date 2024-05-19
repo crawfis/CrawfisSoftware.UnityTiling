@@ -12,13 +12,7 @@ namespace CrawfisSoftware.UnityTiling
         [SerializeField] private ScriptableAssetProviderBase<GameObject> prefab;
         public ScriptableAssetProviderBase<GameObject> AssetProvider { get { return prefab; } set { prefab = value; } }
 
-#if UNITY_EDITOR && SPAWN_PREFABS
-        public override async Task<GameObject> SpawnPrefabAsync()
-        {
-            return await AssetProvider.GetAsync(Name);
-        }
-#endif
-        public override async Task<GameObject> SpawnInstanceAsync()
+        public override async Task<GameObject> SpawnInstanceAsync(bool createPrefabs = false)
         {
             return await AssetProvider.GetAsync(Name);
         }

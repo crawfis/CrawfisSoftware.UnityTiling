@@ -32,10 +32,7 @@ namespace CrawfisSoftware.UnityTiling
 
         public void SetDefaultTile() { isDefaultTile = true; }
 
-#if UNITY_EDITOR && SPAWN_PREFABS
-        public abstract Task<GameObject> SpawnPrefabAsync();
-#endif
-        public abstract Task<GameObject> SpawnInstanceAsync();
+        public abstract Task<GameObject> SpawnInstanceAsync(bool createPrefabs);
 
         public abstract Task Initialize();
     }
