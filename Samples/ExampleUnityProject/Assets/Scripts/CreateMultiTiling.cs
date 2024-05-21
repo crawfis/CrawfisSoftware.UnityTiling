@@ -23,6 +23,7 @@ namespace CrawfisSoftware.UnityTiling
         public string tilingName = "Tiling";
         [SerializeField] MazeProvider _mazeProvider;
         [SerializeField] private List<TileSetUnityScriptable> _tileSetUnityScriptable = new(0);
+        [SerializeField] private bool _spawnPrefabs;
 
         private ITiling2D tiling;
         private float tileWidth;
@@ -87,11 +88,7 @@ namespace CrawfisSoftware.UnityTiling
 
         private async Task CreateTileAsync(float tileWidth, float tileHeight, GameObject parent, int sortOrder, int j, int i, IUnityTile unityTile)
         {
-#if UNITY_EDITOR && SPAWN_PREFABS
-            var prefab = await unityTile.SpawnPrefabAsync();
-#else
-            var prefab = await unityTile.SpawnInstanceAsync();
-#endif
+            var prefab = await unityTile.SpawnInstanceAsync(_spawnPrefabs);
 
             if (prefab == null) await Task.CompletedTask;
 
@@ -107,11 +104,6 @@ namespace CrawfisSoftware.UnityTiling
             //GameObject tileGO = PrefabUtility.InstantiatePrefab(prefab, parent.transform) as GameObject;
             GameObject tileGO = prefab;
             tileGO.transform.SetParent(parent.transform, false);
-#if UNITY_EDITOR
-            //var tileGO = PrefabUtility.InstantiatePrefab(prefab, parent.transform) as GameObject;
-#else
-                //var tileGO = Instantiate<GameObject>(prefab, parent.transform);
-#endif
             InstantiateTile_Completed2(tileGO, position);
             // for SpriteRenderer
             if (tileGO.TryGetComponent(out SpriteRenderer spriteRenderer))
