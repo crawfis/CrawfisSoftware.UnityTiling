@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.unity.addressables": "2.0.8",
+    "com.crawfissoftware.unitytiling": "https://github.com/crawfis/CrawfisSoftware.UnityTiling.git",
     "com.unity.collab-proxy": "2.2.0",
     "com.unity.ide.rider": "3.0.28",
     "com.unity.ide.visualstudio": "2.0.22",
