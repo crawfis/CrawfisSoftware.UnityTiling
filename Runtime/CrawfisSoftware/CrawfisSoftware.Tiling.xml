@@ -1,0 +1,1568 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CrawfisSoftware.Tiling</name>
+    </assembly>
+    <members>
+        <member name="T:CrawfisSoftware.Tiling.ExplicitTiling2D">
+            <summary>
+            Concrete tiling (ITiling2D) that takes a double array of tileID's and a 
+            corresponding tile set (ITileSet)
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ExplicitTiling2D.#ctor(CrawfisSoftware.Tiling.ITile2D[0:,0:],CrawfisSoftware.Tiling.ITile2D)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="tiling">2D array of ITile2D's with [i,j] layout.</param>
+            <param name="defaultTile">A tile to return in the case of a bad request for a tile from the tiling.</param>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ExplicitTiling2D.Width">
+            <summary>
+            The number of cells in the "i"-direction.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ExplicitTiling2D.Height">
+            <summary>
+            The number of cells in the "j"-direction.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ExplicitTiling2D.Tile(System.Int32,System.Int32)">
+            <summary>
+            Get the tile at the corresponding row (i) and column (j).
+            </summary>
+            <param name="i">Index into the "i'-direction (row)</param>
+            <param name="j">Index into the "i'-direction (row)</param>
+            <returns></returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.IDrawableTile`2">
+            <summary>
+            Interface for tilings to render individual tiles.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.IDrawableTile`2.Render(CrawfisSoftware.Tiling.Tiling2DIndex,`0)">
+            <summary>
+            Draw the tile at tiling location. Extra data can be passed in the Context.
+            </summary>
+            <param name="tileLocation"></param>
+            <param name="Context">A placeholder for a concrete implementation to pass in data.</param>
+            <returns>A render specific output. A placeholder for a concrete implementation to return data.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.IDrawableTile`2.PreRender(`0)">
+            <summary>
+            This is called before the tile is rendered, and perhaps before any tiles are rendered.
+            </summary>
+            <param name="Context">A placeholder for a concrete implementation to pass in data.</param>
+            <returns>A render specific output. A placeholder for a concrete implementation to return data.</returns>
+            <remarks>PreRender may be used to load or set textures, build the tileset or as in the case of the
+            SVGTile, create the SVG code that can be instanced in the tiling.</remarks>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.ITile2D">
+            <summary>
+            Interface for a tile with edge colors (constraints)
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITile2D.TileSetName">
+            <summary>
+            The original tile set this tile instance is from.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITile2D.ID">
+            <summary>
+            A unique number within a tileset.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITile2D.LeftColor">
+            <summary>
+            Left edge constraint
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITile2D.RightColor">
+            <summary>
+             Right edge constraint.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITile2D.TopColor">
+            <summary>
+            Top edge constraint.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITile2D.BottomColor">
+            <summary>
+            Bottom edge constraint.
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.ITileSelector">
+            <summary>
+            Interface for selecting a tile from a tileset.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITileSelector.DefaultTile">
+            <summary>
+            Get or set a tile that is returned on any failed search.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ITileSelector.GetTile(CrawfisSoftware.Tiling.ITileSet,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Select and return a tile based on edge constraints.
+            </summary>
+            <param name="TileSet">The tileset that is being searched.</param>
+            <param name="leftChoice">A possible edge contraint on the left edge (or no constraint if -1.</param>
+            <param name="topChoice">A possible edge contraint on the top edge (or no constraint if -1.</param>
+            <param name="rightChoice">A possible edge contraint on the right edge (or no constraint if -1.</param>
+            <param name="bottomChoice">A possible edge contraint on the bottom edge (or no constraint if -1.</param>
+            <param name="row">The tiling row if applicable. Defaults to zero.</param>
+            <param name="column">The tiling column if applicable. Defaults to zero.</param>
+            <returns>An ITile2D</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.ITileSet">
+            <summary>
+            ITileSet provides a container for a set of tiles. This may either be explicit or implicit as in a
+            selection clauses from a global tile set database (see TileSetDatabaseSlice.cs)
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITileSet.Name">
+            <value>
+            Get the name for the tileset
+            </value>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITileSet.Description">
+            <summary>
+            A short text description of the tileset.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITileSet.Count">
+            <summary>
+            Get the number of tiles in the tileset.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITileSet.Width">
+            <summary>
+            The width of each tile in the tileset.
+            </summary>
+            <remarks>This should really be a float.</remarks>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITileSet.Height">
+            <summary>
+            The height of each tile in the tileset.
+            </summary>
+            <remarks>This should really be a float.</remarks>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITileSet.IsComplete">
+            <summary>
+            True if all possible edge color matchings exist in the tileset.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITileSet.DefaultTile">
+            <summary>
+            An ITile2D to return if GetTile or GetMatchingTiles does not have a valid tile.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITileSet.Keywords">
+            <summary>
+            A list of strings that describe the tileset.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ITileSet.GetTile(System.Int32)">
+            <summary>
+            Returns the tile with the specified ID number.
+            </summary>
+            <param name="tileID">The tile ID</param>
+            <returns>Either the tile in tileset with the tileID or the DefaultTile.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ITileSet.GetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns a list of all tiles matching the specified constraints (or the default tile if none).
+            </summary>
+            <param name="leftChoice">A possible edge contraint on the left edge (or no constraint if -1.</param>
+            <param name="topChoice">A possible edge contraint on the top edge (or no constraint if -1.</param>
+            <param name="rightChoice">A possible edge contraint on the right edge (or no constraint if -1.</param>
+            <param name="bottomChoice">A possible edge contraint on the bottom edge (or no constraint if -1.</param>
+            <returns></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ITileSet.TryGetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32,System.Collections.Generic.IList{CrawfisSoftware.Tiling.ITile2D}@)">
+            <summary>
+            Returns a list of all tiles matching the specified constraints if any exist. Otherwise returns false.
+            </summary>
+            <param name="leftChoice">A possible edge contraint on the left edge (or no constraint if -1.</param>
+            <param name="topChoice">A possible edge contraint on the top edge (or no constraint if -1.</param>
+            <param name="rightChoice">A possible edge contraint on the right edge (or no constraint if -1.</param>
+            <param name="bottomChoice">A possible edge contraint on the bottom edge (or no constraint if -1.</param>
+            <param name="tiles">A list of all tiles matching the specified constraints.</param>
+            <returns></returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.ITiling2D">
+            <summary>
+            Interface for a tiling.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITiling2D.Width">
+            <summary>
+            Get the number of columns in the tiling.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITiling2D.Height">
+            <summary>
+            Get the number of rows in the tiling.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ITiling2D.Tile(System.Int32,System.Int32)">
+            <summary>
+            Given the cell location in a tiling, return the tile at that location.
+            </summary>
+            <param name="i">The column location.</param>
+            <param name="j">The row location.</param>
+            <returns>The tile stored at the specified location</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.ITilingBuilder">
+            <summary>
+            Interface for creating tilings.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ITilingBuilder.TilingEnumerator">
+            <summary>
+            Get or set the order and the set of tile locations in which each tile is visited.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ITilingBuilder.TileSelector">
+            <summary>
+            Get or set the algorithm for how a tile is selected for a tile location.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ITilingBuilder.UpdateTiling(CrawfisSoftware.Tiling.ITileSet,System.Boolean)">
+            <summary>
+            Set or optionally replace tiles in the tiling based on the current TilingEnumerator and TileSelector.
+            </summary>
+            <param name="tileSet"></param>
+            <param name="noReplace">A boolean flag that can be used to indicate not to overwrite tiles already placed.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ITilingBuilder.SetTile(System.Int32,System.Int32,CrawfisSoftware.Tiling.ITile2D)">
+            <summary>
+            Utility to set an individual tile at the specified location.
+            </summary>
+            <param name="i">The column location.</param>
+            <param name="j">The row location.</param>
+            <param name="tile">An ITile2D.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ITilingBuilder.GetTiling">
+            <summary>
+            Create a concrete instance of a tiling (or partial tiling).
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder">
+            <summary>
+            Creates a tiling, an ITiling2D, where the edge "colors" are matched. Useful for Wang Tilings.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder.Width">
+            <summary>
+            The number of cells in the "i"-direction.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder.Height">
+            <summary>
+            The number of cells in the "j"-direction.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder.TilingEnumerator">
+            <summary>
+            An enumerator to control the order and possibly subset of tiles to visit.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder.TileSelector">
+            <summary>
+            Instance of an ITileSelector to determine a tile from a possible set of matching tiles.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="width">Number of cells in the "i"-direction.</param>
+            <param name="height">Number of cells in the "j"-direction.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder.#ctor(System.Int32,System.Int32,CrawfisSoftware.Tiling.ITiling2D)">
+            <summary>
+            Constructor that takes in an existing Tiling
+            </summary>
+            <param name="width">Number of cells in the "i"-direction.</param>
+            <param name="height">Number of cells in the "j"-direction.</param>
+            <param name="existingTiling">An existing tiling used as a starting point.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder.UpdateTiling(CrawfisSoftware.Tiling.ITileSet,System.Boolean)">
+            <summary>
+            Create a tiling (or partial tiling) using the current TilingEnumerator and TileSelector. New tiles will come from the passed in tile set.
+            </summary>
+            <param name="tileSet">An instance of a ITileSet.</param>
+            <param name="noReplace">A boolean flag that can be used to indicate not to overwrite tiles already placed.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder.SetTile(System.Int32,System.Int32,CrawfisSoftware.Tiling.ITile2D)">
+            <summary>
+            Utility to set an individual tile at the specified location.
+            </summary>
+            <param name="i">The column location.</param>
+            <param name="j">The row location.</param>
+            <param name="tile">An ITile2D.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MatchingTilingBuilder.GetTiling">
+            <summary>
+            Create a concrete instance of a tiling (or partial tiling).
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingBuilder">
+            <summary>
+            Creates a tiling, an ITiling2D, ignoring the edge "colors".
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingBuilder.Width">
+            <summary>
+            The number of columns in the desired tiling.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingBuilder.Height">
+            <summary>
+            The number of rows in the desired tiling.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingBuilder.TilingEnumerator">
+            <summary>
+            Get or set the order and the set of tile locations in which each tile is visited.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingBuilder.TileSelector">
+            <summary>
+            Get or set the algorithm for how a tile is selected for a tile location.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingBuilder.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="width">The number of columns in the desired tiling.</param>
+            <param name="height">The number of rows in the desired tiling.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingBuilder.UpdateTiling(CrawfisSoftware.Tiling.ITileSet,System.Boolean)">
+            <summary>
+            Set or optionally replace tiles in the tiling based on the current TilingEnumerator and TileSelector.
+            </summary>
+            <param name="tileSet"></param>
+            <param name="noReplace">A boolean flag that can be used to indicate not to overwrite tiles already placed.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingBuilder.SetTile(System.Int32,System.Int32,CrawfisSoftware.Tiling.ITile2D)">
+            <summary>
+            Utility to set an individual tile at the specified location.
+            </summary>
+            <param name="i">The column location.</param>
+            <param name="j">The row location.</param>
+            <param name="tile">An ITile2D.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingBuilder.GetTiling">
+            <summary>
+            Create a concrete instance of a tiling (or partial tiling).
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder">
+            <summary>
+            Utility class for creating tilings using stamps or explicit setting of tiles.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.Width">
+            <summary>
+            The number of columns in the desired tiling.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.Height">
+            <summary>
+            The number of rows in the desired tiling.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.TilingEnumerator">
+            <summary>
+            Get or set the order and the set of tile locations in which each tile is visited.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.TileSelector">
+            <summary>
+            Get or set the algorithm for how a tile is selected for a tile location.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="width">The number of columns in the desired tiling.</param>
+            <param name="height">The number of rows in the desired tiling.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.GetTiling">
+            <summary>
+            Create a concrete instance of a tiling (or partial tiling).
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.SetTile(System.Int32,System.Int32,CrawfisSoftware.Tiling.ITile2D)">
+            <summary>
+            Utility to set an individual tile at the specified location.
+            </summary>
+            <param name="i">The column location.</param>
+            <param name="j">The row location.</param>
+            <param name="tile">An ITile2D.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.UpdateTiling(CrawfisSoftware.Tiling.ITileSet,System.Boolean)">
+            <summary>
+            Set or optionally replace tiles in the tiling based on the current TilingEnumerator and TileSelector.
+            </summary>
+            <param name="tileSet"></param>
+            <param name="noReplace">A boolean flag that can be used to indicate not to overwrite tiles already placed.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.PlaceWithinTiling(CrawfisSoftware.Tiling.ITiling2D,CrawfisSoftware.Tiling.Tiling2DIndex)">
+            <summary>
+            Place an existing tiling within this one.
+            </summary>
+            <param name="stamp">The tiling to place.</param>
+            <param name="location">A TilingIndex2D location for the placement origin.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.TilingBuilder.PlaceWithinTiling(CrawfisSoftware.Tiling.ITiling2D,CrawfisSoftware.Tiling.Tiling2DIndex,CrawfisSoftware.Tiling.ITilingEnumerator,System.Func{CrawfisSoftware.Tiling.Tiling2DIndex,CrawfisSoftware.Tiling.ITile2D,CrawfisSoftware.Tiling.ITile2D,CrawfisSoftware.Tiling.ITile2D})">
+            <summary>
+            Place an existing tiling within this one.
+            </summary>
+            <param name="stamp">The tiling to place.</param>
+            <param name="location">A TilingIndex2D location for the placement origin.</param>
+            <param name="stampEnumerator">An enumerator to control which tiles in the stamp are set (and what order).</param>
+            <param name="replacementStrategy">A function that takes in a location in the tiling being created, the existing tile
+            and the new tile from the stamp. It returns the tile that should be used (typically one of these, but could be anything.</param>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator">
+            <summary>
+            A tiling enumerator that only returns the tiles within a specified width of the tiling's edges
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.BoundaryWidth">
+            <summary>
+            Get or set the width of the boundary to be enumerated
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.Current">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.#ctor(System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="boundaryWidth">The width of the boundary in the number of tiles</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.BoundaryTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator">
+            <summary>
+            A tiling enumerator that only returns the 4 corner tiles within a specified width of the tiling's edges
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator.Current">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.CornerTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator">
+            <summary>
+            Enumerate tiles from an explicit set of tile indices only.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator.Current">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator.#ctor(System.Collections.Generic.IEnumerable{CrawfisSoftware.Tiling.Tiling2DIndex})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="tileLocations">Explicit list of tile locations to enumerate</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ExplicitTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator">
+            <summary>
+            Enumerate from (0,0) using z-order (also known as Lebesgue or Morton space-filling curve).
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator.#ctor">
+            <summary>
+            Constructor. Need the Width and Height set.
+               Design Note: Not set in the constructor since the tiling is not known.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator.Current">
+            <summary>
+            The current cell in the enumeration
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.HilbertTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator">
+            <summary>
+            Iterate over all of the tiles in a tiling randomly.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.Current">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.#ctor(System.Random)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="random">A random number generator</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.RandomTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator">
+            <summary>
+            Simple class to walk through a tiling or 2D grid and emit a Tiling2DIndex of the grid location.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator.Current">
+            <summary>
+            The current cell in the enumeration
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator.#ctor">
+            <summary>
+            Constructor. Need the Width and Height set.
+               Design Note: Not set in the constructor since the tiling is not known.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SequentialTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator">
+            <summary>
+            Class to walk through a tiling or 2D grid in a spiral from some starting position, emitting a Tiling2DIndex of the grid location.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.InitialCell">
+            <summary>
+            The initial cell to spiral around. Defaults to (0,0). Changing in the middle will result in unknown results.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.Current">
+            <summary>
+            The current cell in the enumeration
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.#ctor">
+            <summary>
+            Constructor. Need the Width and Height set.
+               Design Note: Not set in the constructor since the tiling is not known.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.SpiralTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator">
+            <summary>
+            Sample of a "special" tiling enumerator that only enumerates the
+            upper-left quadrant.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator.Current">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.UpperLeftQuadrantEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator">
+            <summary>
+            Enumerate from (0,0) using z-order (also known as Lebesgue or Morton space-filling curve).
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator.#ctor">
+            <summary>
+            Constructor. Need the Width and Height set.
+               Design Note: Not set in the constructor since the tiling is not known.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator.Current">
+            <summary>
+            The current cell in the enumeration
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.ZOrderTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.ITilingEnumerator">
+            <summary>
+            Interface for all tiling Enumerators. Inherits IEnumerator<TilingIndex2D></TilingIndex2D>
+            </summary>
+            <remarks>Can be used to control the order or tiles and whether a tile is enumerated or not.</remarks>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITilingEnumerator.Width">
+            <summary>
+            The number of columns in the tiling that will be enumerated.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ITilingEnumerator.Height">
+            <summary>
+            The number of rows in the tiling that will be enumerated.
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.Tile2D">
+            <summary>
+            Struct for holding information about an individual tile.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.Tile2D.TileSetName">
+            <summary>
+            The original tile set this tile instance is from.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.Tile2D.ID">
+            <summary>
+            A unique number within a tileset.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.Tile2D.LeftColor">
+            <summary>
+            Left edge constraint
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.Tile2D.RightColor">
+            <summary>
+             Right edge constraint.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.Tile2D.TopColor">
+            <summary>
+            Top edge constraint.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.Tile2D.BottomColor">
+            <summary>
+            Bottom edge constraint.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.Tile2D.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="tileSetName">The name of the tileset this tile comes from.</param>
+            <param name="ID">Unique ID within that tileset.</param>
+            <param name="left">The left edge color (or unspecified if -1).</param>
+            <param name="top">The left edge color (or unspecified if -1).</param>
+            <param name="right">The right edge color (or unspecified if -1).</param>
+            <param name="bottom">The bottom edge color (or unspecified if -1).</param>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.Tiling2DIndex">
+            <summary>
+            Struct to hold the interger grid location of a tile.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.Tiling2DIndex.i">
+            <summary>
+            The i (column) grid location from zero to N-1, where N is the width of the tiling.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.Tiling2DIndex.j">
+            <summary>
+            The j (row) grid location from zero to M-1, where M is the height of the tiling.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.Tiling2DIndex.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="i"></param>
+            <param name="j"></param>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingUtility">
+            <summary>
+            Static utility class to hold defaults for the enumeration and selection.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingUtility.DefaultTilingEnumerator">
+            <summary>
+            Get or set the default tiling enumerator
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingUtility.DefaultTileSelector">
+            <summary>
+            Get or set the default tile selector
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.RandomTileSelector">
+            <summary>
+            A tile selector that random picks a tile
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.RandomTileSelector.DefaultTile">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.RandomTileSelector.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.RandomTileSelector.#ctor(System.Random)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="random">A random generator to use in the selection</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.RandomTileSelector.GetTile(CrawfisSoftware.Tiling.ITileSet,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.SequentialTileSelector">
+            <summary>
+            An ItileSelector that will select the next tile returned from a set
+            of matched tiles with the same constraints.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.SequentialTileSelector.DefaultTile">
+            <summary>
+            Get or set the tile to return if no match is found.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.SequentialTileSelector.#ctor(System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="maxNumberOfEdgeColors">Optional. A hint on the maximum number of edges. Used in the
+            hashing needed for saved searches.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.SequentialTileSelector.GetTile(CrawfisSoftware.Tiling.ITileSet,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Returns a tile based on the constraints specified.
+            </summary>
+            <param name="tileSet">The tileset to search.</param>
+            <param name="leftChoice">A constraint on the left edge or -1 for no constraint.</param>
+            <param name="topChoice">A constraint on the top edge or -1 for no constraint.</param>
+            <param name="rightChoice">A constraint on the right edge or -1 for no constraint.</param>
+            <param name="bottomChoice">A constraint on the bottom edge or -1 for no constraint.</param>
+            <param name="row">The tiling row if applicable. Defaults to zero.</param>
+            <param name="column">The tiling column if applicable. Defaults to zero.</param>
+            <returns>Either the next tile from the match or the default tile.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet">
+            <summary>
+            A tile set (abstract) that has the 16 possible configurations of walls and doors
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.Description">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.IsComplete">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.Keywords">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.DefaultTile">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.GetTile(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.GetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.TryGetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32,System.Collections.Generic.IList{CrawfisSoftware.Tiling.ITile2D}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractMazeTileSet.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet">
+            <summary>
+            This creates a tileset of all maze and path tiles. Each edge can have a 
+            color of 0 or 1 (wall or path). It also have all tiles where one or more
+            edges can be undefined (-1).
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.Description">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.IsComplete">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.Keywords">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.DefaultTile">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.GetTile(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.GetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.TryGetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32,System.Collections.Generic.IList{CrawfisSoftware.Tiling.ITile2D}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.AbstractPartialTileSet.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.CompositeTileSet">
+            <summary>
+            A collection of tilesets that act as a single tileset
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.Description">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.IsComplete">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.Keywords">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.DefaultTile">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.TileSets">
+            <summary>
+            Iterate over all of the tilesets in this class
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.GetTile(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.GetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.AddTileSet(CrawfisSoftware.Tiling.ITileSet)">
+            <summary>
+            Add a tile set to the composite list of tilesets
+            </summary>
+            <param name="tileSet"></param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.TryGetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32,System.Collections.Generic.IList{CrawfisSoftware.Tiling.ITile2D}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.CompositeTileSet.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.TileFactory">
+            <summary>
+            Factory to create a ITile2D
+            </summary>
+            <seealso cref="T:CrawfisSoftware.Tiling.TileSets.TileSetFactory"/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileFactory.#ctor(System.String,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="tileSetName">A name for newly constructed tile set.</param>
+            <param name="initialID">An initial tile ID (defaults to zero). Subsequent tiles will increment this to give unique tile id's.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileFactory.CreateTile(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Create a tile associated with the indicated edge "colors"
+            </summary>
+            <param name="left">The "color" associated with the left edge.</param>
+            <param name="top">The "color" associated with the top edge.</param>
+            <param name="right">The "color" associated with the right edge.</param>
+            <param name="bottom">The "color" associated with the bottom edge.</param>
+            <returns>An ITile2D with a unique tile id associated with the tile set.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.TileSearchUtility">
+            <summary>
+            Static class for useful methods in the Tiling framework
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSearchUtility.MeetsConstraints(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Function delegate that will return true if a tile's edge colors match the input edgeColors.
+            </summary>
+            <param name="leftChoice">The color of left edge. A negative value indicates any color will match.</param>
+            <param name="topChoice">The color of top edge. A negative value indicates any color will match.</param>
+            <param name="rightChoice">The color of right edge. A negative value indicates any color will match.</param>
+            <param name="bottomChoice">The color of bottom edge. A negative value indicates any color will match.</param>
+            <returns>A delegate, bool function(ITile), that takes as input an ITile and returns a boolean. 
+            Returns true is the tile matches the input colors. Returns false otherwise.</returns>
+            <example>var list = tileSet.Where<c>&lt;ITile2D&gt;</c>(TileSearchUtility.MeetsConstraints(leftChoice, topChoice, rightChoice, bottomChoice));</example>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.TileSet">
+            <inheritdoc/>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.TileSets.TileSet._tileSet">
+            <summary>
+            Protected. The list of tiles in this tileSet.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.TileSet.Name">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.TileSet.Description">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.TileSet.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.TileSet.IsComplete">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.TileSet.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.TileSet.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.TileSet.Keywords">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileSets.TileSet.DefaultTile">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.#ctor(System.String,System.String,System.Single,System.Single)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="name">The name for this tileSet</param>
+            <param name="description">A short description of the tileSet</param>
+            <param name="width">The width of the tile</param>
+            <param name="height">The height of the tile</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.AddKeyword(System.String)">
+            <summary>
+            Add a new keyword to this tileSet.
+            </summary>
+            <param name="keyword">A new keyword (string)</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.GetTile(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.GetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.TryGetMatchingTiles(System.Int32,System.Int32,System.Int32,System.Int32,System.Collections.Generic.IList{CrawfisSoftware.Tiling.ITile2D}@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.AddTile(CrawfisSoftware.Tiling.ITile2D)">
+            <summary>
+            Add a new tile to the tileSet
+            </summary>
+            <param name="tile">The tile to add</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.SetDefaultTile(CrawfisSoftware.Tiling.ITile2D)">
+            <summary>
+            Set the default tile for this tileSet
+            </summary>
+            <param name="tile"></param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.SetDefaultTile(System.Int32)">
+            <summary>
+            Set the default tile for this tileSet
+            </summary> 
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSet.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.TileSetFactory">
+            <summary>
+            Factory to create an ITileSet
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetFactory.#ctor(System.String,System.String,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="tileSetName">A name for newly constructed tile set.</param>
+            <param name="description">A tile set description.</param>
+            <param name="tileWidth">The width of the tiles in the tileset.</param>
+            <param name="tileHeight">the height of the tiles in the tileset.</param>
+            <param name="initialID">An initial tile ID (defaults to zero). Subsequent tiles will increment this to give unique tile id's.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetFactory.AddTile(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Add a new tile to the tileset. Handles unique id's and tileset binding.
+            </summary>
+            <param name="left">The "color" associated with the left edge.</param>
+            <param name="top">The "color" associated with the top edge.</param>
+            <param name="right">The "color" associated with the right edge.</param>
+            <param name="bottom">The "color" associated with the bottom edge.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetFactory.AddTileIfUniqueColors(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Add a new tile to the tileset only if one with the same edge colors does not exist.
+            </summary>
+            <param name="left">The "color" associated with the left edge.</param>
+            <param name="top">The "color" associated with the top edge.</param>
+            <param name="right">The "color" associated with the right edge.</param>
+            <param name="bottom">The "color" associated with the bottom edge.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetFactory.GetTileSet">
+            <summary>
+            Get the constructed tile set from the factory.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetFactory.SetDefaultTile(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Set the tile sets Default tile.
+            </summary>
+            <param name="left">The "color" associated with the left edge.</param>
+            <param name="top">The "color" associated with the top edge.</param>
+            <param name="right">The "color" associated with the right edge.</param>
+            <param name="bottom">The "color" associated with the bottom edge.</param>
+            <param name="additionallyAddToTileSet">If true adds the tile to the tile set as well.</param>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileSets.TileSetSelection">
+            <summary>
+            An ITileSet that queries the TileDatabase and selects a subset 
+            of the tiles from the database using a predicate function (or set of 
+            predicate functions.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetSelection.#ctor(System.String,System.String,System.Int32,System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="name"></param>
+            <param name="description"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetSelection.AddTiles(System.Func{CrawfisSoftware.Tiling.ITile2D,System.Boolean})">
+            <summary>
+            Use the passed in function: bool predicate(ITile2D tile) to select tiles from
+            the TileDatabase and add to this tileSet.
+            </summary>
+            <param name="predicate"> A predicate function that takes in an ITile2D and returns a bool.</param>
+            <remarks>Can be called multiple times to build up a tileSet.</remarks>
+            <example>To select the subset of the abstract maze tiles for a racetrack or a path with no
+            branches.
+               <code>
+               var pathTileSet = new TileSetSelection("Path Tiles", "Turns and straights only.", width, height);
+               pathTileSet.AddTiles(TurnAndStraightTilesOnly);
+               ...
+               private bool TurnAndStraightTilesOnly(ITile2D tile) {
+               if(tile.Name != "Abstract Maze") return false;
+                  int sum = tile.LeftColor + tile.TopColor + tile.RightColor + tile.BottomColor;
+                  if(sum == 2) return true;
+                  return false;
+               }
+               </code>
+            </example>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetUtilities.RemapEdgeColors(System.String,System.Collections.Generic.IEnumerable{CrawfisSoftware.Tiling.ITile2D},System.Func{System.Int32,System.Int32},System.Func{System.Int32,System.Int32},System.Func{System.Int32,System.Int32},System.Func{System.Int32,System.Int32},System.Int32,System.Int32)">
+            <summary>
+            Remap edge colors using functions
+            </summary>
+            <param name="tileSetName">A name for the resulting tileset.</param>
+            <param name="tileset">The initial tileset.</param>
+            <param name="leftEdgeRemapper">Function that uses the left edge color to determine a new left edge color.</param>
+            <param name="topEdgeRemapper">Function that uses the top edge color to determine a new top edge color.</param>
+            <param name="rightEdgeRemapper">Function that uses the right edge color to determine a new right edge color.</param>
+            <param name="bottomEdgeRemapper">Function that uses the bottom edge color to determine a new bottom edge color.</param>
+            <param name="initialID">An initial value for the new tile's unique _id.</param>
+            <param name="idIncrement">(default of 1) Each _id will be separated by this value.</param>
+            <returns>A stream of new Tile2D's.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetUtilities.RemapEdgeColors(System.String,System.Collections.Generic.IEnumerable{CrawfisSoftware.Tiling.ITile2D},System.Func{CrawfisSoftware.Tiling.ITile2D,System.Int32[]},System.Int32,System.Int32)">
+            <summary>
+            Remap edge colors using functions
+            </summary>
+            <param name="tileSetName">A name for the resulting tileset.</param>
+            <param name="tileset">The initial tileset.</param>
+            <param name="edgeRemapper">Function that takes an ITile2D and produces new edge colors as an array of int[4].</param>
+            <param name="initialID">An initial value for the new tile's unique _id.</param>
+            <param name="idIncrement">(default of 1) Each _id will be separated by this value.</param>
+            <returns>A stream of new Tile2D's.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetUtilities.LoftColors(System.String,System.Collections.Generic.IEnumerable{CrawfisSoftware.Tiling.ITile2D},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Create new tiles with new edge colors "lofted" by the value passed in. 
+            </summary>
+            <param name="tileSetName">A name for the resulting tileset.</param>
+            <param name="tileset">The initial tileset.</param>
+            <param name="loftValue">Value to be added to each edge color.</param>
+            <param name="initialID">An initial value for the new tile's unique _id.</param>
+            <param name="idIncrement">(default of 1) Each _id will be separated by this value.</param>
+            <returns>A stream of new Tile2D's.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileSets.TileSetUtilities.Filter(System.Collections.Generic.IEnumerable{CrawfisSoftware.Tiling.ITile2D},System.Func{CrawfisSoftware.Tiling.ITile2D,System.Boolean})">
+            <summary>
+            Same as LINQ's Select/Where
+            </summary>
+            <param name="tileset">The tileset to filter</param>
+            <param name="predicate">A predicate function that takes in an iTile2D and determines whether to keep it (output it).</param>
+            <returns>A stream of desired tiles.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TileDatabase">
+            <summary>
+            Singleton class that can be used as a database of tiles or tilesets
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileDatabase.Instance">
+            <summary>
+            Get the instance of the tile database
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileDatabase.NumberOfTiles">
+            <summary>
+            Get the total number of tiles in the database
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileDatabase.NumberOfTileSets">
+            <summary>
+            Get the number of distinct tilesets in the database
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TileDatabase.Tiles">
+            <summary>
+            Enumerate through all of the tiles in the database
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileDatabase.RegisterTileSet(CrawfisSoftware.Tiling.ITileSet)">
+            <summary>
+            This will register a new tileset with the database. No tiles will be added.
+            </summary>
+            <param name="tileSet">The ITileSet to register</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileDatabase.GetTile(System.String,System.Int32)">
+            <summary>
+            Get the specified tile based on the tileset name and tileID
+            </summary>
+            <param name="tileSetName">The name of the tileset</param>
+            <param name="tileID">Unique tile ID within this tileset</param>
+            <returns>The requested tile</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">If the tile does not exist in the database</exception>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileDatabase.AddTile(CrawfisSoftware.Tiling.ITile2D)">
+            <summary>
+            Add a tile to the database
+            </summary>
+            <param name="tile">The tile to add</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileDatabase.GetTileSet(System.String)">
+            <summary>
+            Returns a new instance of the tileset
+            </summary>
+            <param name="tileSetName">The tile set name</param>
+            <returns>A new instance of the tileset</returns>
+            <see cref="M:CrawfisSoftware.Tiling.TileDatabase.FindTiles(System.Func{CrawfisSoftware.Tiling.ITile2D,System.Boolean})"/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TileDatabase.FindTiles(System.Func{CrawfisSoftware.Tiling.ITile2D,System.Boolean})">
+            <summary>
+            Iterate over all of the tiles that match based on a predicate function
+            </summary>
+            <param name="predicate">A function: bool predicate(ITile2D) that returns true
+            if this tile should be enumerated, false otherwise</param>
+            <returns></returns>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator">
+            <summary>ITilingEnumerator decorator that uses a predicate function to determine
+            whether to yield each tile index or not.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator.#ctor(CrawfisSoftware.Tiling.ITilingEnumerator,System.Predicate{CrawfisSoftware.Tiling.Tiling2DIndex})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="realEnumerator">A ITilingEnumerator to decorate.</param>
+            <param name="maskFunction">A function that takes a Tiling2DIndex and returns true or false. If true, this
+            index is enumerated.</param>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator.Current">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.MaskedTilingEnumeratorDecorator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator">
+            <summary>
+            Restrict an enumerator to a rectanglular region.
+            </summary>
+            <remarks>Note: The width and height of the enumerator are changed!</remarks>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.LowerRight">
+            <summary>
+            The origin of the rectangle in the underlying tiling
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.Size">
+            <summary>
+            The width and height of the rectangle
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.#ctor(CrawfisSoftware.Tiling.ITilingEnumerator)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="realEnumerator">An <c>ITilingEnumerator</c> that this class decorates</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.#ctor(CrawfisSoftware.Tiling.ITilingEnumerator,CrawfisSoftware.Tiling.Tiling2DIndex,System.Int32,System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="realEnumerator">An <c>ITilingEnumerator</c> that this class decorates</param>
+            <param name="origin">Location in the tiling of the rectangle's origin</param>
+            <param name="width">The width of the rectangle</param>
+            <param name="height">The height of the rectangle</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.#ctor(CrawfisSoftware.Tiling.ITilingEnumerator,CrawfisSoftware.Tiling.Tiling2DIndex,CrawfisSoftware.Tiling.Tiling2DIndex)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="realEnumerator">An <c>ITilingEnumerator</c> that this class decorates</param>
+            <param name="origin">Location in the tiling of the rectangle's origin</param>
+            <param name="size">The width and the height of the rectangle</param>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.Current">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingEnumerators.RectangleTilingEnumeratorDecorator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.ZigzagTilingEnumerator">
+            <summary>
+            Sweep left-to-right and then right-to-left as you go from row to row.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ZigzagTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ZigzagTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ZigzagTilingEnumerator.Current">
+            <summary>
+            The current cell in the enumeration
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.ZigzagTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ZigzagTilingEnumerator.#ctor">
+            <summary>
+            Constructor. Need the Width and Height set.
+               Design Note: Not set in the constructor since the tiling is not known.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ZigzagTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ZigzagTilingEnumerator.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ZigzagTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.ZigzagTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.TilingRemapper">
+            <summary>
+            Class to configure and remap tiles in a tiling. Can be used to map from an abstract
+            tiling to a concrete, replace tiles on a path, etc.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingRemapper.#ctor(CrawfisSoftware.Tiling.ITiling2D,CrawfisSoftware.Tiling.ITileSet)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="originalTiling">The underlying tiling</param>
+            <param name="newTileSet">A tileset to use to replace existing tiles</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingRemapper.#ctor(CrawfisSoftware.Tiling.ITiling2D,CrawfisSoftware.Tiling.ITileSet,System.Random)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="originalTiling">The underlying tiling</param>
+            <param name="newTileSet">A tileset to use to replace existing tiles</param>
+            <param name="random">A random generator used when multiple tiles can be used
+            in the remapping</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingRemapper.Remap(CrawfisSoftware.Tiling.ITilingEnumerator)">
+            <summary>
+            Create a new tiling, remapping tiles where indicated
+            </summary>
+            <param name="tilingEnumerator">The set of tiles to consider in the remapping</param>
+            <returns>A new tiling that has some or all of the tiles replaced from the original tiling</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingRemapper.AddMapping(System.Int32,System.Int32)">
+            <summary>
+            Add a mapping between tileID's
+            </summary>
+            <param name="originalTile">The tile ID to be replaced</param>
+            <param name="newPossibleTile">A tile ID to be included in the set of possible replacements</param>
+        </member>
+    </members>
+</doc>

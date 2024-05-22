@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CrawfisSoftware.Paths</name>
+    </assembly>
+    <members>
+        <member name="T:CrawfisSoftware.Collections.Path.GridLoopMetrics`2">
+            <summary>
+            Data structure to hold loop metrics on a grid.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.GridLoopMetrics`2.#ctor(CrawfisSoftware.Collections.Path.GridPath{`0,`1},System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="gridPath">A GridPath.</param>
+            <param name="startingCellPathIndex">An index into the pathIndices that is the desired "starting" point for the loop. Useful for the string based representation.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.GridLoopMetrics`2.SetLoopStartingPathIndex(System.Int32)">
+            <summary>
+            Rotate the loop (Turtle string) to start at the specified index in the original GridPath.
+            </summary>
+            <param name="index">The index into the GridPath list of grid cells.</param>
+        </member>
+        <member name="T:CrawfisSoftware.Collections.Path.GridPath`2">
+            <summary>
+            Data structure to hold a path or loop through a Grid
+            </summary>
+            <typeparam name="TNodeValue">The underlying node label type of the grid. Not used.</typeparam>
+            <typeparam name="TEdgeValue">The underlying edge label type of the grid. Not used.</typeparam>
+            <seealso cref="T:CrawfisSoftware.Collections.Graph.Grid`2"/>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.GridPath`2.IsClosed">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.GridPath`2.PositionCount">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.GridPath`2.PathLength">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.GridPath`2.Grid">
+            <summary>
+            Get the underlying grid that this path is defined on.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.GridPath`2.#ctor(CrawfisSoftware.Collections.Graph.Grid{`0,`1},System.Collections.Generic.IEnumerable{System.Int32},System.Single,System.Boolean)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="grid">The underlying grid.</param>
+            <param name="positions">A sequence of grid indices that the path goes through (in order).</param>
+            <param name="pathLength">A value representing the length of a path perhaps with edge costs.</param>
+            <param name="isClosed">If true, the path forms a loop and the last position is connected to the first position automatically.</param>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.GridPath`2.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.GridPath`2.Item(System.Int32)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.GridPath`2.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.GridPath`2.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Collections.Path.GridPathMetrics`2">
+            <summary>
+            Data structure to hold path metrics on a grid.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.GridPathMetrics`2.Path">
+            <summary>
+            The Path on which these metrics are based.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Path.GridPathMetrics`2.StartingCell">
+            <summary>
+            A (Column, Row) value tuple of the starting cell.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Path.GridPathMetrics`2.EndingCell">
+            <summary>
+            A (Column, Row) value tuple of the ending cell.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Path.GridPathMetrics`2.MaximumConsecutiveTurns">
+            <summary>
+            The maximum number of consecutive horizontal or vertical straights.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Path.GridPathMetrics`2.MaximumConsecutiveStraights">
+            <summary>
+            The maximum number of consecutive turns (left or right).
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Path.GridPathMetrics`2.TurtlePath">
+            <summary>
+            A string representing the path movements where S implies go straight, L implies go left, and R implies go right. This can be easily searched for patterns.
+            </summary>
+            <remarks>The string path is 2 characters shorter than the path length due to the start and end cells considered as dead-ends.</remarks>
+            <seealso cref="N:System.Text.RegularExpressions"/>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.GridPathMetrics`2.#ctor(CrawfisSoftware.Collections.Path.GridPath{`0,`1})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="gridPath">The path to compute metrics on.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.GridPathMetrics`2.GetGridColumnRowTuple(System.Int32)">
+            <summary>
+            Given an index into the path list of cells (or string), return the grid indices as a (column, row) tuple.
+            </summary>
+            <param name="pathIndex">The index or number of cells along the path.</param>
+            <returns>The underlying grid indices as a (column, row) tuple.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.GridPathMetrics`2.GetGridIndex(System.Int32)">
+            <summary>
+            Given an index into the path list of cells (or string), return the grid index for the cell along the path.
+            </summary>
+            <param name="pathIndex">The index or number of cells along the path.</param>
+            <returns>The underlying grid index.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.GridPathMetrics`2.GetGridIndex(System.Single)">
+            <summary>
+            Given an index into the path list of cells (or string), return the grid index for the cell along the path.
+            </summary>
+            <param name="pathDistance">The percentage distance along the path.</param>
+            <returns>The underlying grid index.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Collections.Path.IPath`2">
+            <summary>
+            Defines a path including positions, a path length attribute and a flag indicating whether it is a closed loop or not.
+            </summary>
+            <typeparam name="TPosition">The type of the position (e.g., Vector3, (i,j)-tuple, int, etc.)</typeparam>
+            <typeparam name="TEdgeValue">The type of the "distance" (or time) of the path.</typeparam>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.IPath`2.IsClosed">
+            <summary>
+            If true, the path forms a loop connecting the last position to the first.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.IPath`2.PositionCount">
+            <summary>
+            The number of positions that are defined on this path.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Path.IPath`2.PathLength">
+            <summary>
+            The path length computed by some measure.
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Collections.Path.PathQuery">
+            <summary>
+            Static class with methods to query an IPath or GridPath.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.PathQuery.DetermineCellDirectionAt``2(CrawfisSoftware.Collections.Path.GridPath{``0,``1},System.Int32,System.Boolean)">
+            <summary>
+            Utility function to determine whether a path goes straight (S) or turns left (L) or right (R).
+            </summary>
+            <param name="path">A GridPath</param>
+            <param name="positionIndex">The position index of the path which we are querying the cell direction.</param>
+            <param name="isLoop">True is the path forms a closed loop.</param>
+            <returns>A character respresenting the turtle action.</returns>
+            <remarks>Does not support toriodal grids.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.PathQuery.DetermineTurtleString``2(CrawfisSoftware.Collections.Path.GridPath{``0,``1})">
+            <summary>
+            Give a GridPath, determine the turtle string defining the path.
+            </summary>
+            <typeparam name="N">The underlying node label type of the grid. Not used.</typeparam>
+            <typeparam name="E">The underlying edge label type of the grid. Not used.</typeparam>
+            <param name="path">A GridPath</param>
+            <returns>A string representing the straights and turns as you move along the path.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Collections.Path.StringPathQuery">
+            <summary>
+            Static utility for querying a path or loop as an encoded turtle-based string.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Path.StringPathQuery.StraightChar">
+            <summary>
+            The character that indicates: Go Straight (defaults to 'S').
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Path.StringPathQuery.LeftChar">
+            <summary>
+            The character that indicates: Go Left (defaults to 'L').
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Path.StringPathQuery.RightChar">
+            <summary>
+            The character that indicates: Go Right (defaults to 'R').
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Path.StringPathQuery.InvalidChar">
+            <summary>
+            A character that indicates the path is disconnect here or invalid (defaults to 'X').
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.StringPathQuery.SearchPathString(System.String,System.Text.RegularExpressions.Regex,System.Boolean)">
+            <summary>
+            Searches the path (expressed as an input string) for the regular expression and returns the starting string index for each instance it encounters.
+            </summary>
+            <param name="pathString">The turtle string of straight, left and right movements.</param>
+            <param name="regex">A Regular Expression in the System.Text.RegularExpression.Regex format.</param>
+            <param name="isClosed">True if the string represents a loop. Default is false.</param>
+            <returns>The starting index for the pattern for each occurance.</returns>
+            <remarks>Note that the pattern usually starts at the cell before. For instance a left turn that starts at i-1, goes through i to i+width, will return i-1, not i.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.StringPathQuery.UTurns(System.String,System.Boolean)">
+            <summary>
+            Enumerates all of the U-turns in TurtlePath string (aka, all "RR" and "LL" substrings).
+            </summary>
+            <param name="pathString">The turtle string of straight, left and right movements.</param>
+            <param name="isClosed">True if the string represents a loop. Default is false.</param>
+            <returns>The starting index for the pattern for each occurance.</returns>
+            <remarks>Note that the pattern usually starts at the cell before. For instance a left turn that starts at i-1, goes through i to i+width, will return i-1, not i.</remarks>
+            <seealso cref="!:Search(Regex)"/>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.StringPathQuery.StraightAways(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Enumerates all of the consecutive straights (StringPathQuery.Straight) in TurtlePath string with a length greater than or equal to specified length.
+            </summary>
+            <param name="pathString">The turtle string of straight, left and right movements.</param>
+            <param name="straightLength">The desired straight-away length to match.</param>
+            <param name="isClosed">True if the string represents a loop. Default is false.</param>
+            <returns>The starting index for the pattern for each occurance.</returns>
+            <remarks>Note that the pattern usually starts at the cell before. For instance a left turn that starts at i-1, goes through i to i+width, will return i-1, not i.</remarks>
+            <seealso cref="!:Search(Regex)"/>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.StringPathQuery.SpeedAgilityRatio(System.String,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Calculate the ratio of straights to turns within a specified window centered on the specified path index.
+            </summary>
+            <param name="pathString">The turtle string of straight, left and right movements.</param>
+            <param name="pathIndex">The index into the List of grid cells that define the path, not a grid index itself.</param>
+            <param name="halfWindowSize">The half window size to use in the analysis.</param>
+            <param name="isClosed">True if the string represents a loop. Default is false.</param>
+            <returns>A float from 0 to 1 representing the ratio of straights to turns with the window centered at the path location. 
+            Note, if the window exceeds the path it is cropped to the valid region. If the resulting window size is less than one, a -1 is returned.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.StringPathQuery.MaximumConsecutiveStraights(System.String,System.Boolean)">
+            <summary>
+            Calculate the number of consecutive straights.
+            </summary>
+            <param name="pathString">The turtle string of straight, left and right movements.</param>
+            <param name="isClosed">True if the string represents a loop. Default is false.</param>
+            <returns>The maximum number of straights in the turtle string.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Path.StringPathQuery.MaximumConsecutiveTurns(System.String,System.Boolean)">
+            <summary>
+            Calculate the number of Consecutive turns (left or right).
+            </summary>
+            <param name="pathString">The turtle string of straight, left and right movements.</param>
+            <param name="isClosed">True if the string represents a loop. Default is false.</param>
+            <returns>The maximum number of turns in the turtle string.</returns>
+        </member>
+    </members>
+</doc>
