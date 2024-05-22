@@ -27,7 +27,9 @@ namespace CrawfisSoftware.UnityTiling
         public string Name { get { return _tileSet.Name; } }
         public string Description
         {
-            get { return _tileSet.Description; set { _tileSet.Description = value; } }
+            get { return _tileSet.Description; }
+            set { _tileSet.Description = value; }
+        }
         public float Width { get { return _tileSet.Width; } }
         public float Height { get { return _tileSet.Height; } }
         public IEnumerable<string> Keywords { get { return _tileSet.Keywords; } }
