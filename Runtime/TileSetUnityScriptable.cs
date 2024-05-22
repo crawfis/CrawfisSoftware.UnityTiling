@@ -39,6 +39,21 @@ namespace CrawfisSoftware.UnityTiling
         public int Count { get { return _tileSet.Count; } }
         public bool IsComplete { get { return _tileSet.IsComplete; } }
 
+        public void SetName(string name) { _tileSet.Name = name; }
+        public void SetWidth(float width) { _tileSet.Width = width; }
+        public void SetHeight(float height) { _tileSet.Height = height; }
+        public void SetDescription(string description)
+        {
+            _tileSet.Description = description;
+        }
+        public void AddKeyword(string keyword)
+        {
+            _tileSet.AddKeyword(keyword);
+        }
+        public void SetDefaultTile(IUnityTile tile)
+        {
+            _tileSet.SetDefaultTile(tile);
+        }
         public void AddTiles(List<UnityTileScriptableBase> tiles)
         {
             foreach (var tile in tiles)
