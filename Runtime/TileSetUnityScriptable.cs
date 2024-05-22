@@ -56,7 +56,7 @@ namespace CrawfisSoftware.UnityTiling
             _tileSet.AddKeyword(keyword);
             _keywords.Add(keyword);
         }
-        public void SetDefaultTile(IUnityTile tile)
+        public void SetDefaultTile(UnityTileScriptableBase tile)
         {
             _tileSet.SetDefaultTile(tile);
             _defaultTile = tile;
