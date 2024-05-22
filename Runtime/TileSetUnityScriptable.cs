@@ -28,7 +28,11 @@ namespace CrawfisSoftware.UnityTiling
         public string Description
         {
             get { return _tileSet.Description; }
-            set { _tileSet.Description = value; }
+            set
+            {
+                _tileSet.Description = value;
+                _description = value;
+            }
         }
         public float Width { get { return _tileSet.Width; } }
         public float Height { get { return _tileSet.Height; } }
@@ -39,29 +43,33 @@ namespace CrawfisSoftware.UnityTiling
         public int Count { get { return _tileSet.Count; } }
         public bool IsComplete { get { return _tileSet.IsComplete; } }
 
-        public void SetName(string name) { _tileSet.Name = name; }
-        public void SetWidth(float width) { _tileSet.Width = width; }
-        public void SetHeight(float height) { _tileSet.Height = height; }
+        public void SetName(string name) { _tileSet.Name = name; _name = name; }
+        public void SetWidth(float width) { _tileSet.Width = width; _width = width; }
+        public void SetHeight(float height) { _tileSet.Height = height; _height = height; }
         public void SetDescription(string description)
         {
             _tileSet.Description = description;
+            _description = description;
         }
         public void AddKeyword(string keyword)
         {
             _tileSet.AddKeyword(keyword);
+            _keywords.Add(keyword);
         }
         public void SetDefaultTile(IUnityTile tile)
         {
             _tileSet.SetDefaultTile(tile);
+            _defaultTile = tile;
         }
         public void AddTiles(List<UnityTileScriptableBase> tiles)
         {
             foreach (var tile in tiles)
             {
                 _tileSet.AddTile(tile);
+                _tiles.Add(tile);
             }
         }
-        public void AddTile(UnityTileScriptableBase tile) { _tileSet.AddTile(tile); }
+        public void AddTile(UnityTileScriptableBase tile) { _tileSet.AddTile(tile); _tiles.Add(tile); }
 
         public async Task Awake()
         {
