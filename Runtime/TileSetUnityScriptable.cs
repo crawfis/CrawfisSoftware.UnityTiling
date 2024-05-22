@@ -25,7 +25,9 @@ namespace CrawfisSoftware.UnityTiling
         protected TileSet _tileSet;
 
         public string Name { get { return _tileSet.Name; } }
-        public string Description { get { return _tileSet.Description; } }
+        public string Description
+        {
+            get { return _tileSet.Description; set { _tileSet.Description = value; } }
         public float Width { get { return _tileSet.Width; } }
         public float Height { get { return _tileSet.Height; } }
         public IEnumerable<string> Keywords { get { return _tileSet.Keywords; } }
@@ -35,21 +37,6 @@ namespace CrawfisSoftware.UnityTiling
         public int Count { get { return _tileSet.Count; } }
         public bool IsComplete { get { return _tileSet.IsComplete; } }
 
-        public void SetName(string name) { _tileSet.Name = name; }
-        public void SetWidth(float width) { _tileSet.Width = width; }
-        public void SetHeight(float height) { _tileSet.Height = height; }
-        public void SetDescription(string description)
-        {
-            _tileSet.Description = description;
-        }
-        public void AddKeyword(string keyword)
-        {
-            _tileSet.AddKeyword(keyword);
-        }
-        public void SetDefaultTile(IUnityTile tile)
-        {
-            _tileSet.SetDefaultTile(tile);
-        }
         public void AddTiles(List<UnityTileScriptableBase> tiles)
         {
             foreach (var tile in tiles)
@@ -59,10 +46,15 @@ namespace CrawfisSoftware.UnityTiling
         }
         public void AddTile(UnityTileScriptableBase tile) { _tileSet.AddTile(tile); }
 
-        public async Task Initialize()
+        public async Task Awake()
         {
             // Create a TileSet and add it.
             _tileSet = new(_name, _description, _width, _height);
+            await Initialize();
+        }
+
+        public async Task Initialize()
+        {
             List<Task> tasks = new List<Task>();
             foreach (var tile in _tiles)
             {
