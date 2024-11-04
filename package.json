@@ -1,8 +1,8 @@
 {
   "name": "com.crawfissoftware.unitytiling",
   "displayName": "CrawfisSoftware - UnityTiling",
-  "version": "1.0.26",
-  "unity": "2022.3",
+  "version": "1.0.27",
+  "unity": "6000.0",
   "description": "Wrapper for CrawfisSoftware.Tiling and the various PCG tools.",
   "keywords": [
     "unity",

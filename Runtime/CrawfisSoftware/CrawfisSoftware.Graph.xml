@@ -179,6 +179,21 @@
             <value>Greater than zero, if x is greater than y</value>
             </returns>
         </member>
+        <member name="T:CrawfisSoftware.Collections.Graph.EulerianCircuit">
+            <summary>
+            Static class to find Eulerian Circuits.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.EulerianCircuit.FindCircuit``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32)">
+            <summary>
+            Output the Euler Circuit from the starting index.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of the edges used to reach each node.</returns>
+        </member>
         <member name="T:CrawfisSoftware.Collections.Graph.GraphEdgeEnumerator`2">
             <summary>
             An enumerator to walk the edges of a <typeparamref name="IGraph{N,E}{N,E}"/>.
@@ -337,7 +352,7 @@
             Represents the current component number that the iterator is currently at.
             </summary>
         </member>
-        <member name="T:CrawfisSoftware.Collections.Graph.GraphQuery`2">
+        <member name="T:CrawfisSoftware.Collections.Graph.GraphQuery">
             <summary>
             Provides a scoped location to place static methods that take
             a graph as input and provide basic queries on it.
@@ -345,7 +360,7 @@
             <typeparam name="N">The type of the node labels in the corresponding graph.</typeparam>
             <typeparam name="E">The type of the edge labels in the corresponding graph.</typeparam>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.IsAcyclic(CrawfisSoftware.Collections.Graph.IIndexedGraph{`0,`1})">
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.IsAcyclic``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1})">
             <summary>
             Checks whether the graph has any cycles.
             </summary>
@@ -356,7 +371,7 @@
             already been enumerated, then a cycle exists and the routine returns false.
             Note that the routine will return early if a cycle is found.</remarks>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.IsAcyclicUndirected(CrawfisSoftware.Collections.Graph.IIndexedGraph{`0,`1})">
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.IsAcyclicUndirected``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1})">
             <summary>
             Checks whether an undirected graph has any cycles.
             </summary>
@@ -364,7 +379,7 @@
             <returns>True if there are no cycles (the graph is acyclic). False otherwise.</returns>
             <remarks>Note that the routine will return early if a cycle is found.</remarks>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.IsAcyclic(CrawfisSoftware.Collections.Graph.IGraph{`0,`1})">
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.IsAcyclic``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1})">
             <summary>
             Checks whether the graph has any cycles.
             </summary>
@@ -375,37 +390,14 @@
             already been enumerated, then a cycle exists and the routine returns false.
             <para>Note that the routine will return early if a cycle is found,</para></remarks>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.GetTopologicalSort(CrawfisSoftware.Collections.Graph.IGraph{`0,`1})">
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.GetTopologicalSort``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1})">
             <summary>
             Enumerate through the graph nodes in topological order
             </summary>
             <param name="graph">The graph to enumerate.</param>
             <returns>An enumeration of the graph nodes.</returns>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.GetTopologicalSort(CrawfisSoftware.Collections.Graph.IGraph{`0,`1},System.Int32)">
-            <summary>
-            Enumerate through the graph nodes in topological order
-            </summary>
-            <param name="graph">The graph to enumerate.</param>
-            <param name="MaxNodes">For very large (and possibly infinite) graphs, the <paramref name="MaxNodes"/>
-            parameter provides a guard to ensure the algorithm is bounded. Can also be used to 
-            query whether the graph is larger than a certain size.</param>
-            <returns>An enumeration of the graph nodes.</returns>
-            <returns>The number of nodes in the graph.</returns>
-            <exception cref="T:System.InvalidOperationException">
-            An <paramref name="InvalidOperationException"/> is thrown if the user-specified 
-            maximum number of nodes to enumerate is exceeded. Since a graph can be infinite in
-            size, this guards against passing an infinite graph (e.g., set of all whole numbers)
-            into the routine.</exception>
-        </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.GetTopologicalSort(CrawfisSoftware.Collections.Graph.IIndexedGraph{`0,`1})">
-            <summary>
-            Enumerate through the graph nodes in topological order
-            </summary>
-            <param name="graph">The graph to enumerate.</param>
-            <returns>An enumeration of the graph nodes.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.GetTopologicalSort(CrawfisSoftware.Collections.Graph.IIndexedGraph{`0,`1},System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.GetTopologicalSort``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1},System.Int32)">
             <summary>
             Enumerate through the graph nodes in topological order
             </summary>
@@ -421,13 +413,36 @@
             size, this guards against passing an infinite graph (e.g., set of all whole numbers)
             into the routine.</exception>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.NumberOfNodes(CrawfisSoftware.Collections.Graph.IGraph{`0,`1})">
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.GetTopologicalSort``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1})">
+            <summary>
+            Enumerate through the graph nodes in topological order
+            </summary>
+            <param name="graph">The graph to enumerate.</param>
+            <returns>An enumeration of the graph nodes.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.GetTopologicalSort``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32)">
+            <summary>
+            Enumerate through the graph nodes in topological order
+            </summary>
+            <param name="graph">The graph to enumerate.</param>
+            <param name="MaxNodes">For very large (and possibly infinite) graphs, the <paramref name="MaxNodes"/>
+            parameter provides a guard to ensure the algorithm is bounded. Can also be used to 
+            query whether the graph is larger than a certain size.</param>
+            <returns>An enumeration of the graph nodes.</returns>
+            <returns>The number of nodes in the graph.</returns>
+            <exception cref="T:System.InvalidOperationException">
+            An <paramref name="InvalidOperationException"/> is thrown if the user-specified 
+            maximum number of nodes to enumerate is exceeded. Since a graph can be infinite in
+            size, this guards against passing an infinite graph (e.g., set of all whole numbers)
+            into the routine.</exception>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.NumberOfNodes``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1})">
             <summary>
             </summary>
             <param name="graph">The graph to query against.</param>
             <returns>The number of nodes in the graph.</returns>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.NumberOfNodes(CrawfisSoftware.Collections.Graph.IGraph{`0,`1},System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.NumberOfNodes``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1},System.Int32)">
             <summary>
             Counts the number of nodes or vertices.
             </summary>
@@ -442,14 +457,14 @@
             size, this guards against passing an infinite graph (e.g., set of all whole numbers)
             into the routine.</exception>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.NumberOfEdges(CrawfisSoftware.Collections.Graph.IGraph{`0,`1})">
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.NumberOfEdges``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1})">
             <summary>
             Counts the number of Edges in the graph.
             </summary>
             <param name="graph">The graph to query against.</param>
             <returns>The number of edges in the graph.</returns>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery`2.NumberOfEdges(CrawfisSoftware.Collections.Graph.IGraph{`0,`1},System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.NumberOfEdges``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1},System.Int32)">
             <summary>
             Counts the number of edges.
             </summary>
@@ -554,6 +569,53 @@
             Sorts the graph.
             </summary>
         </member>
+        <member name="T:CrawfisSoftware.Collections.Graph.GraphTraversalExtensions">
+            <summary>
+            Helper extension methods for common index graph traversal algorithms.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphTraversalExtensions.BreadthFirstTraversalNodes``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1},``0)">
+            <summary>
+            Breadth-first traversal of a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of node indices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphTraversalExtensions.DepthFirstTraversalNodes``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1},``0)">
+            <summary>
+            Depth-first traversal of a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of node indices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphTraversalExtensions.BreadthFirstTraversalEdges``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1},``0)">
+            <summary>
+            Breadth-first traversal of a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of the edges used to reach each node.</returns>
+            <remarks>This traversing all reachable node, not all reachable edges.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GraphTraversalExtensions.DepthFirstTraversalEdges``2(CrawfisSoftware.Collections.Graph.IGraph{``0,``1},``0)">
+            <summary>
+            Depth-first traversal of a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of the edges used to reach each node.</returns>
+            <remarks>This traversing all reachable node, not all reachable edges.</remarks>
+        </member>
         <member name="T:CrawfisSoftware.Collections.Graph.IIndexedEdgeCostComparer`1">
             <summary>
             Provides a common interface to compare edge (or path) costs in a graph
@@ -609,30 +671,30 @@
             <remarks>Passing in a <typeparamref name="QueueAdaptor{T}{T}"/> will traverse the
             graph in a breadth-first manner.</remarks>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphEdgeEnumerator`2.TraverseGraph(System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphEdgeEnumerator`2.TraverseNodes(System.Int32)">
             <summary>
             Traverse the <typeparamref name="IIndexedGraph{N,E}{N,E}"/> starting from the specified node
-            until no more connected edges exist.
+            until no more connected nodes exist.
             </summary>
             <param name="startingNode">The node to start the traversal from.</param>
             <returns>An <typeparamref name="IEnumerable{T}{T}"/> of 
             <typeparamref name="IIndexedEdge{N,E}{N,E}"/>.</returns>
             <remarks>This routine will only traverse those nodes reachable from 
-            the startingNode.</remarks>
+            the startingNode once. Not all edges are enumerated.</remarks>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphEdgeEnumerator`2.TraverseNodes(System.Collections.Generic.IEnumerable{System.Int32})">
             <summary>
             Traverse the <typeparamref name="IIndexedGraph{N,E}{N,E}"/> 
             until no more connected nodes exist. 
             </summary>
-            <param name="startingNode">A list of node index to start the traversal from. The PriorityCollection determines how when these nodes are outptut.</param>
+            <param name="startingNodes">A list of node index to start the traversal from. The PriorityCollection determines how when these nodes are output.</param>
             <returns>An <typeparamref name="IIndexedEdge{N,E{N,E"/> of 
             node indices.</returns>
             <remarks>This routine will only traverse those nodes reachable from 
             the list of startingNodes.</remarks>
-            <remarks>Component numbers ahouls bw ignored when using this.</remarks>
+            <remarks>Component numbers should be ignored when using this.</remarks>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphEdgeEnumerator`2.Reset">
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphEdgeEnumerator`2.ResetNodeTraversal">
             <summary>
             Restarts the traversal.
             </summary>
@@ -642,6 +704,34 @@
             Traverses any untouched graph nodes that are accessible from the specified node.
             </summary>
             <param name="startingNode">A new node to continue the search from.</param>
+            <param name="listIsPrePrimed">True is the activeList is already initialized with a set of starting nodes and the neighbors.</param>
+            <returns>An <typeparamref name="IEnumerable{T}{T}"/> of 
+            <typeparamref name="IIndexedEdge{N,E}{N,E}"/>.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphEdgeEnumerator`2.TraverseEdges(System.Int32,System.Boolean)">
+            <summary>
+            Traverse the <typeparamref name="IIndexedGraph{N,E}{N,E}"/> starting from the specified node
+            until no more connected edges exist.
+            </summary>
+            <param name="startingNode">The node to start the traversal from.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <returns>An <typeparamref name="IEnumerable{T}{T}"/> of 
+            <typeparamref name="IIndexedEdge{N,E}{N,E}"/>.</returns>
+            <remarks>This routine will only traverse those edges reachable from 
+            the startingNode.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphEdgeEnumerator`2.ResetEdgeTraversal">
+            <summary>
+            Restarts the traversal for edge traversals.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphEdgeEnumerator`2.ResumeTraverseEdges(System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Traverses any untouched graph edges that are accessible from the specified node.
+            </summary>
+            <param name="startingNode">A new node to continue the search from.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <param name="listIsPrePrimed">True is the activeList is already initialized with a set of starting nodes and the neighbors.</param>
             <returns>An <typeparamref name="IEnumerable{T}{T}"/> of 
             <typeparamref name="IIndexedEdge{N,E}{N,E}"/>.</returns>
         </member>
@@ -712,12 +802,182 @@
             Traverse the <typeparamref name="IGraph{N,E}{N,E}"/> 
             until no more connected nodes exist. 
             </summary>
-            <param name="startingNode">A list of node index to start the traversal from. The PriorityCollection determines how when these nodes are outptut.</param>
+            <param name="startingNodes">A list of node index to start the traversal from. The PriorityCollection determines how when these nodes are output.</param>
             <returns>An <typeparamref name="IEnumerable{T}{T}"/> of 
             node indices.</returns>
             <remarks>This routine will only traverse those nodes reachable from 
             the list of startingNodes.</remarks>
-            <remarks>Component numbers ahouls bw ignored when using this.</remarks>
+            <remarks>Component numbers should be ignored when using this.</remarks>
+        </member>
+        <member name="T:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions">
+            <summary>
+            Helper extension methods for common index graph traversal algorithms: depth-first, breadth-first, Dijkstra's traversal.
+            Can Traverse all nodes (e.g, BreadthFirstTraversalNodes) or all Edges (e.g., BreadthFirstTraversalEdges).
+            Traversals can return either just node indices (and path costs with Dijkstra's), or the edge used to reach that node (adding a WithEdges suffix - BreadthFirstTraversalNodesWithEdges).
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.BreadthFirstTraversalNodes``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32)">
+            <summary>
+            Breadth-first traversal of all nodes in  a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of node indices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.BreadthFirstTraversalNodesWithEdges``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32)">
+            <summary>
+            Breadth-first traversal all nodes in of a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of node and the edges used to reach them.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.BreadthFirstTraversalEdges``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32,System.Boolean)">
+            <summary>
+            Breadth-first traversal of a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <returns>An enumerable of the edges used to reach each node.</returns>
+            <remarks>This traversing all reachable node, not all reachable edges.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DepthFirstTraversalNodes``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32)">
+            <summary>
+            Depth-first traversal of all nodes in a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of node indices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DepthFirstTraversalNodesWithEdges``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32)">
+            <summary>
+            Depth-first traversal of all nodes in a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of node and the edges used to reach them.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DepthFirstTraversalEdges``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32,System.Boolean)">
+            <summary>
+            Depth-first traversal of all edges in a graph
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <returns>An enumerable of the edges used to reach each node.</returns>
+            <remarks>This traversing all reachable node, not all reachable edges.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DijkstraTraversalNodes``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32,CrawfisSoftware.Collections.Graph.EdgeCostDelegate{``1})">
+            <summary>
+            Best-first (Dijkstra's algorithm) traversal of a graph using a function converting the general edge labels to a numeric (float) value.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="costDelegate">Function to convert the Edge label to a float representing the cost of the edge.</param>
+            <returns>An enumerable of node indices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DijkstraTraversalNodesWithEdges``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32,CrawfisSoftware.Collections.Graph.EdgeCostDelegate{``1})">
+            <summary>
+            Best-first (Dijkstra's algorithm) traversal of a graph using a function converting the general edge labels to a numeric (float) value.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="costDelegate">Function to convert the Edge label to a float representing the cost of the edge.</param>
+            <returns>An enumerable of node indices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DijkstraTraversalNodes``1(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,System.Int32},System.Int32)">
+            <summary>
+            Best-first (Dijkstra's algorithm) traversal of a graph with integer edge weights.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <returns>An enumerable of node indices and the minimum path cost to reach that node.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DijkstraTraversalEdges``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32,CrawfisSoftware.Collections.Graph.EdgeCostDelegate{``1},System.Boolean)">
+            <summary>
+            Best-first (Dijkstra's algorithm) traversal of a graph.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="costDelegate">Function to convert the Edge label to a float representing the cost of the edge.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <returns>An enumerable of the edges used to reach each node.</returns>
+            <remarks>This traverses all reachable edges.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DijkstraTraversalEdges``1(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,System.Int32},System.Int32,System.Boolean)">
+            <summary>
+            Best-first (Dijkstra's algorithm) traversal of a graph with integer edge weights.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <returns>An enumerable of the edges used to reach each node..</returns>
+            <remarks>This traversing all reachable node, not all reachable edges.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DijkstraTraversalEdges``1(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,System.Int64},System.Int32,System.Boolean)">
+            <summary>
+            Best-first (Dijkstra's algorithm) traversal of a graph with integer  (long) edge weights.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <returns>An enumerable of the edges used to reach each node..</returns>
+            <remarks>This traversing all reachable node, not all reachable edges.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DijkstraTraversalEdges``1(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,System.Boolean},System.Int32,System.Boolean)">
+            <summary>
+            Best-first (Dijkstra's algorithm) traversal of a graph with boolean edge weights. True is low cost, false is high cost.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <returns>An enumerable of the edges used to reach each node..</returns>
+            <remarks>This traversing all reachable node, not all reachable edges.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DijkstraTraversalEdges``1(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,System.Single},System.Int32,System.Boolean)">
+            <summary>
+            Best-first (Dijkstra's algorithm) traversal of a graph with floating point edge weights.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <returns>An enumerable of the edges used to reach each node..</returns>
+            <remarks>This traversing all reachable node, not all reachable edges.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DijkstraTraversalEdges``1(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,System.Double},System.Int32,System.Boolean)">
+            <summary>
+            Best-first (Dijkstra's algorithm) traversal of a graph with double precision edge weights.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <param name="graph">The graph to traverse.</param>
+            <param name="startingIndex">The starting graph index.</param>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
+            <returns>An enumerable of the edges used to reach each node..</returns>
+            <remarks>This traversing all reachable node, not all reachable edges.</remarks>
         </member>
         <member name="T:CrawfisSoftware.Collections.Graph.EdgeCostDelegate`1">
             <summary>
@@ -743,12 +1003,12 @@
             </summary>
             <param name="graph">The <typeparamref name="IIndexedGraph{N,E}{N,E}"/> that will be 
             used in the path finding algorithms.</param>
-            <param name="hueristicAcceleration">A coefficient to accelerate more towards the target using the hueristic.</param>
+            <param name="heuristicAcceleration">A coefficient to accelerate more towards the target using the heuristic.</param>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.PathCostComparer`2.Initialize(System.Int32,System.Int32)">
             <summary>Clear out any prior computations. Set the starting node and target node.</summary>
             <param name="startNode">A starting node in the path.</param>
-            <param name="target">(Optional) A target node that can be used to accelerate the search using A*. The method TargetHueristic needs to be overridden for A*.</param>
+            <param name="target">(Optional) A target node that can be used to accelerate the search using A*. The method TargetHeuristic needs to be overridden for A*.</param>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.PathCostComparer`2.PathCost(System.Int32)">
             <inheritdoc/>
@@ -804,7 +1064,7 @@
             <param name="edge">The edge to get the cost from.</param>
             <returns>A <c>float</c> as the edge cost.</returns>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.PathCostComparer`2.TargetHueristic(System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.Graph.PathCostComparer`2.TargetHeuristic(System.Int32)">
             <summary>
             Returns an estimated cost to reach a target cell.
             </summary>
@@ -812,6 +1072,31 @@
             <returns>An estimated (and conservative) path cost from the current cell to the target cell.</returns>
             <remarks>Override this method to enable A* search.</remarks>
             <remarks>Default is a constant (0), which is not conservative, but results in Dijkstra's path search.</remarks>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Graph.PathCostComparer`2._graph">
+            <summary>
+            The graph.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Graph.PathCostComparer`2._heuristicAcceleration">
+            <summary>
+            A value to speed up the A* search.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Graph.PathCostComparer`2._targetNode">
+            <summary>
+            The target node.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Graph.PathCostComparer`2._edgeCostDelegate">
+            <summary>
+            The function to call to get an edge cost.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Graph.PathCostComparer`2._costs">
+            <summary>
+            A dictionary of edge indices to path costs.
+            </summary>
         </member>
         <member name="T:CrawfisSoftware.Collections.Graph.PathQuery`2">
             <summary>

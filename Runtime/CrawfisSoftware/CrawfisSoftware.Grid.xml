@@ -50,15 +50,15 @@
             </summary>
             <param name="direction">A Direction enum containing only one Direction.</param>
             <returns>The opposite direction or Direction.None if invalid.</returns>
-            <example> Reverse(Direction.N) would retuen Direction.S. Reverse(Direction.N | Direction.W) would
+            <example> Reverse(Direction.N) would return Direction.S. Reverse(Direction.N | Direction.W) would
             return Direction.None.</example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.DirectionExtensions.GetEdgeDirection(System.Int32,System.Int32,System.Int32)">
             <summary>
             Exception safe routine to get the label on an edge.
             </summary>
-            <param name="i">The "x" index of the grid.</param>
-            <param name="j">The "y" index of the grid.</param>
+            <param name="i">The cell index of the grid.</param>
+            <param name="j">The cell index of the grid.</param>
             <param name="width">The width of a fictional grid.</param>
             <returns>The direction when moving from i to an adjacent cell j under the assumption that all grid edges exist.
             Return Direction.None if j is not adjacent to i.</returns>
@@ -121,7 +121,7 @@
             <typeparam name="T">The type returned at each edge.</typeparam>
             <param name="i">The "x" index of the grid.</param>
             <param name="j">The "y" index of the grid.</param>
-            <param name="dir">The direction from the specidied grid index.</param>
+            <param name="dir">The direction from the specified grid index.</param>
             <returns>The user-defined edge label for the edge.</returns>
         </member>
         <member name="T:CrawfisSoftware.Collections.Graph.Grid`2">
@@ -133,6 +133,16 @@
             </summary>
             <typeparam name="N">The type of the node labels in the graph.</typeparam>
             <typeparam name="E">The type of the edge labels in the graph.</typeparam>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Graph.Grid`2.nodeFunction">
+            <summary>
+            A function to get a node's data.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Graph.Grid`2.edgeFunction">
+            <summary>
+            A function to get an edge's data.
+            </summary>
         </member>
         <member name="P:CrawfisSoftware.Collections.Graph.Grid`2.WrapHorizontal">
             <summary>
@@ -185,7 +195,7 @@
             </summary>
             <param name="i">The "x" index of the grid.</param>
             <param name="j">The "y" index of the grid.</param>
-            <param name="dir">The direction from the specidied grid index.</param>
+            <param name="dir">The direction from the specified grid index.</param>
             <returns>The label on the edge.</returns>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.Grid`2.GetOutFlowDirections(System.Int32,System.Int32)">
@@ -202,7 +212,7 @@
             </summary>
             <param name="i">The "x" index of the grid.</param>
             <param name="j">The "y" index of the grid.</param>
-            <param name="dir">The direction from the specidied grid index.</param>
+            <param name="dir">The direction from the specified grid index.</param>
             <returns><c>True</c> if the an edge from node (i,j) in the direction
             dir exists,<c>false</c> otherwise.</returns>
         </member>
@@ -367,10 +377,38 @@
             used in the path finding algorithms.</param>
             <param name="edgeCostFunction">A function used to retrieve or calculate
             the cost for a given edge.</param>
-            <param name="hueristicAcceleration">A coefficient to accelerate more towards the target using the hueristic.</param>
+            <param name="heuristicAcceleration">A coefficient to accelerate more towards the target using the heuristic.</param>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.GridPathComparer`2.TargetHueristic(System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.Graph.GridPathComparer`2.TargetHeuristic(System.Int32)">
             <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Collections.Graph.GridTraversalExtensions">
+            <summary>
+            Useful static methods like finding cells and boundaries within some distance.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GridTraversalExtensions.WalkableGridBoundary``2(CrawfisSoftware.Collections.Graph.Grid{``0,``1},System.Int32,System.Int32)">
+            <summary>
+            Given a grid returns a grid cell indices and offsets. These should be offset as if they are based on the lower-left corner.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="grid">A grid.</param>
+            <param name="startingIndex">The cell index to use as the center of the walkable area.</param>
+            <param name="maxDistance">the number of cells that can be reached from the startingIndex.</param>
+            <returns>An IEnumerable of grid cell indices and an offset.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GridTraversalExtensions.WalkableBoundary``2(CrawfisSoftware.Collections.Graph.Grid{``0,``1},System.Int32,CrawfisSoftware.Collections.Graph.EdgeCostDelegate{``1},System.Single)">
+            <summary>
+            Given a grid with edge weights, returns a grid cell indices and offsets. These should be offset as if they are based on the lower-left corner.
+            </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="grid">A grid</param>
+            <param name="startingIndex">The cell index to use as the center of the walkable area.</param>
+            <param name="costDelegate">A function that converts an edge to a cost for that edge.</param>
+            <param name="maxDistance">The maximum path cost that is allowed.</param>
+            <returns></returns>
         </member>
         <member name="T:CrawfisSoftware.Collections.Graph.GridUtility">
             <summary>
@@ -387,7 +425,7 @@
             the cost for a given edge.</param>
             <param name="start">The starting node index for the desired path.</param>
             <param name="target">The destination being searched for.</param>
-            <param name="hueristicAcceleration">A coefficient to accelerate more towards the target using the hueristic.</param>
+            <param name="heuristicAcceleration">A coefficient to accelerate more towards the target using the heuristic.</param>
             <returns>An enumeration of the path from the starting node to the target node.</returns>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.GridUtility.StampInto(CrawfisSoftware.Collections.Graph.OccupancyGrid,CrawfisSoftware.Collections.Graph.OccupancyGrid,System.Int32,System.Int32)">
@@ -415,6 +453,23 @@
             <param name="width">The number of columns for the new stamps.</param>
             <param name="height">The number of rows for the new stamps.</param>
             <returns>The created StampSet.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GridUtility.DummyNodeValues``1(System.Int32,System.Int32)">
+            <summary>
+            Function that always returns 1
+            </summary>
+            <param name="i">Column index of a cell.</param>
+            <param name="j">Row index of a cell.</param>
+            <returns>The default value for the <typeparamref name="N"/>.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.GridUtility.DummyEdgeValues``1(System.Int32,System.Int32,CrawfisSoftware.Collections.Graph.Direction)">
+            <summary>
+            Function that always returns the default value
+            </summary>
+            <param name="i">Column index of a cell.</param>
+            <param name="j">Row index of a cell.</param>
+            <param name="dir">Direction of the desired edge</param>
+            <returns>The default value for the <typeparamref name="E"/>.</returns>
         </member>
         <member name="T:CrawfisSoftware.Collections.Graph.OccupancyGrid">
             <summary>
@@ -468,6 +523,110 @@
             Returns a friendly representation of the grid.
             </summary>
             <returns>A string.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Collections.Graph.StampSet`1">
+            <summary>
+            A association of OccupancyGrids (stamps) based on some type (e.g., Direction).
+            </summary>
+            <typeparam name="TName">The type used to associate each stamp.</typeparam>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Graph.StampSet`1.Width">
+            <summary>
+            The width of all of the stamps (OccupancyGrids)
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Graph.StampSet`1.Height">
+             <summary>
+            The height of all of the stamps (OccupancyGrids)
+             </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSet`1.#ctor(System.Int32,System.Int32,CrawfisSoftware.Collections.Graph.OccupancyGrid)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="width">The width of all of the stamps.</param>
+            <param name="height">The height of all of the stamps.</param>
+            <param name="defaultStamp">The stamp to return for any unregistered stamp requests.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSet`1.RegisterStamp(`0,CrawfisSoftware.Collections.Graph.OccupancyGrid)">
+            <summary>
+            Add a stamp to the collection.
+            </summary>
+            <param name="name">The value to associate with this stamp.</param>
+            <param name="stamp">The OccupancyGrid for the stamp.</param>
+            <exception cref="T:System.ArgumentException">An exception is thrown if the stamp size is wrong or the name is already associated with a stamp.</exception>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSet`1.GetStamp(`0)">
+            <summary>
+            Gets a stamp associated with value passed in.
+            </summary>
+            <param name="name">The stamp id to return.</param>
+            <returns>The associated stamp if the name (or id) is registered. Otherwise the default stamp is returned.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Collections.Graph.StampSetFactory">
+            <summary>
+            Factory class for creating stamp sets for different directions and grid sizes.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampSet3x3Bool">
+            <summary>
+            Create a 3x3 stamp set for all direction sets. All corners are closed.
+            </summary>
+            <returns>A stamp set of Direction's to OccupancyGrid's.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampSet3x3BoolOpen">
+            <summary>
+            Create a 3x3 stamp set for all direction sets. Corners shared by two openings are open.
+            </summary>
+            <returns>A stamp set of Direction's to OccupancyGrid's.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampSet2x2Bool">
+            <summary>
+            Create a 2x2 stamp set for all direction sets. bottom-left corner is closed.
+            </summary>
+            <returns>A stamp set of Direction's to OccupancyGrid's.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampSetOpenNxM(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a StampSet foreach Direction where the right and top edges are open if there is a passage.
+            </summary>
+            <param name="width">The width of the stamps.</param>
+            <param name="height">The heights of the stamps.</param>
+            <param name="horizontalWallThickness">The thickness of the walls. Must be less than (width-1)/2 for any passages. Width minus twice this will be the passageway width.</param>
+            <param name="verticalWallThickness">The thickness of the walls. Must be less than (height-1)/2 for any passages. Width minus twice this will be the passageway height.</param>
+            <returns>A stamp set of Direction's to OccupancyGrid's</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampSetClosedNxM(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a StampSet foreach Direction where the corners are closed off.
+            </summary>
+            <param name="width">The width of the stamps.</param>
+            <param name="height">The heights of the stamps.</param>
+            <param name="horizontalWallThickness">The thickness of the walls. Must be less than (width-1)/2 for any passages. Width minus twice this will be the passageway width.</param>
+            <param name="verticalWallThickness">The thickness of the walls. Must be less than (height-1)/2 for any passages. Width minus twice this will be the passageway height.</param>
+            <returns>A stamp set of Direction's to OccupancyGrid's</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampOpen(CrawfisSoftware.Collections.Graph.Direction,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Stamp for a specified Direction where the right and top edges are open if there is a passage.
+            </summary>
+            <param name="direction">The Direction(s) that this stamp should support.</param>
+            <param name="width">The width of the stamps.</param>
+            <param name="height">The heights of the stamps.</param>
+            <param name="horizontalWallThickness">The thickness of the walls. Must be less than (width-1)/2 for any passages. Width minus twice this will be the passageway width.</param>
+            <param name="verticalWallThickness">The thickness of the walls. Must be less than (height-1)/2 for any passages. Width minus twice this will be the passageway height.</param>
+            <returns>A stamp associated with the input Direction.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampClosed(CrawfisSoftware.Collections.Graph.Direction,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Creates a Stamp for a specified Direction where the corners are closed.
+            </summary>
+            <param name="direction">The Direction(s) that this stamp should support.</param>
+            <param name="width">The width of the stamps.</param>
+            <param name="height">The heights of the stamps.</param>
+            <param name="horizontalWallThickness">The thickness of the walls. Must be less than (width-1)/2 for any passages. Width minus twice this will be the passageway width.</param>
+            <param name="verticalWallThickness">The thickness of the walls. Must be less than (height-1)/2 for any passages. Width minus twice this will be the passageway height.</param>
+            <returns>A stamp associated with the input Direction.</returns>
         </member>
     </members>
 </doc>

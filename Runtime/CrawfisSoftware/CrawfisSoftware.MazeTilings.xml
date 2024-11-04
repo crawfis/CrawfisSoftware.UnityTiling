@@ -8,7 +8,7 @@
             <summary>
             Select and return a tile based on edge constraints.
             </summary>
-            <param name="TileSet">The tileset that is being searched.</param>
+            <param name="TileSet">The tileSet that is being searched.</param>
             <param name="direction">The set of directions for the cell.</param>
             <param name="row">The tiling row if applicable.</param>
             <param name="column">The tiling column if applicable.</param>
@@ -34,9 +34,25 @@
             Get the edge the path exists or ends at
             </summary>
         </member>
+        <member name="T:CrawfisSoftware.Tiling.MazeTilings">
+            <summary>
+            Static utility functions for creating an abstract tiling and tileSet from a maze (aka grid of Direction(s))
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.MazeTilings.WangColorizer(CrawfisSoftware.Collections.Maze.Maze{System.Int32,System.Int32},System.Func{System.Int32,System.Int32,System.Int32[]},System.String,System.String,CrawfisSoftware.Tiling.TileSets.TileSet@)">
+            <summary>
+            Create an abstract tileSet and a resulting tiling using the tileSet.
+            </summary>
+            <param name="maze">The input maze.</param>
+            <param name="colorizer">A function that takes the </param>
+            <param name="tileSetName"></param>
+            <param name="tileSetDescription"></param>
+            <param name="tileSet"></param>
+            <returns></returns>
+        </member>
         <member name="T:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder">
             <summary>
-            Takes as input a maze and a tileset and creates a tiling based on the maze.
+            Takes as input a maze and a tileSet and creates a tiling based on the maze.
             </summary>
         </member>
         <member name="P:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.TilingEnumerator">
@@ -60,8 +76,16 @@
             <summary>
             Set or optionally replace tiles in the tiling based on the current TilingEnumerator and TileSelector.
             </summary>
-            <param name="tileSet">The tileset to use in creating the tiling</param>
+            <param name="tileSet">The tileSet to use in creating the tiling</param>
             <param name="noReplace">Indicates whether to only update tiles that have not been already set</param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.SelectTile(CrawfisSoftware.Tiling.ITileSet,CrawfisSoftware.Tiling.Tiling2DIndex)">
+            <summary>
+            Given the cell location in the maze, return the tile appropriate for the maze cell.
+            </summary>
+            <param name="tileSet">The tileSet to query</param>
+            <param name="index">The grid index for the maze</param>
+            <returns>A tile that matches the maze edges.</returns>
         </member>
         <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.SetTile(System.Int32,System.Int32,CrawfisSoftware.Tiling.ITile2D)">
             <summary>
@@ -119,79 +143,95 @@
             <param name="toEdge">The edge the path definition ends at</param>
             <param name="positions">A list of positions along the path</param>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Straight0101">
+        <member name="T:CrawfisSoftware.Tiling.PathTileSetFactory">
+            <summary>
+            Class to create an arc-based path tileSet or a Manhattan like path tileSet
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Straight0101">
             <summary>
             A vertical path tile in a straight line. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Straight1010">
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Straight1010">
             <summary>
             A horizontal path tile in a straight line. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Circle0011">
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Circle0011">
             <summary>
             Path tile that turns from right edge to bottom edge in an arc. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Circle0110">
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Circle0110">
             <summary>
             Path tile that turns from top edge to right edge in an arc. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Circle1001">
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Circle1001">
             <summary>
             Path tile that turns from left edge to bottom edge in an arc. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Circle1100">
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Circle1100">
             <summary>
             Path tile that turns from left edge to top edge in an arc. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Manhattan0011">
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Manhattan0011">
             <summary>
             Path tile that turns from right edge to bottom edge along axes. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Manhattan0110">
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Manhattan0110">
             <summary>
             Path tile that turns from top edge to right edge along axes. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Manhattan1001">
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Manhattan1001">
             <summary>
             Path tile that turns from left edge to bottom edge along axes. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="F:CrawfisSoftware.Tiling.PathTile.Manhattan1100">
+        <member name="F:CrawfisSoftware.Tiling.PathTileSetFactory.Manhattan1100">
             <summary>
             Path tile that turns from left edge to bottom top along axes. Numbering goes left,top,right,bottom
             </summary>
         </member>
-        <member name="T:CrawfisSoftware.Tiling.PathTileSetBuilder">
-            <summary>
-            Class to create an arc-based path tileset or a manhattan like path tileset
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.Tiling.PathTileSetBuilder.#ctor(System.Single,System.Single)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="tileWidth">The desired tile width</param>
-            <param name="tileHeight">The desired tile height</param>
-        </member>
-        <member name="M:CrawfisSoftware.Tiling.PathTileSetBuilder.GenerateArcTileSet">
+        <member name="M:CrawfisSoftware.Tiling.PathTileSetFactory.GenerateArcTileSet(System.Single,System.Single)">
             <summary>
             Create a path tile set (6 tiles) with circle arc turns and straight aways
             </summary>
-            <returns>An <paramref>ITileSet</paramref></returns>
+            <returns>An <paramref>ITileSet</paramref> containing PathTiles with 4 smooth turns and 2 straight-aways</returns>
         </member>
-        <member name="M:CrawfisSoftware.Tiling.PathTileSetBuilder.GenerateManhattanTileSet">
+        <member name="M:CrawfisSoftware.Tiling.PathTileSetFactory.GenerateManhattanTileSet(System.Single,System.Single)">
             <summary>
             Create a path tile set (6 tiles) with sharp turns
             </summary>
-            <returns></returns>
+            <returns>A tileSet containing PathTiles with 4 sharp turns and 2 straight-aways</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.PathTileSetFactory.ReComputeArcTiles(System.Int32,System.Single)">
+            <summary>
+            Recompute the arc tiles based on the number of samples and the radius
+            </summary>
+            <param name="numberOfSamples">Number of samples on the quarter-circle.</param>
+            <param name="radius">The radius of the circle or the half-width of the tile. Defaults to 1/2.</param>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.Simple16TileColorizer">
+            <summary>
+            A simple colorizer that colors the 16 tiles based on the direction of the exits.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.Simple16TileColorizer.#ctor(CrawfisSoftware.Collections.Maze.Maze{System.Int32,System.Int32})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="maze">The maze to query</param>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.Simple16TileColorizer.Colorizer">
+            <summary>
+            The colorizer function. It will take a column and row for the maze and return an array of 4 colors for the edges (left, top, right, bottom order).
+            </summary>
         </member>
         <member name="T:CrawfisSoftware.Tiling.TileSizePathTileDecorator">
             <summary>

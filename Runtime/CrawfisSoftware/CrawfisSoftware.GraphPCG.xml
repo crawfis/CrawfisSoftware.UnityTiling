@@ -511,12 +511,12 @@
             A value of true implies this cell is a solid block. Passages will be carved from non-solid
             blocks to adjacent non-solid blocks.</param>
         </member>
-        <member name="T:CrawfisSoftware.PCG.MazeWrapperFromGridBitArrays">
+        <member name="T:CrawfisSoftware.PCG.MazeWrapperFromGridBitArrays`2">
             <summary>
             Static class used to carve a path
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.PCG.MazeWrapperFromGridBitArrays.CarvePath(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{System.Int32,System.Int32},System.Collections.Generic.IList{System.Int32},System.Collections.Generic.IList{System.Int32},System.Int32,System.Int32)">
+        <member name="M:CrawfisSoftware.PCG.MazeWrapperFromGridBitArrays`2.CarvePath(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{`0,`1},System.Collections.Generic.IList{System.Int32},System.Collections.Generic.IList{System.Int32},System.Int32,System.Int32)">
             <summary>
             Carve openings based on the list of compressed vertical and horizontal edge flags for each row
             </summary>
@@ -533,7 +533,7 @@
         </member>
         <member name="M:CrawfisSoftware.PCG.OutflowStates.OldDetermineOutflowStates(System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
             <summary>
-            This method will eliminate invald states between two inflows based on positions and
+            This method will eliminate invalid states between two inflows based on positions and
             components. All possible combinations can then be tried for each span
             So there would be 3^N possible state cases. 
             </summary>
@@ -866,65 +866,6 @@
             <param name="width">The width of the row</param>
             <param name="row">The inflow bit pattern</param>
             <returns></returns>
-        </member>
-        <member name="T:CrawfisSoftware.Utility.EnumerableExtensions">
-            <summary>
-            Static helper class for enumerables
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.Utility.EnumerableExtensions.CartesianProduct``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
-            <summary>
-            Performs a n-Cartesian product (or cross product) from the 
-            set of sets passed in. 
-            </summary>
-            <typeparam name="T">The type of the elements in the sets.</typeparam>
-            <param name="inputs">A set, N of sets.</param>
-            <returns>A set of N-dimensional sets.</returns>
-            <example>{a,b} x {c,d} => {(a,c), (a,d), (b,c), (b,d)}</example>
-            <seealso cref="M:CrawfisSoftware.Utility.EnumerableExtensions.CartesianProduct``1(System.Collections.Generic.IEnumerable{``0}[])"/>
-        </member>
-        <member name="M:CrawfisSoftware.Utility.EnumerableExtensions.CartesianProduct``1(System.Collections.Generic.IEnumerable{``0}[])">
-            <summary>
-            Performs a n-Cartesian product (or cross product) from the 
-            set of sets passed in. 
-            </summary>
-            <typeparam name="T">The type of the elements in the sets.</typeparam>
-            <param name="inputs">A list of sets.</param>
-            <returns>A set of N-dimensional sets.</returns>
-            <example>{a,b} x {c,d} => {(a,c), (a,d), (b,c), (b,d)}</example>
-            <seealso cref="M:CrawfisSoftware.Utility.EnumerableExtensions.CartesianProduct``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})"/>
-        </member>
-        <member name="M:CrawfisSoftware.Utility.EnumerableExtensions.Append``1(System.Collections.Generic.IEnumerable{``0},``0)">
-            <summary>
-            Creates a new IEnumerable by adding the passed in item to the old IEnumerable.
-            </summary>
-            <typeparam name="T">A generic type for the IEnumerable and item.</typeparam>
-            <param name="currentList">The existing list of size N.</param>
-            <param name="newItem">The new item to add to the list.</param>
-            <returns>A new list of size N+1 containing the newItem.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.Utility.EnumerableExtensions.EnumFlagUnion``1(System.Collections.Generic.IEnumerable{``0})">
-            <summary>
-            Converts a list of Enum flags to a combined Flag Enum (a Union of the Flags).
-            </summary>
-            <typeparam name="T">Must be a Flag Enum</typeparam>
-            <param name="values">The list of Enum values to combine.</param>
-            <returns></returns>
-            <example>Direction[] enums = new[] { Direction.N, Direction.S };
-                     Direction flags = enums.EnumFlagUnion(); // Direction.N | Direction.S
-            </example>
-        </member>
-        <member name="M:CrawfisSoftware.Utility.EnumerableExtensions.EnumFlagSubsets``1(``0)">
-            <summary>
-            Returns a list of individual Enum values from a Enum Flag.
-            </summary>
-            <typeparam name="T">Needs to be an Enum</typeparam>
-            <param name="flags">The bits or Flags of the Enum to enumerate.</param>
-            <returns>Each flag that is "set" or turned on in the Flag Enum.</returns>
-            <example>Direction directionFlags = Direction.N | Direction.E | Direction.S;
-                     Direction[] directionList = flags.EnumFlagSubsets().ToArray();
-                     { Direction.N, Direction.E, Direction.S }
-            </example>
         </member>
     </members>
 </doc>

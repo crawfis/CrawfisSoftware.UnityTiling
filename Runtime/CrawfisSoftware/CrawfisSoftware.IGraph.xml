@@ -54,7 +54,7 @@
         </member>
         <member name="P:CrawfisSoftware.Collections.Graph.IGraph`2.Nodes">
             <summary>
-            Iterator for the nodes in the graoh.
+            Iterator for the nodes in the graph.
             </summary>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.IGraph`2.Neighbors(`0)">
@@ -161,7 +161,7 @@
         </member>
         <member name="P:CrawfisSoftware.Collections.Graph.IIndexedGraph`2.Nodes">
             <summary>
-            Iterator for the node indices in the graoh.
+            Iterator for the node indices in the graph.
             </summary>
         </member>
         <member name="P:CrawfisSoftware.Collections.Graph.IIndexedGraph`2.Edges">

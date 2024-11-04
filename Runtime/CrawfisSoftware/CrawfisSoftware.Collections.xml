@@ -99,12 +99,12 @@
             </summary>
             <remarks>This routine is thread-safe under the single use-case this class is designed for.</remarks>
         </member>
-        <member name="T:CrawfisSoftware.Collections.EnumerableHelpers">
+        <member name="T:CrawfisSoftware.Collections.EnumerableExtensions">
             <summary>
             Static class of extensions for IEnumerable and IList.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.Collections.EnumerableHelpers.Shuffle``1(System.Collections.Generic.IList{``0},System.Random)">
+        <member name="M:CrawfisSoftware.Collections.EnumerableExtensions.Shuffle``1(System.Collections.Generic.IList{``0},System.Random)">
             <summary>
             Enumerates a list in a random order.
             </summary>
@@ -113,7 +113,7 @@
             <param name="random">Optional random number generator.</param>
             <returns>An enumeration of the list elements.</returns>
         </member>
-        <member name="M:CrawfisSoftware.Collections.EnumerableHelpers.MakeInfinite``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:CrawfisSoftware.Collections.EnumerableExtensions.MakeInfinite``1(System.Collections.Generic.IEnumerable{``0})">
             <summary>
             Repeatedly enumerates a set
             </summary>
@@ -121,7 +121,7 @@
             <returns>An infinite stream with the finiteSet repeated.</returns>
             <seealso cref="!:TakeWithRepeats()"/>
         </member>
-        <member name="M:CrawfisSoftware.Collections.EnumerableHelpers.MakeFinite``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.EnumerableExtensions.MakeFinite``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Returns either a finite set or the first N items
             </summary>
@@ -130,7 +130,7 @@
             <returns>A finite stream.</returns>
             <seealso cref="!:TakeWithRepeats()"/>
         </member>
-        <member name="M:CrawfisSoftware.Collections.EnumerableHelpers.TakeWithRepeats``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.EnumerableExtensions.TakeWithRepeats``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
             <summary>
             Creates a finite stream by repeating if necessary another stream.
             </summary>
@@ -138,6 +138,60 @@
             <param name="stream">A stream of type T</param>
             <returns>A stream of type T</returns>
             <remarks>Equivalent to using LINQ's Take(numberOfSamples) with MakeInfinite(finiteSet).</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.EnumerableExtensions.CartesianProduct``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})">
+            <summary>
+            Performs a n-Cartesian product (or cross product) from the 
+            set of sets passed in. 
+            </summary>
+            <typeparam name="T">The type of the elements in the sets.</typeparam>
+            <param name="inputs">A set, N of sets.</param>
+            <returns>A set of N-dimensional sets.</returns>
+            <example>{a,b} x {c,d} => {(a,c), (a,d), (b,c), (b,d)}</example>
+            <seealso cref="M:CrawfisSoftware.Collections.EnumerableExtensions.CartesianProduct``1(System.Collections.Generic.IEnumerable{``0}[])"/>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.EnumerableExtensions.CartesianProduct``1(System.Collections.Generic.IEnumerable{``0}[])">
+            <summary>
+            Performs a n-Cartesian product (or cross product) from the 
+            set of sets passed in. 
+            </summary>
+            <typeparam name="T">The type of the elements in the sets.</typeparam>
+            <param name="inputs">A list of sets.</param>
+            <returns>A set of N-dimensional sets.</returns>
+            <example>{a,b} x {c,d} => {(a,c), (a,d), (b,c), (b,d)}</example>
+            <seealso cref="M:CrawfisSoftware.Collections.EnumerableExtensions.CartesianProduct``1(System.Collections.Generic.IEnumerable{System.Collections.Generic.IEnumerable{``0}})"/>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.EnumerableExtensions.Append``1(System.Collections.Generic.IEnumerable{``0},``0)">
+            <summary>
+            Creates a new IEnumerable by adding the passed in item to the old IEnumerable.
+            </summary>
+            <typeparam name="T">A generic type for the IEnumerable and item.</typeparam>
+            <param name="currentList">The existing list of size N.</param>
+            <param name="newItem">The new item to add to the list.</param>
+            <returns>A new list of size N+1 containing the newItem.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.EnumerableExtensions.EnumFlagUnion``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Converts a list of Enum flags to a combined Flag Enum (a Union of the Flags).
+            </summary>
+            <typeparam name="T">Must be a Flag Enum</typeparam>
+            <param name="values">The list of Enum values to combine.</param>
+            <returns></returns>
+            <example>Direction[] enums = new[] { Direction.N, Direction.S };
+                     Direction flags = enums.EnumFlagUnion(); // Direction.N | Direction.S
+            </example>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.EnumerableExtensions.EnumFlagSubsets``1(``0)">
+            <summary>
+            Returns a list of individual Enum values from a Enum Flag.
+            </summary>
+            <typeparam name="T">Needs to be an Enum</typeparam>
+            <param name="flags">The bits or Flags of the Enum to enumerate.</param>
+            <returns>Each flag that is "set" or turned on in the Flag Enum.</returns>
+            <example>Direction directionFlags = Direction.N | Direction.E | Direction.S;
+                     Direction[] directionList = flags.EnumFlagSubsets().ToArray();
+                     { Direction.N, Direction.E, Direction.S }
+            </example>
         </member>
         <member name="T:CrawfisSoftware.Collections.GenericCommand`1">
             <summary>
@@ -160,7 +214,7 @@
         </member>
         <member name="M:CrawfisSoftware.Collections.GenericCommand`1.Execute">
             <summary>
-            Perform the command, passing in the reciever.
+            Perform the command, passing in the receiver.
             </summary>
         </member>
         <member name="T:CrawfisSoftware.Collections.Heap`1">
@@ -173,20 +227,12 @@
             <summary>
             Initializes a new instance of the <see cref="T:CrawfisSoftware.Collections.Heap`1"/> class.
             </summary>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="Constructor" lang="cs" title="The following example shows how to use the default constructor."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="Constructor" lang="vbnet" title="The following example shows how to use the default constructor."/>
-            </example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Heap`1.#ctor(System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:CrawfisSoftware.Collections.Heap`1"/> class.
             </summary>
             <param name="capacity">The capacity.</param>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="ConstructorCapacity" lang="cs" title="The following example shows how to use the capacity constructor."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="ConstructorCapacity" lang="vbnet" title="The following example shows how to use the capacity constructor."/>
-            </example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Heap`1.#ctor(System.Collections.Generic.IComparer{`0})">
             <summary>
@@ -194,10 +240,6 @@
             </summary>
             <param name="comparer">The comparer to use.</param>
             <exception cref="T:System.ArgumentNullException"><paramref name="comparer"/> is a null reference (<c>Nothing</c> in Visual Basic).</exception>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="ConstructorComparer" lang="cs" title="The following example shows how to use the comparer constructor."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="ConstructorComparer" lang="vbnet" title="The following example shows how to use the comparer constructor."/>
-            </example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Heap`1.#ctor(System.Int32,System.Collections.Generic.IComparer{`0})">
             <summary>
@@ -213,10 +255,6 @@
             </summary>
             <returns>The value of the root of the Heap.</returns>
             <exception cref="T:System.InvalidOperationException">The <see cref="T:CrawfisSoftware.Collections.Heap`1"/> is empty.</exception>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="Root" lang="cs" title="The following example shows how to use the Root property."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="Root" lang="vbnet" title="The following example shows how to use the Root property."/>
-            </example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Heap`1.RemoveRoot">
             <summary>
@@ -224,10 +262,6 @@
             </summary>
             <returns>The value contained in the root of the Heap.</returns>
             <exception cref="T:System.InvalidOperationException">The <see cref="T:CrawfisSoftware.Collections.Heap`1"/> is empty.</exception>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="RemoveRoot" lang="cs" title="The following example shows how to use the RemoveRoot method."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="RemoveRoot" lang="vbnet" title="The following example shows how to use the RemoveRoot method."/>
-            </example>
         </member>
         <member name="P:CrawfisSoftware.Collections.Heap`1.ComparerToUse">
             <summary>
@@ -242,10 +276,6 @@
             <returns>
             true if item is found in the <see cref="T:System.Collections.Generic.ICollection`1"/>; otherwise, false.
             </returns>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="Contains" lang="cs" title="The following example shows how to use the Contains method."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="Contains" lang="vbnet" title="The following example shows how to use the Contains method."/>
-            </example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Heap`1.CopyTo(`0[],System.Int32)">
             <summary>
@@ -256,20 +286,12 @@
             <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="arrayIndex"/> is less than 0.</exception>
             <exception cref="T:System.ArgumentNullException"><paramref name="array"/> is a null reference (<c>Nothing</c> in Visual Basic).</exception>
             <exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or-<paramref name="arrayIndex"/> is equal to or greater than the length of array.-or-The number of elements in the source <see cref="T:System.Collections.Generic.ICollection`1"/> is greater than the available space from arrayIndex to the end of the destination array.-or-Type T cannot be cast automatically to the type of the destination array.</exception>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="CopyTo" lang="cs" title="The following example shows how to use the CopyTo method."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="CopyTo" lang="vbnet" title="The following example shows how to use the CopyTo method."/>
-            </example>
         </member>
         <member name="P:CrawfisSoftware.Collections.Heap`1.Count">
             <summary>
             Gets the number of elements contained in the <see cref="T:System.Collections.ICollection"/>.
             </summary>
             <returns>The number of elements contained in the <see cref="T:System.Collections.ICollection"/>.</returns>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="Count" lang="cs" title="The following example shows how to use the Count property."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="Count" lang="vbnet" title="The following example shows how to use the Count property."/>
-            </example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Heap`1.Add(`0)">
             <summary>
@@ -277,10 +299,6 @@
             </summary>
             <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"/>.</param>
             <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.Generic.ICollection`1"/> is read-only.</exception>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="Add" lang="cs" title="The following example shows how to use the Add method."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="Add" lang="vbnet" title="The following example shows how to use the Add method."/>
-            </example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Heap`1.System#Collections#Generic#ICollection{T}#Remove(`0)">
             <summary>
@@ -299,19 +317,11 @@
             <returns>
             A <see cref="T:System.Collections.Generic.IEnumerator`1"/> that can be used to iterate through the collection.
             </returns>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="GetEnumerator" lang="cs" title="The following example shows how to use the GetEnumerator method."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="GetEnumerator" lang="vbnet" title="The following example shows how to use the GetEnumerator method."/>
-            </example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Heap`1.Clear">
             <summary>
             Clears all the objects in this instance.
             </summary>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="Clear" lang="cs" title="The following example shows how to use the Clear method."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="Clear" lang="vbnet" title="The following example shows how to use the Clear method."/>
-            </example>
         </member>
         <member name="P:CrawfisSoftware.Collections.Heap`1.IsReadOnly">
             <summary>
@@ -320,10 +330,6 @@
             <value>
             	<c>true</c> if this instance is read only; otherwise, <c>false</c>.
             </value>
-            <example>
-            <code source="..\..\Examples\ExampleLibraryCSharp\DataStructures\General\HeapExamples.cs" region="IsReadOnly" lang="cs" title="The following example shows how to use the IsReadOnly property."/>
-            <code source="..\..\Examples\ExampleLibraryVB\DataStructures\General\HeapExamples.vb" region="IsReadOnly" lang="vbnet" title="The following example shows how to use the IsReadOnly property."/>
-            </example>
         </member>
         <member name="M:CrawfisSoftware.Collections.Heap`1.System#Collections#IEnumerable#GetEnumerator">
             <summary>
@@ -340,7 +346,7 @@
         </member>
         <member name="M:CrawfisSoftware.Collections.HeapAdaptor`1.#ctor(System.Int32,System.Collections.Generic.IComparer{`0})">
             <summary>
-            Constructor specifying an inital size and an <typeparamref name="IComparer{T}{T}"/>.
+            Constructor specifying an initial size and an <typeparamref name="IComparer{T}{T}"/>.
             </summary>
             <param name="capacity">The initial number of elements that the 
             <typeparamref name="HeapAdaptor{T}{T}"/> can contain.</param>

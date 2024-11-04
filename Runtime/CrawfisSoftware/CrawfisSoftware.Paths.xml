@@ -143,7 +143,7 @@
         </member>
         <member name="P:CrawfisSoftware.Collections.Path.IPath`2.PositionCount">
             <summary>
-            The number of positions that are defined on this path.
+            The number of positions that are defined on this path. If it is a loop then the count is one more than the number of positions.
             </summary>
         </member>
         <member name="P:CrawfisSoftware.Collections.Path.IPath`2.PathLength">
@@ -163,8 +163,8 @@
             <param name="path">A GridPath</param>
             <param name="positionIndex">The position index of the path which we are querying the cell direction.</param>
             <param name="isLoop">True is the path forms a closed loop.</param>
-            <returns>A character respresenting the turtle action.</returns>
-            <remarks>Does not support toriodal grids.</remarks>
+            <returns>A character representing the turtle action.</returns>
+            <remarks>Does not support toroidal grids.</remarks>
         </member>
         <member name="M:CrawfisSoftware.Collections.Path.PathQuery.DetermineTurtleString``2(CrawfisSoftware.Collections.Path.GridPath{``0,``1})">
             <summary>
@@ -207,7 +207,7 @@
             <param name="pathString">The turtle string of straight, left and right movements.</param>
             <param name="regex">A Regular Expression in the System.Text.RegularExpression.Regex format.</param>
             <param name="isClosed">True if the string represents a loop. Default is false.</param>
-            <returns>The starting index for the pattern for each occurance.</returns>
+            <returns>The starting index for the pattern for each occurrence.</returns>
             <remarks>Note that the pattern usually starts at the cell before. For instance a left turn that starts at i-1, goes through i to i+width, will return i-1, not i.</remarks>
         </member>
         <member name="M:CrawfisSoftware.Collections.Path.StringPathQuery.UTurns(System.String,System.Boolean)">
@@ -216,7 +216,7 @@
             </summary>
             <param name="pathString">The turtle string of straight, left and right movements.</param>
             <param name="isClosed">True if the string represents a loop. Default is false.</param>
-            <returns>The starting index for the pattern for each occurance.</returns>
+            <returns>The starting index for the pattern for each occurrence.</returns>
             <remarks>Note that the pattern usually starts at the cell before. For instance a left turn that starts at i-1, goes through i to i+width, will return i-1, not i.</remarks>
             <seealso cref="!:Search(Regex)"/>
         </member>
@@ -227,7 +227,7 @@
             <param name="pathString">The turtle string of straight, left and right movements.</param>
             <param name="straightLength">The desired straight-away length to match.</param>
             <param name="isClosed">True if the string represents a loop. Default is false.</param>
-            <returns>The starting index for the pattern for each occurance.</returns>
+            <returns>The starting index for the pattern for each occurrence.</returns>
             <remarks>Note that the pattern usually starts at the cell before. For instance a left turn that starts at i-1, goes through i to i+width, will return i-1, not i.</remarks>
             <seealso cref="!:Search(Regex)"/>
         </member>

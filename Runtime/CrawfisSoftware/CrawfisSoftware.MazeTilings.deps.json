@@ -12,12 +12,12 @@
           "CrawfisSoftware.Tiling": "1.0.0",
           "Microsoft.CSharp": "4.7.0",
           "System.Data.DataSetExtensions": "4.5.0",
-          "CrawfisSoftware.Graph": "1.0.0.0",
-          "CrawfisSoftware.GraphPCG": "1.0.0.0",
-          "CrawfisSoftware.Grid": "1.0.0.0",
-          "CrawfisSoftware.IGraph": "1.0.0.0",
-          "CrawfisSoftware.Maze": "1.0.0.0",
-          "CrawfisSoftware.Tiling.Reference": "1.0.0.0",
+          "CrawfisSoftware.Graph": "1.1.0.0",
+          "CrawfisSoftware.GraphPCG": "1.1.0.0",
+          "CrawfisSoftware.Grid": "1.1.0.0",
+          "CrawfisSoftware.IGraph": "1.1.0.0",
+          "CrawfisSoftware.Maze": "1.1.0.0",
+          "CrawfisSoftware.Tiling.Reference": "1.1.0.0",
           "UnityEngine": "0.0.0.0"
         },
         "runtime": {
@@ -46,54 +46,57 @@
           "System.Data.DataSetExtensions": "4.5.0"
         },
         "runtime": {
-          "CrawfisSoftware.Tiling.dll": {}
+          "CrawfisSoftware.Tiling.dll": {
+            "assemblyVersion": "1.0.0",
+            "fileVersion": ""
+          }
         }
       },
-      "CrawfisSoftware.Graph/1.0.0.0": {
+      "CrawfisSoftware.Graph/1.1.0.0": {
         "runtime": {
           "CrawfisSoftware.Graph.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
-      "CrawfisSoftware.GraphPCG/1.0.0.0": {
+      "CrawfisSoftware.GraphPCG/1.1.0.0": {
         "runtime": {
           "CrawfisSoftware.GraphPCG.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
-      "CrawfisSoftware.Grid/1.0.0.0": {
+      "CrawfisSoftware.Grid/1.1.0.0": {
         "runtime": {
           "CrawfisSoftware.Grid.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
-      "CrawfisSoftware.IGraph/1.0.0.0": {
+      "CrawfisSoftware.IGraph/1.1.0.0": {
         "runtime": {
           "CrawfisSoftware.IGraph.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
-      "CrawfisSoftware.Maze/1.0.0.0": {
+      "CrawfisSoftware.Maze/1.1.0.0": {
         "runtime": {
           "CrawfisSoftware.Maze.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
-      "CrawfisSoftware.Tiling.Reference/1.0.0.0": {
+      "CrawfisSoftware.Tiling.Reference/1.1.0.0": {
         "runtime": {
           "CrawfisSoftware.Tiling.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
@@ -105,19 +108,19 @@
           }
         }
       },
-      "CrawfisSoftware.Collections/1.0.0.0": {
+      "CrawfisSoftware.Collections/1.1.0.0": {
         "runtime": {
           "CrawfisSoftware.Collections.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       },
-      "CrawfisSoftware.Paths/1.0.0.0": {
+      "CrawfisSoftware.Paths/1.1.0.0": {
         "runtime": {
           "CrawfisSoftware.Paths.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.0.0",
+            "fileVersion": "1.1.0.0"
           }
         }
       }
@@ -148,32 +151,32 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CrawfisSoftware.Graph/1.0.0.0": {
+    "CrawfisSoftware.Graph/1.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "CrawfisSoftware.GraphPCG/1.0.0.0": {
+    "CrawfisSoftware.GraphPCG/1.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "CrawfisSoftware.Grid/1.0.0.0": {
+    "CrawfisSoftware.Grid/1.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "CrawfisSoftware.IGraph/1.0.0.0": {
+    "CrawfisSoftware.IGraph/1.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "CrawfisSoftware.Maze/1.0.0.0": {
+    "CrawfisSoftware.Maze/1.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "CrawfisSoftware.Tiling.Reference/1.0.0.0": {
+    "CrawfisSoftware.Tiling.Reference/1.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
@@ -183,12 +186,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CrawfisSoftware.Collections/1.0.0.0": {
+    "CrawfisSoftware.Collections/1.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
     },
-    "CrawfisSoftware.Paths/1.0.0.0": {
+    "CrawfisSoftware.Paths/1.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""
