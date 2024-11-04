@@ -74,12 +74,12 @@ namespace CrawfisSoftware.UnityTiling
         public async Task Awake()
         {
             // Create a TileSet and add it.
-            _tileSet = new(_name, _description, _width, _height);
             await Initialize();
         }
 
         public async Task Initialize()
         {
+            _tileSet = new(_name, _description, _width, _height);
             List<Task> tasks = new List<Task>();
             foreach (var tile in _tiles)
             {
