@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _name: Cube-Prefabs
   _description: Just a cube used as the default and empty for all closed off areas.
-  _width: 1.02
-  _height: 1.02
+  _width: 1.6
+  _height: 1.6
   _defaultTile: {fileID: 11400000, guid: afdfe71e249617a40ac43730b00486cc, type: 2}
   _keywords: []
   _tiles:
