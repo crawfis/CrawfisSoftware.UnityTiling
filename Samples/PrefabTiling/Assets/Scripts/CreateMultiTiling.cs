@@ -48,7 +48,7 @@ namespace CrawfisSoftware.UnityTiling
             _mazeProvider.Build();
             var maze = _mazeProvider.Maze;
             int tileSetIndex = 1;
-            Debug.Log("All tilesets are loaded. Creating the tiling.");
+            Debug.Log("All tileSets are loaded. Creating the tiling.");
             foreach (var tileSet in _tileSetUnityScriptable)
             {
                 GameObject emptyGO = new GameObject("Tiling" + tileSetIndex.ToString());

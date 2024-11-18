@@ -34,21 +34,18 @@
             Get the edge the path exists or ends at
             </summary>
         </member>
-        <member name="T:CrawfisSoftware.Tiling.MazeTilings">
+        <member name="T:CrawfisSoftware.Tiling.MazeColorizers">
             <summary>
-            Static utility functions for creating an abstract tiling and tileSet from a maze (aka grid of Direction(s))
+            A set of colorizers that convert maze directions to a set of colors for tiling.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.Tiling.MazeTilings.WangColorizer(CrawfisSoftware.Collections.Maze.Maze{System.Int32,System.Int32},System.Func{System.Int32,System.Int32,System.Int32[]},System.String,System.String,CrawfisSoftware.Tiling.TileSets.TileSet@)">
+        <member name="M:CrawfisSoftware.Tiling.MazeColorizers.ColorizeBasedOnDirectionOnly(CrawfisSoftware.Collections.Graph.Direction,System.Int32,System.Int32)">
             <summary>
-            Create an abstract tileSet and a resulting tiling using the tileSet.
+            Simple two-color colorizer function, mapping openings to the doorColor (default 1) and walls to the wallColor (default 0).
             </summary>
-            <param name="maze">The input maze.</param>
-            <param name="colorizer">A function that takes the </param>
-            <param name="tileSetName"></param>
-            <param name="tileSetDescription"></param>
-            <param name="tileSet"></param>
-            <returns></returns>
+            <param name="directions">The directions to which you can exit the cell.</param>
+            <param name="wallColor">The color to use for a wall. Defaults to 0.</param>
+            <param name="doorColor">The color to use for a door. Defaults to 1.</param>
         </member>
         <member name="T:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder">
             <summary>
@@ -63,6 +60,11 @@
         <member name="P:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.TileSelector">
             <summary>
             Get or set the algorithm for how a tile is selected for a tile location.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.Colorizer">
+            <summary>
+            A function that takes the row and column of a cell in the maze and returns an array of 4 integers that represent the color of the tile.
             </summary>
         </member>
         <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.#ctor(CrawfisSoftware.Collections.Maze.Maze{System.Int32,System.Int32},CrawfisSoftware.Tiling.ITiling2D)">
@@ -217,22 +219,6 @@
             <param name="numberOfSamples">Number of samples on the quarter-circle.</param>
             <param name="radius">The radius of the circle or the half-width of the tile. Defaults to 1/2.</param>
         </member>
-        <member name="T:CrawfisSoftware.Tiling.Simple16TileColorizer">
-            <summary>
-            A simple colorizer that colors the 16 tiles based on the direction of the exits.
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.Tiling.Simple16TileColorizer.#ctor(CrawfisSoftware.Collections.Maze.Maze{System.Int32,System.Int32})">
-            <summary>
-            Constructor
-            </summary>
-            <param name="maze">The maze to query</param>
-        </member>
-        <member name="P:CrawfisSoftware.Tiling.Simple16TileColorizer.Colorizer">
-            <summary>
-            The colorizer function. It will take a column and row for the maze and return an array of 4 colors for the edges (left, top, right, bottom order).
-            </summary>
-        </member>
         <member name="T:CrawfisSoftware.Tiling.TileSizePathTileDecorator">
             <summary>
             A decorator for an IPathTile that changes the tile size
@@ -271,6 +257,38 @@
             </summary>
             <param name="pathTile">The real path tile</param>
             <param name="scale">A scale transform to apply to all of the path positions</param>
+        </member>
+        <member name="T:CrawfisSoftware.Tiling.WangColorizer`2">
+            <summary>
+            TilingBuilder for creating an abstract tiling as well as a tileSet. Useful coming from a maze (aka grid of Direction(s)) or in a more general setting.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.WangColorizer`2.Colorizer">
+            <summary>
+            A function that takes the row and column of the tiling and returns an array of 4 integers that represent the color of the tile.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.WangColorizer`2.TilingEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="P:CrawfisSoftware.Tiling.WangColorizer`2.TileSelector">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.WangColorizer`2.#ctor(System.Func{System.Int32,System.Int32,System.Int32[]})">
+            <summary>
+            Create an abstract tileSet and a resulting tiling using the tileSet.
+            </summary>
+            <param name="colorizer">A function that takes the </param>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.WangColorizer`2.UpdateTiling(CrawfisSoftware.Tiling.ITileSet,System.Boolean)">
+            <inheritdoc/>
+            <remarks>Also modifies the tileSet and requires it to be of type TileSet.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.WangColorizer`2.SetTile(System.Int32,System.Int32,CrawfisSoftware.Tiling.ITile2D)">
+            <inheritdoc/>
+        </member>
+        <member name="M:CrawfisSoftware.Tiling.WangColorizer`2.GetTiling">
+            <inheritdoc/>
         </member>
     </members>
 </doc>
