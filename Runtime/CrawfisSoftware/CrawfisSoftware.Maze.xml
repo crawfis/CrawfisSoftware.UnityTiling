@@ -334,6 +334,14 @@
             </summary>
             <param name="mazeBuilder">An existing maze builder to copy the current state from.</param>
         </member>
+        <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderAbstract`2.GetDirection(System.Int32,System.Int32)">
+            <summary>
+            Get the direction for the specified cell.
+            </summary>
+            <param name="column">The column index of the cell.</param>
+            <param name="row">The row index of the cell.</param>
+            <returns>The Direction flags.</returns>
+        </member>
         <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderAbstract`2.CarveDirectionally(System.Int32,System.Int32,CrawfisSoftware.Collections.Graph.Direction,System.Boolean)">
             <inheritdoc/>
         </member>
@@ -530,34 +538,29 @@
         <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderBitEdges`2.CreateMaze(System.Boolean)">
             <inheritdoc/>
         </member>
-        <member name="T:CrawfisSoftware.Collections.Maze.MazeBuilderBraids`2">
+        <member name="T:CrawfisSoftware.Collections.Maze.MazeBuilderBraids">
             <summary>
-            Given an existing maze, utilities to carve more passages that may cause loops.
+            Given an existing maze builder, extensions to carve more passages that may cause loops or braid a perfect maze.
             </summary>
-            <typeparam name="N">The type used for node labels</typeparam>
-            <typeparam name="E">The type used for edge weights</typeparam>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderBraids`2.#ctor(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{`0,`1},CrawfisSoftware.Collections.Maze.MazeMetricsComputations{`0,`1})">
-            <summary>
-            Constructor.
-            </summary>
-            <param name="mazeBuilder">A previous MazeBuilder</param>
-            <param name="mazeMetricsComputations">(optional) Pre-computed maze metrics. If null, these will be computed if needed.</param>
-        </member>
-        <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderBraids`2.CreateMaze(System.Boolean)">
-            <inheritdoc/>
-        </member>
-        <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderBraids`2.MergeDeadEndsRandomly(System.Boolean,System.Boolean)">
+        <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderBraids.MergeDeadEndsRandomly``2(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{``0,``1},System.Boolean,System.Boolean)">
             <summary>
             Provides a braid for the maze, randomly connecting dead-end cell to a neighbor. 
             </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="mazeBuilder">the underlying MazeBuilder</param>
             <param name="preserveExistingCells">Boolean indicating whether to only replace maze cells that are undefined.</param>
             <param name="carveNeighbors">True to keep the underlying maze consistent. False to just modify the dead-end cell.</param>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderBraids`2.MergeAdjacentCells(System.Func{CrawfisSoftware.Collections.Graph.IIndexedEdge{`1},CrawfisSoftware.Collections.Maze.MazeCellMetrics,CrawfisSoftware.Collections.Maze.MazeCellMetrics,System.Single},System.Single,System.Boolean,System.Func{System.Int32,System.Single,CrawfisSoftware.Collections.Graph.IIndexedEdge{`1},System.Boolean},System.Boolean)">
+        <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderBraids.MergeAdjacentCells``2(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{``0,``1},CrawfisSoftware.Collections.Maze.MazeMetricsComputations{``0,``1},System.Func{CrawfisSoftware.Collections.Graph.IIndexedEdge{``1},CrawfisSoftware.Collections.Maze.MazeCellMetrics,CrawfisSoftware.Collections.Maze.MazeCellMetrics,System.Single},System.Single,System.Boolean,System.Func{System.Int32,System.Single,CrawfisSoftware.Collections.Graph.IIndexedEdge{``1},System.Boolean},System.Boolean)">
             <summary>
             General routine to merge adjacent cells using scores and functions.
             </summary>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
+            <param name="mazeBuilder">the underlying MazeBuilder</param>
+            <param name="mazeMetricsComputations">Pre-computed maze metrics.</param>
             <param name="computeWallScore">A function that computes a "score" for a wall using cell metrics and edge properties.</param>
             <param name="thresholdToRemove">If the wall score is greater than this threshold it is added to a candidate set to carve.</param>
             <param name="sortResults">If true, sort the candidate set according to the score.</param>
@@ -628,7 +631,7 @@
         </member>
         <member name="T:CrawfisSoftware.Collections.Maze.MazeBuilderModifiers`2">
             <summary>
-            Modify amaze based on maze metrics.
+            Modify a maze based on maze metrics.
             </summary>
         </member>
         <member name="M:CrawfisSoftware.Collections.Maze.MazeBuilderModifiers`2.#ctor(CrawfisSoftware.Collections.Maze.Maze{`0,`1},CrawfisSoftware.Collections.Maze.MazeMetricsComputations{`0,`1},CrawfisSoftware.Collections.Graph.GetGridLabel{`0},CrawfisSoftware.Collections.Graph.GetEdgeLabel{`1})">

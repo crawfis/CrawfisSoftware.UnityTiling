@@ -326,13 +326,11 @@
             Actually creates the passages in the underlying grid maze.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.PCG.DungeonMazeBuilder`2.CarveExtraPassagesFurthestAway(System.Int32)">
+        <member name="M:CrawfisSoftware.PCG.DungeonMazeBuilder`2.CarveAllRooms">
             <summary>
             Using existing path distances, find the furthest paths and carve them.
             </summary>
             <param name="numberOfPathsToCarve">THe number of passageways to create.</param>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.DungeonMazeBuilder`2.CarveAllRooms">
             <summary>
             Actually create the rooms in the underlying grid maze.
             </summary>
@@ -681,8 +679,8 @@
             <summary>
             Graph builder using the Drunken Walk or Random Walk algorithm with multiple walkers.
             </summary>
-            <typeparam name="N"></typeparam>
-            <typeparam name="E"></typeparam>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
         </member>
         <member name="P:CrawfisSoftware.PCG.RandomWalkMazeBuilder`2.PercentToCarve">
             <summary>
@@ -702,7 +700,7 @@
             <summary>
             The number of walkers to spawn (eventually). New walkers can be spawned
             at random locations during initialization or at an existing walker's
-            location as the algorithm progesses. The later will carve out more open areas.
+            location as the algorithm progresses. The later will carve out more open areas.
             </summary>
         </member>
         <member name="P:CrawfisSoftware.PCG.RandomWalkMazeBuilder`2.InitialNumberOfWalkers">

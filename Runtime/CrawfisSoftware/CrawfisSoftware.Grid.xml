@@ -596,7 +596,7 @@
             <param name="verticalWallThickness">The thickness of the walls. Must be less than (height-1)/2 for any passages. Width minus twice this will be the passageway height.</param>
             <returns>A stamp set of Direction's to OccupancyGrid's</returns>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampSetClosedNxM(System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampSetClosedNxM(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Creates a StampSet foreach Direction where the corners are closed off.
             </summary>
@@ -617,7 +617,7 @@
             <param name="verticalWallThickness">The thickness of the walls. Must be less than (height-1)/2 for any passages. Width minus twice this will be the passageway height.</param>
             <returns>A stamp associated with the input Direction.</returns>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampClosed(CrawfisSoftware.Collections.Graph.Direction,System.Int32,System.Int32,System.Int32,System.Int32)">
+        <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampClosed(CrawfisSoftware.Collections.Graph.Direction,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
             <summary>
             Creates a Stamp for a specified Direction where the corners are closed.
             </summary>
