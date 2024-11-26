@@ -395,6 +395,62 @@
             </summary>
             <returns>True if the heap is full. False otherwise.</returns>
         </member>
+        <member name="T:CrawfisSoftware.Collections.Instrumented2DArray`1">
+            <summary>
+            A 2D array with an event to notify you every time the array is possibly changed.
+            </summary>
+            <typeparam name="T">The type of the underlying 2D array.</typeparam>
+        </member>
+        <member name="F:CrawfisSoftware.Collections.Instrumented2DArray`1.array2D">
+            <summary>
+            The underlying 2D array.
+            </summary>
+        </member>
+        <member name="E:CrawfisSoftware.Collections.Instrumented2DArray`1.ValueChanged">
+            <summary>
+            An event to notify you every time the array is possibly changed.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Instrumented2DArray`1.Item(System.Int32,System.Int32)">
+            <summary>
+            Get or set the value at the specified column and row.
+            </summary>
+            <param name="column">The column.</param>
+            <param name="row">The row.</param>
+            <returns>The value at this location.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Instrumented2DArray`1.GetArray">
+            <summary>
+            Get a 2D array of T.
+            </summary>
+            <returns>A 2D array.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Instrumented2DArray`1.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="width">The width of the 2D array.</param>
+            <param name="height">The height of the 2D array.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Instrumented2DArray`1.#ctor(`0[0:,0:])">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="directions">A 2D array of type T.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Instrumented2DArray`1.ReplaceArray(`0[0:,0:])">
+            <summary>
+            Replace the underlying data with a new 2D array. Shallow copy.
+            </summary>
+            <param name="newDirections">An array of type T.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Instrumented2DArray`1.GetLength(System.Int32)">
+            <summary>
+            Get the length of the array in the specified dimension.
+            </summary>
+            <param name="dimension">Either 0 or 1.</param>
+            <returns>The length.</returns>
+        </member>
         <member name="T:CrawfisSoftware.Collections.IPriorityCollection`1">
             <summary>
             Interface for a priority-based collection or a collection with a determined 
