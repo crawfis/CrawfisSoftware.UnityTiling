@@ -11,15 +11,14 @@ namespace CrawfisSoftware.UnityTiling
         {
             int width = mazeBuilderProvider.MazeBuilder.Width;
             int height = mazeBuilderProvider.MazeBuilder.Height;
-            var mazeBuilder = new MazeBuilderRecursiveBacktracker<int, int>(width, height);
-            mazeBuilder.RandomGenerator = randomGenerator;
-            mazeBuilder.CreateMaze(true);
+            var backTracker = new MazeBuilderRecursiveBacktracker<int, int>(mazeBuilderProvider.MazeBuilder);
+            backTracker.CreateMaze(true);
             //mazeBuilder.MergeDeadEnds();
-            mazeBuilder.RemoveDeadEnds();
-            mazeBuilder.OpenRegion(width * 3 + 3, width * 5 + 5);
-            mazeBuilder.BlockRegion(width * 8 + 3, width * 12 + 5);
-            mazeBuilder.MakeBidirectionallyConsistent();
-            this.MazeBuilder = mazeBuilder;
+            mazeBuilderProvider.MazeBuilder.RemoveDeadEnds();
+            mazeBuilderProvider.MazeBuilder.OpenRegion(width * 3 + 3, width * 5 + 5);
+            mazeBuilderProvider.MazeBuilder.BlockRegion(width * 8 + 3, width * 12 + 5);
+            mazeBuilderProvider.MazeBuilder.MakeBidirectionallyConsistent();
+            this.MazeBuilder = mazeBuilderProvider.MazeBuilder;
         }
     }
 }
