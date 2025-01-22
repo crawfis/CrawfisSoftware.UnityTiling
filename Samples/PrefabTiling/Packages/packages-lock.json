@@ -1,11 +1,18 @@
 {
   "dependencies": {
+    "com.crawfissoftware.randomprovider": {
+      "version": "https://github.com/crawfis/RandomProvider.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d8d7ad79e3f22c1fa77f26d9a3834a12498fd15d"
+    },
     "com.crawfissoftware.unitytiling": {
       "version": "https://github.com/crawfis/CrawfisSoftware.UnityTiling.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "ffe3a98b755532e885213d05e66b16c4d2cd7150"
+      "hash": "41d1990906c73f7cbdc89122cd0d4cb97cf4ec62"
     },
     "com.unity.collab-proxy": {
       "version": "2.6.0",
@@ -70,13 +77,6 @@
         "com.unity.modules.ui": "1.0.0",
         "com.unity.modules.imgui": "1.0.0"
       }
-    },
-    "crawfissoftware.randomprovider": {
-      "version": "https://github.com/crawfis/RandomProvider.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "4193c212dbd3f5b6ef9f9b98c2e2deb6f632e6b1"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
