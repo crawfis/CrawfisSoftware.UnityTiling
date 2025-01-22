@@ -35,6 +35,34 @@
             </summary>
             <param name="newDirections">An array of type T.</param>
         </member>
+        <member name="T:CrawfisSoftware.Maze.MazePathCost`2">
+            <summary>
+            A path cost comparer for a Maze. The cost of traversing a passage is PassageTraversalCost.
+            </summary>
+            <typeparam name="N">The type of the node labels in the corresponding graph.</typeparam>
+            <typeparam name="E">The type of the edge labels in the corresponding graph.</typeparam>
+        </member>
+        <member name="P:CrawfisSoftware.Maze.MazePathCost`2.PassageTraversalCost">
+            <summary>
+            The cost of traversing an existing passage.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Maze.MazePathCost`2.FixedWallCarveCost">
+            <summary>
+            The cost of carving a previously defined wall.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Maze.MazePathCost`2.UndefinedWallCarveCost">
+            <summary>
+            The cost of carving unexplored space.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Maze.MazePathCost`2.#ctor(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{`0,`1})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="mazeBuilder">The underlying maze builder, <c>MazeBuilderAbstract</c>.</param>
+        </member>
         <member name="T:CrawfisSoftware.Collections.Maze.IMazeBuilder`2">
             <summary>
             Interface for creating mazes.
@@ -259,6 +287,11 @@
             </summary>
             <typeparam name="N">The type used for node labels</typeparam>
             <typeparam name="E">The type used for edge weights</typeparam>
+        </member>
+        <member name="P:CrawfisSoftware.Collections.Maze.Maze`2.Grid">
+            <summary>
+            Get the grid that is the basis for the maze
+            </summary>
         </member>
         <member name="P:CrawfisSoftware.Collections.Maze.Maze`2.Width">
             <value>
@@ -1185,7 +1218,7 @@
             Static methods to convert a Maze to an OccupancyGrid.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.Collections.Maze.MazeOccupancyGrids.ReplaceDirectionsWithStamps``2(CrawfisSoftware.Collections.Maze.Maze{``0,``1},CrawfisSoftware.Collections.Graph.StampSet{CrawfisSoftware.Collections.Graph.Direction})">
+        <member name="M:CrawfisSoftware.Collections.Maze.MazeOccupancyGrids.ReplaceDirectionsWithStamps``2(CrawfisSoftware.Collections.Maze.Maze{``0,``1},CrawfisSoftware.Collections.Graph.StampSet{CrawfisSoftware.Collections.Graph.Direction},System.Boolean)">
             <summary>
             Given a maze and a stamp set associating directions to stamps, create and return an occupancy grid.
             </summary>
@@ -1193,6 +1226,7 @@
             <typeparam name="E">The type used for edge weights in the maze.</typeparam>
             <param name="maze">The maze.</param>
             <param name="stampSet">A stamp set with Direction as the associated type for id's.</param>
+            <param name="ignoreUndefinedDirection">If true, undefined directions will be ignored.</param>
             <returns>An OccupancyGrid.</returns>
         </member>
         <member name="M:CrawfisSoftware.Collections.Maze.MazeOccupancyGrids.CreateOccupancyGridFromMaze``2(CrawfisSoftware.Collections.Maze.Maze{``0,``1},CrawfisSoftware.Collections.Graph.StampSet{CrawfisSoftware.Collections.Graph.Direction})">
@@ -1214,6 +1248,22 @@
             <param name="maze">The maze.</param>
             <param name="tileStyle">The style of the underlying stamp set to use. Default is to replace each cell with a 3x3 occupancy grid having all of the corners blocked.</param>
             <returns>An OccupancyGrid.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Maze.MazeOccupancyGrids.CarveOpenings(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{System.Int32,System.Int32},System.Boolean[0:,0:])">
+            <summary>
+            Carve openings based on the list of compressed vertical and horizontal edge flags for each row
+            </summary>
+            <param name="mazeBuilder">An existing maze builder to use in the carving process</param>
+            <param name="solidBlocks">2D array matching the maze builder's width and height.
+            A value of true implies this cell is a solid block. Passages will be carved from non-solid
+            blocks to adjacent non-solid blocks.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Maze.MazeOccupancyGrids.ConvertOccupancyGridToMaze(CrawfisSoftware.Collections.Graph.OccupancyGrid)">
+            <summary>
+            Convert an OccupancyGrid to a Maze.
+            </summary>
+            <param name="cells">An <c>OccupancyGrid</c>.</param>
+            <returns>A <c>Maze</c>.</returns>
         </member>
         <member name="T:CrawfisSoftware.Collections.Maze.MazeQuery">
             <summary>

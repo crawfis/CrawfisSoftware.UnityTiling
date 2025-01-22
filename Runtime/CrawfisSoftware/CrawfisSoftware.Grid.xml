@@ -524,6 +524,18 @@
             </summary>
             <returns>A string.</returns>
         </member>
+        <member name="T:CrawfisSoftware.Collections.Graph.OccupancyGridExtensions">
+            <summary>
+            Provides extension methods for the <c>OccupancyGrid</c> class.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.OccupancyGridExtensions.Invert(CrawfisSoftware.Collections.Graph.OccupancyGrid)">
+            <summary>
+            Extension method that takes an existing <c>OccupancyGrid</c> and returns a new one with the values inverted.
+            </summary>
+            <param name="grid">The occupancy grid to invert.</param>
+            <returns>A new <c>OccupancyGrid</c>.</returns>
+        </member>
         <member name="T:CrawfisSoftware.Collections.Graph.StampSet`1">
             <summary>
             A association of OccupancyGrids (stamps) based on some type (e.g., Direction).
@@ -604,6 +616,7 @@
             <param name="height">The heights of the stamps.</param>
             <param name="horizontalWallThickness">The thickness of the walls. Must be less than (width-1)/2 for any passages. Width minus twice this will be the passageway width.</param>
             <param name="verticalWallThickness">The thickness of the walls. Must be less than (height-1)/2 for any passages. Width minus twice this will be the passageway height.</param>
+            <param name="doorSize">Opening size. Default is -1, which opens the entire edge.</param>
             <returns>A stamp set of Direction's to OccupancyGrid's</returns>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.StampSetFactory.CreateStampOpen(CrawfisSoftware.Collections.Graph.Direction,System.Int32,System.Int32,System.Int32,System.Int32)">
@@ -626,6 +639,7 @@
             <param name="height">The heights of the stamps.</param>
             <param name="horizontalWallThickness">The thickness of the walls. Must be less than (width-1)/2 for any passages. Width minus twice this will be the passageway width.</param>
             <param name="verticalWallThickness">The thickness of the walls. Must be less than (height-1)/2 for any passages. Width minus twice this will be the passageway height.</param>
+            <param name="doorSize">Opening size. Default is -1, which opens the entire edge.</param>
             <returns>A stamp associated with the input Direction.</returns>
         </member>
     </members>

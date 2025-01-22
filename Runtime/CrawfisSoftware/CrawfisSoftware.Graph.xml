@@ -357,8 +357,6 @@
             Provides a scoped location to place static methods that take
             a graph as input and provide basic queries on it.
             </summary>
-            <typeparam name="N">The type of the node labels in the corresponding graph.</typeparam>
-            <typeparam name="E">The type of the edge labels in the corresponding graph.</typeparam>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.GraphQuery.IsAcyclic``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1})">
             <summary>
@@ -1178,7 +1176,7 @@
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.SourceShortestPaths`2.GetPath(System.Int32)">
             <summary>
-            Actual method that returns an enumeration of the path edges.
+            Returns an enumeration of the shortest path to the target node.
             </summary>
             <param name="targetNode"></param>
             <returns>An IEnumerable of IIndexedEdge's.</returns>

@@ -395,6 +395,88 @@
             </summary>
             <returns>True if the heap is full. False otherwise.</returns>
         </member>
+        <member name="T:CrawfisSoftware.Collections.IndexShuffling">
+            <summary>
+            Static class for shuffling array indices.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.IndexShuffling.GenerateChoices(System.Random,System.Int32,System.Int32,System.Boolean,System.Boolean)">
+            <summary>
+            Generate a set (n=numberOfChoices) of indices for a set of size totalSetSize.
+            </summary>
+            <param name="random">A seeded random number generator.</param>
+            <param name="totalSetSize">The maximum index of the set.</param>
+            <param name="numberOfChoices">The desired number of indices to return.</param>
+            <param name="singleChoice">If true, a single random index is returned for all indices. Default is false.</param>
+            <param name="noDuplicates">If true and totalSetSize > numberOfChoices, then the randomized indices will not have duplicates. Default is false. Ignored if singleChoice is true.</param>
+            <returns>An array of indices of size numberOfChoices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.IndexShuffling.RandomShuffle(System.Random,System.Int32,System.Int32)">
+            <summary>
+            Generate a set (n=numberOfChoices) of indices for a set of size totalSetSize, with out duplicates.
+            </summary>
+            <param name="random">A seeded random number generator.</param>
+            <param name="totalSetSize">The maximum index of the set.</param>
+            <param name="numberOfChoices">The desired number of indices to return.</param>
+            <returns>An array of indices of size numberOfChoices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.IndexShuffling.RandomShuffle(System.Int32,System.Int32)">
+            <summary>
+            Generate a set (n=numberOfChoices) of indices for a set of size totalSetSize. Without duplicates.
+            </summary>
+            <param name="totalSetSize">The maximum index of the set.</param>
+            <param name="numberOfChoices">The desired number of indices to return.</param>
+            <returns>An array of indices of size numberOfChoices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.IndexShuffling.RandomChoices(System.Random,System.Int32,System.Int32)">
+            <summary>
+            Generate a set (n=numberOfChoices) of indices for a set of size totalSetSize. With possible duplicates.
+            </summary>
+            <param name="random">A seeded random number generator.</param>
+            <param name="totalSetSize">The maximum index of the set.</param>
+            <param name="numberOfChoices">The desired number of indices to return.</param>
+            <returns>An array of indices of size numberOfChoices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.IndexShuffling.RandomChoices(System.Int32,System.Int32)">
+            <summary>
+            Generate a set (n=numberOfChoices) of indices for a set of size totalSetSize. With possible duplicates.
+            </summary>
+            <param name="totalSetSize">The maximum index of the set.</param>
+            <param name="numberOfChoices">The desired number of indices to return.</param>
+            <returns>An array of indices of size numberOfChoices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.IndexShuffling.RandomSingleChoice(System.Random,System.Int32,System.Int32)">
+            <summary>
+            Randomly pick an index from set of size totalSetSize. Return an array of size numberOfChoices with the same index.
+            </summary>
+            <param name="random">A seeded random number generator.</param>
+            <param name="totalSetSize">The maximum index of the set.</param>
+            <param name="numberOfChoices">The desired number of indices to return.</param>
+            <returns>An array of indices of size numberOfChoices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.IndexShuffling.RandomSingleChoice(System.Int32,System.Int32)">
+            <summary>
+            Randomly pick an index from set of size totalSetSize. Return an array of size numberOfChoices with the same index.
+            </summary>
+            <param name="totalSetSize">The maximum index of the set.</param>
+            <param name="numberOfChoices">The desired number of indices to return.</param>
+            <returns>An array of indices of size numberOfChoices.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Collections.IndexShuffling.InterleaveSets``1(System.Random,System.Int32,System.Int32[],System.Collections.Generic.IList{``0},System.Collections.Generic.IList{``0},System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Interleave two sets of objects. The first set is placed at the locations specified by setOneLocations.
+            </summary>
+            <typeparam name="T">The type of objects.</typeparam>
+            <param name="random">A seeded random number generator.</param>
+            <param name="desiredSetSize">The desired number of objects to return.</param>
+            <param name="setOneLocations">The indices in the desired set which should be from set  one.</param>
+            <param name="setOne">A set of possible choices for set one.</param>
+            <param name="setTwo">A set of possible choices for set two.</param>
+            <param name="setOneSingleSelector">If true, use the same set one wherever needed for set one. Default is false.</param>
+            <param name="setTwoSingleSelector">If true, use the same set two wherever needed for set two. Default is false.</param>
+            <param name="allowRepeats">If false, the sets will be shuffled to avoid duplicates. Default is true.</param>
+            <returns>An array of objects of type <typeparamref name="T"/></returns>
+        </member>
         <member name="T:CrawfisSoftware.Collections.Instrumented2DArray`1">
             <summary>
             A 2D array with an event to notify you every time the array is possibly changed.
