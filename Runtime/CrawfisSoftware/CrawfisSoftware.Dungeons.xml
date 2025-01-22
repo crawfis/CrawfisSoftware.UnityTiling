@@ -332,49 +332,49 @@
             Use a random walk
             </summary>
         </member>
-        <member name="T:CrawfisSoftware.Dungeons.RandomSpatialLayout`2">
+        <member name="T:CrawfisSoftware.Dungeons.RandomSpatialLayout`3">
             <summary>
             A class to randomly place rooms in a grid.
             </summary>
             <typeparam name="R">The type used for room data</typeparam>
             <typeparam name="C">The type used for connection data</typeparam>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.GridWidth">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.GridWidth">
             <summary>
             Get the width of the grid
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.GridHeight">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.GridHeight">
             <summary>
             Get the height of the grid
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.SpatialRoomGenerator">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.SpatialRoomGenerator">
             <summary>
             Get or set the room generator function. It should return a GridRoom given and AbstractRoom.
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.RoomMoatSize">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.RoomMoatSize">
             <summary>
             Get or set the outside wall buffer size
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.RasterType">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.RasterType">
             <summary>
             Get or set the type of rasterizer to use for the passage.
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.MaxNumberOfTriesPerRoom">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.MaxNumberOfTriesPerRoom">
             <summary>
             Get or set the maximum number of tries to place a room.
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.RandomGenerator">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.RandomGenerator">
             <summary>
             Get or set the random number generator.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.#ctor(System.Int32,System.Int32,CrawfisSoftware.Dungeons.DungeonGraph{`0,`1})">
+        <member name="M:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.#ctor(System.Int32,System.Int32,CrawfisSoftware.Dungeons.DungeonGraph{`0,`1})">
             <summary>
             Constructor.
             </summary>
@@ -382,7 +382,7 @@
             <param name="gridHeight">The height of the desired grid.</param>
             <param name="dungeonGraph">The initial (abstract) <c>DungeonGrid</c>.</param>
         </member>
-        <member name="M:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.RandomRoomPlacement">
+        <member name="M:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.RandomRoomPlacement">
             <summary>
             Randomly place the rooms in the grid.
             </summary>
