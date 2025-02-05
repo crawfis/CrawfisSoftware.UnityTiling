@@ -1065,7 +1065,7 @@
         </member>
         <member name="F:CrawfisSoftware.Collections.Maze.MazeMetrics.MaxDeadEndLength">
             <summary>
-            The maximum distance any ded-end cell is from the solution path.
+            The maximum distance any dead-end cell is from the solution path.
             </summary>
         </member>
         <member name="F:CrawfisSoftware.Collections.Maze.MazeMetrics.MaxDistanceFromStart">

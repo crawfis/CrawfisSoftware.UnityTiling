@@ -675,8 +675,7 @@
             until no more connected nodes exist.
             </summary>
             <param name="startingNode">The node to start the traversal from.</param>
-            <returns>An <typeparamref name="IEnumerable{T}{T}"/> of 
-            <typeparamref name="IIndexedEdge{N,E}{N,E}"/>.</returns>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> where T is a <see cref="T:CrawfisSoftware.Collections.Graph.IIndexedEdge`1"/>.</returns>
             <remarks>This routine will only traverse those nodes reachable from 
             the startingNode once. Not all edges are enumerated.</remarks>
         </member>
@@ -686,8 +685,7 @@
             until no more connected nodes exist. 
             </summary>
             <param name="startingNodes">A list of node index to start the traversal from. The PriorityCollection determines how when these nodes are output.</param>
-            <returns>An <typeparamref name="IIndexedEdge{N,E{N,E"/> of 
-            node indices.</returns>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> where T is a <see cref="T:CrawfisSoftware.Collections.Graph.IIndexedEdge`1"/>.</returns>
             <remarks>This routine will only traverse those nodes reachable from 
             the list of startingNodes.</remarks>
             <remarks>Component numbers should be ignored when using this.</remarks>
@@ -703,8 +701,7 @@
             </summary>
             <param name="startingNode">A new node to continue the search from.</param>
             <param name="listIsPrePrimed">True is the activeList is already initialized with a set of starting nodes and the neighbors.</param>
-            <returns>An <typeparamref name="IEnumerable{T}{T}"/> of 
-            <typeparamref name="IIndexedEdge{N,E}{N,E}"/>.</returns>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> where T is a <see cref="T:CrawfisSoftware.Collections.Graph.IIndexedEdge`1"/>.</returns>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphEdgeEnumerator`2.TraverseEdges(System.Int32,System.Boolean)">
             <summary>
@@ -713,8 +710,7 @@
             </summary>
             <param name="startingNode">The node to start the traversal from.</param>
             <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
-            <returns>An <typeparamref name="IEnumerable{T}{T}"/> of 
-            <typeparamref name="IIndexedEdge{N,E}{N,E}"/>.</returns>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> where T is a <see cref="T:CrawfisSoftware.Collections.Graph.IIndexedEdge`1"/>.</returns>
             <remarks>This routine will only traverse those edges reachable from 
             the startingNode.</remarks>
         </member>
@@ -728,10 +724,9 @@
             Traverses any untouched graph edges that are accessible from the specified node.
             </summary>
             <param name="startingNode">A new node to continue the search from.</param>
-            <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
-            <param name="listIsPrePrimed">True is the activeList is already initialized with a set of starting nodes and the neighbors.</param>
-            <returns>An <typeparamref name="IEnumerable{T}{T}"/> of 
-            <typeparamref name="IIndexedEdge{N,E}{N,E}"/>.</returns>
+            <param name="isUndirected">If true treats edges as bi-direction (undirected) and will not traverse them twice for undirected graphs.</param>
+            <param name="listIsPrePrimed">True if the activeList is already initialized with a set of starting nodes and the neighbors.</param>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> where T is a <see cref="T:CrawfisSoftware.Collections.Graph.IIndexedEdge`1"/>.</returns>
         </member>
         <member name="T:CrawfisSoftware.Collections.Graph.IndexedGraphEnumerator`2">
             <summary>
@@ -826,24 +821,24 @@
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.BreadthFirstTraversalNodesWithEdges``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32)">
             <summary>
-            Breadth-first traversal all nodes in of a graph.
+            Breadth-first traversal of all nodes in of a graph, enumerating the edges that it explored.
             </summary>
             <typeparam name="N">The type used for node labels</typeparam>
             <typeparam name="E">The type used for edge weights</typeparam>
             <param name="graph">The graph to traverse.</param>
             <param name="startingIndex">The starting graph index.</param>
-            <returns>An enumerable of node and the edges used to reach them.</returns>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> where T is a <see cref="T:CrawfisSoftware.Collections.Graph.IIndexedEdge`1"/>.</returns>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.BreadthFirstTraversalEdges``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32,System.Boolean)">
             <summary>
-            Breadth-first traversal of a graph.
+            Breadth-first traversal of all edges graph.
             </summary>
             <typeparam name="N">The type used for node labels</typeparam>
             <typeparam name="E">The type used for edge weights</typeparam>
             <param name="graph">The graph to traverse.</param>
             <param name="startingIndex">The starting graph index.</param>
             <param name="isUndirected">If true treats edges as bi-direction (undirected) adn will not traverse them twice for undirected graphs.</param>
-            <returns>An enumerable of the edges used to reach each node.</returns>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> where T is a <see cref="T:CrawfisSoftware.Collections.Graph.IIndexedEdge`1"/>.</returns>
             <remarks>This traversing all reachable node, not all reachable edges.</remarks>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DepthFirstTraversalNodes``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32)">
@@ -864,7 +859,7 @@
             <typeparam name="E">The type used for edge weights</typeparam>
             <param name="graph">The graph to traverse.</param>
             <param name="startingIndex">The starting graph index.</param>
-            <returns>An enumerable of node and the edges used to reach them.</returns>
+            <returns>An enumerable of nodes and the edges used to reach them.</returns>
         </member>
         <member name="M:CrawfisSoftware.Collections.Graph.IndexedGraphTraversalExtensions.DepthFirstTraversalEdges``2(CrawfisSoftware.Collections.Graph.IIndexedGraph{``0,``1},System.Int32,System.Boolean)">
             <summary>
