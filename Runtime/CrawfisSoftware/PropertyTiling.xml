@@ -1,0 +1,1131 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PropertyTiling</name>
+    </assembly>
+    <members>
+        <member name="T:PropertyTiling.Comparer.EdgeComparerDefault">
+            <summary>
+            A comparer that compares if two <see cref="T:PropertyTiling.Edge.IEdge"/> has the same direction and same numbers of <see cref="T:PropertyTiling.Property.IProperty`1"/> as well as their
+            values where T is <see cref="T:System.Int32"/>, <see cref="T:System.Single"/>,<see cref="T:System.Boolean"/>,<see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Comparer.EdgeComparerDefault.Compare(PropertyTiling.Edge.IEdge,PropertyTiling.Edge.IEdge)">
+            <summary>
+            Compares if two <see cref="T:PropertyTiling.Edge.IEdge"/>s has the same direction and same numbers of <see cref="T:PropertyTiling.Property.IProperty`1"/> as well as their
+            values where T is <see cref="T:System.Int32"/>, <see cref="T:System.Single"/>,<see cref="T:System.Boolean"/>,<see cref="T:System.String"/>.
+            </summary>
+            <param name="x">An <see cref="T:PropertyTiling.Edge.IEdge"/></param>
+            <param name="y">An <see cref="T:PropertyTiling.Edge.IEdge"/></param>
+            <returns>0 if two <see cref="T:PropertyTiling.Edge.IEdge"/> has the same direction and same numbers of <see cref="T:PropertyTiling.Property.IProperty`1"/> as well as their
+            values where T is <see cref="T:System.Int32"/>, <see cref="T:System.Single"/>,<see cref="T:System.Boolean"/>,<see cref="T:System.String"/>.
+            -1 otherwise.</returns>
+        </member>
+        <member name="T:PropertyTiling.Comparer.EdgeComparerOneValue">
+            <summary>
+            A comparer that compares if two <see cref="T:PropertyTiling.Edge.IEdge"/> has the same direction and at least one <see cref="T:PropertyTiling.Property.IProperty`1"/> as well as its
+            values where T is <see cref="T:System.Int32"/>, <see cref="T:System.Single"/>,<see cref="T:System.Boolean"/>,<see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Comparer.EdgeComparerOneValue.Compare(PropertyTiling.Edge.IEdge,PropertyTiling.Edge.IEdge)">
+            <summary>
+            Compares if two <see cref="T:PropertyTiling.Edge.IEdge"/>s has the same direction and at least one <see cref="T:PropertyTiling.Property.IProperty`1"/> as well as its
+            values where T is <see cref="T:System.Int32"/>, <see cref="T:System.Single"/>,<see cref="T:System.Boolean"/>,<see cref="T:System.String"/>.
+            </summary>
+            <param name="x">An <see cref="T:PropertyTiling.Edge.IEdge"/></param>
+            <param name="y">An <see cref="T:PropertyTiling.Edge.IEdge"/></param>
+            <returns>0 if two <see cref="T:PropertyTiling.Edge.IEdge"/> has the same direction and same numbers of <see cref="T:PropertyTiling.Property.IProperty`1"/> as well as their
+            values where T is <see cref="T:System.Int32"/>, <see cref="T:System.Single"/>,<see cref="T:System.Boolean"/>,<see cref="T:System.String"/>.
+            -1 otherwise.</returns>
+        </member>
+        <member name="T:PropertyTiling.Comparer.PropertyNameComparer`1">
+            <summary>
+            A comparer that compares if two <see cref="T:PropertyTiling.Property.IProperty`1"/> has the same name.
+            This ensures two properties are describing the same attribute
+            <typeparam name="T"> The value type of <see cref="T:PropertyTiling.Property.IProperty`1"/></typeparam>
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Comparer.PropertyNameComparer`1.Compare(PropertyTiling.Property.IProperty{`0},PropertyTiling.Property.IProperty{`0})">
+            <summary>
+            Compare if two IProperty has the same name
+            </summary>
+            <param name="x"> An <see cref="T:PropertyTiling.Property.IProperty`1"/></param>
+            <param name="y"> An <see cref="T:PropertyTiling.Property.IProperty`1"/></param>
+            <returns>0 if two <see cref="T:PropertyTiling.Property.IProperty`1"/> has the same Name, -1 otherwise</returns>
+        </member>
+        <member name="T:PropertyTiling.Comparer.PropertyValueComparerDefault`1">
+            <summary>
+            A comparer that compares the value of two <see cref="T:PropertyTiling.Property.IProperty`1"/> of type <see cref="T:System.IComparable"/> that implements
+            <see cref="T:System.IComparable"/> using the built-in compareTo methods.
+            <typeparam name="T"> The value type of <see cref="T:PropertyTiling.Property.IProperty`1"/></typeparam>
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Comparer.PropertyValueComparerDefault`1.Compare(PropertyTiling.Property.IProperty{`0},PropertyTiling.Property.IProperty{`0})">
+            <summary>
+            Compares the value of this <see cref="T:PropertyTiling.Property.IProperty`1"/> to a specified value of another <see cref="T:PropertyTiling.Property.IProperty`1"/> and returns an
+            integer that indicates their relationship to one another.
+            </summary>
+            <param name="x">An <see cref="T:PropertyTiling.Property.IProperty`1"/></param>
+            <param name="y">An <see cref="T:PropertyTiling.Property.IProperty`1"/></param>
+            <returns>
+            The value that <paramref name="x"/>.Value.CompareTo(<paramref name="y"/>.Value) returns.
+            This depends on the implemented <see cref="M:System.IComparable.CompareTo(System.Object)"/> method of T in <see cref="T:PropertyTiling.Property.IProperty`1"/> and <see cref="T:PropertyTiling.Property.IProperty`1"/>.
+            </returns>
+        </member>
+        <member name="T:PropertyTiling.Comparer.TileComparerDefault">
+            <summary>
+            A comparer that compares if two <see cref="T:PropertyTiling.Tile.ITile"/> has the same <see cref="T:PropertyTiling.Edge.IEdge"/> using <see cref="T:PropertyTiling.Comparer.EdgeComparerDefault"/>
+            and same numbers of <see cref="T:PropertyTiling.Property.IProperty`1"/> as well as their
+            values where T is <see cref="T:System.Int32"/>, <see cref="T:System.Single"/>,<see cref="T:System.Boolean"/>,<see cref="T:System.String"/>.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Comparer.TileComparerDefault.Compare(PropertyTiling.Tile.ITile,PropertyTiling.Tile.ITile)">
+            <summary>
+            A comparer that compares if two <see cref="T:PropertyTiling.Tile.ITile"/> has the same <see cref="T:PropertyTiling.Edge.IEdge"/> using <see cref="T:PropertyTiling.Comparer.EdgeComparerDefault"/>
+            and same numbers of <see cref="T:PropertyTiling.Property.IProperty`1"/> as well as their values where T is <see cref="T:System.Int32"/>,
+            <see cref="T:System.Single"/>,<see cref="T:System.Boolean"/>,<see cref="T:System.String"/>.
+            </summary>
+            <param name="x">An <see cref="T:PropertyTiling.Tile.ITile"/></param>
+            <param name="y">An <see cref="T:PropertyTiling.Tile.ITile"/></param>
+            <returns>0 if two <see cref="T:PropertyTiling.Tile.ITile"/> is the same. -1 otherwise.</returns>
+        </member>
+        <member name="T:PropertyTiling.Edge.IEdge">
+            <summary>
+            An interface that represents an edge of a tile can be described as a boundary between two adjacent tiles.
+            It can be used to define the shape and size of the tile and to specify how it is connected to other tiles.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Edge.IEdge.Direction">
+            <summary>
+            Orientation of the edge
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Edge.IEdge.GetTileEdgeProperties``1">
+            <summary>
+            All properties that describe the edge with given type
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Edge.IEdge.GetTileEdgePropertyNames">
+            <summary>
+            Names of all properties in this tile edge
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of property names</returns>
+        </member>
+        <member name="M:PropertyTiling.Edge.IEdge.FindPropertyByName``1(System.String)">
+            <summary>
+            Find a property of type <typeparamref name="T"/> with name <paramref name="propertyName"/>
+            </summary>
+            <param name="propertyName">Name of a property</param>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>
+            A property of type <typeparamref name="T"/> with name <paramref name="propertyName"/>.
+            Null if not found
+            </returns>
+        </member>
+        <member name="P:PropertyTiling.Edge.IEdge.NumOfProperties">
+            <summary>
+            Get the number of properties in current Edge
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Edge.IEdge.GetAllPropertyTypes">
+            <summary>
+            Return a collection of property types that exist in the edge
+            </summary>
+            <returns>a collection of types that exist in the tile</returns>
+        </member>
+        <member name="T:PropertyTiling.Edge.TileEdge">
+            <summary>
+            A class that represents an edge of a tile
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdge.#ctor(PropertyTiling.Utility.EdgeDirection,System.Collections.Generic.Dictionary{System.Type,System.Object},System.Collections.Generic.Dictionary{System.String,System.Type})">
+            <summary>
+            A constructor for the TileEdge class
+            </summary>
+            <param name="direction">Orientation of the edge</param>
+            <param name="allProperties">All properties that belongs to the edge</param>
+            <param name="propertyNamesAndTypes">Names of all properties in the tile edge and their type</param>
+            <remarks>Made internal to prevent creation of TileEdge outside of <see cref="T:PropertyTiling.Edge.TileEdgeBuilder"/></remarks>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdge.GetTileEdgePropertyNames">
+            <summary>
+            Names of all properties in this tile
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of property names</returns>
+        </member>
+        <member name="P:PropertyTiling.Edge.TileEdge.Direction">
+            <summary>
+            Orientation of the edge
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdge.GetTileEdgeProperties``1">
+            <summary>
+            All properties that describe the edge with given type
+            </summary>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>A list of properties of type T</returns>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdge.FindPropertyByName``1(System.String)">
+            <summary>
+            Find a property of type <typeparamref name="T"/> with name <paramref name="propertyName"/>
+            </summary>
+            <param name="propertyName">Name of a property</param>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>
+            A property of type <typeparamref name="T"/> with name <paramref name="propertyName"/>.
+            Null if not found
+            </returns>
+        </member>
+        <member name="P:PropertyTiling.Edge.TileEdge.NumOfProperties">
+            <summary>
+            Get the number of properties in current Edge
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdge.GetAllPropertyTypes">
+            <summary>
+            Return a collection of property types that exist in the tile
+            </summary>
+            <returns>a collection of types that exist in the tile</returns>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdge.ToString">
+            <summary>
+            Returns the property values with comma seperated format, property names are sorted alphabetically.
+            </summary>
+            <returns>A comma seperated string of values</returns>
+        </member>
+        <member name="T:PropertyTiling.Edge.TileEdgeBuilder">
+            <summary>
+            A tile edge builder class that can build an IEdge using the TileEdge implementation.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdgeBuilder.GetTileEdge">
+            <summary>
+            Get the current tile edge
+            </summary>
+            <returns>An edge</returns>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdgeBuilder.SetDirection(PropertyTiling.Utility.EdgeDirection)">
+            <summary>
+            Set the direction of the edge on a tile
+            </summary>
+            <param name="direction"></param>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdgeBuilder.AddProperties``1(System.Collections.Generic.IList{PropertyTiling.Property.IProperty{``0}})">
+            <summary>
+            Add a list of properties to the tile edge
+            </summary>
+            <param name="newProperties">A list of properties of given type</param>
+            <typeparam name="T">The type of the properties </typeparam>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdgeBuilder.AddProperty``1(PropertyTiling.Property.IProperty{``0})">
+            <summary>
+            Add a single property to the edge
+            </summary>
+            <param name="newProperty">A new property with a type T</param>
+            <typeparam name="T">The type of the property</typeparam>
+        </member>
+        <member name="M:PropertyTiling.Edge.TileEdgeBuilder.Clear">
+            <summary>
+            Clears the staste of the TileEdgeBuiler
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.Property.GenericProperty`1">
+            <summary>
+            A property can be described as a set of attributes that define the characteristics of an edge of a
+            tile or the tile itself. It can be used to specify the color, texture, size, and other properties of the tile and its edges.
+            </summary>
+            <typeparam name="T">The value type of the property</typeparam>
+        </member>
+        <member name="M:PropertyTiling.Property.GenericProperty`1.#ctor(System.String,`0)">
+            <summary>
+            A constructor for the IntegerProperty
+            </summary>
+            <param name="name">The name of the property, it acts as a unique identifier of this property</param>
+            <param name="value">A <typeparamref name="T"/> value that describe a characteristics</param>
+            <remarks>Made internal to prevent creation of TileEdge outside of <see cref="!:PropertyPool"/></remarks>
+        </member>
+        <member name="P:PropertyTiling.Property.GenericProperty`1.Name">
+            <summary>
+            The name of the property, it acts as a unique identifier of this property.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Property.GenericProperty`1.Value">
+            <summary>
+            A <typeparamref name="T"/> value that describe a characteristics
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Property.GenericProperty`1.ToString">
+            <summary>
+            Returns the name value pair as a string
+            </summary>
+            <returns>Returns the name value pair as a string</returns>
+        </member>
+        <member name="T:PropertyTiling.Property.IProperty`1">
+            <summary>
+            An interface for a property can be described as a set of attributes that define the characteristics of an edge of a
+            tile or the tile itself. It can be used to specify the color, texture, size, and other properties of the tile and its edges.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Property.IProperty`1.Name">
+            <summary>
+            The name of the property can be described as a unique identifier that is used to distinguish it
+            from other properties.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Property.IProperty`1.Value">
+            <summary>
+            The values of this property can be described as the set of possible options that can be assigned to it.
+            They can be used to specify the appearance, behavior, and other characteristics of the tile and its edges.
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.Property.PropertyPool`1">
+            <summary>
+            An object pool implementation for a property. This is in charge of creating and pooling <see cref="T:PropertyTiling.Property.IProperty`1"/>
+            where <typeparamref name="T"/> is <see cref="T:System.IComparable"/>
+            </summary>
+            <typeparam name="T"> A generic type of <see cref="T:System.IComparable"/></typeparam>
+        </member>
+        <member name="M:PropertyTiling.Property.PropertyPool`1.GetProperty(System.String,`0)">
+            <summary>
+            Get an <see cref="T:PropertyTiling.Property.IProperty`1"/> with a given name and value from the object pool.
+            If it does not exit, create one and add it to the pool and return it.
+            </summary>
+            <param name="name">The name of the property</param>
+            <param name="value">The value of the property</param>
+            <returns></returns>
+        </member>
+        <member name="T:PropertyTiling.TileSelector.ITileSelector">
+            <summary>
+            An interface to a class. When provided a tileset and a tile, this class selects a tile from
+            the tile set
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TileSelector.ITileSelector.SelectATile(PropertyTiling.TileSet.ITileSet,PropertyTiling.Tile.ITile)">
+            <summary>
+            Selecta a tile from the tileset based on the given tile
+            </summary>
+            <param name="tileSet">A tileset</param>
+            <param name="tile">A tile</param>
+            <returns></returns>
+        </member>
+        <member name="T:PropertyTiling.TileSelector.MatchingTileSelectorRandom">
+            <summary>
+            Randomly Select a tile from a tile set that matches the exact properties and edges of a given tile
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TileSelector.MatchingTileSelectorRandom.#ctor(System.Int32)">
+            <summary>
+            Constructor for the tile selector random
+            </summary>
+            <param name="randomSeed">The seed for the random. Default seed is 0</param>
+        </member>
+        <member name="M:PropertyTiling.TileSelector.MatchingTileSelectorRandom.SelectATile(PropertyTiling.TileSet.ITileSet,PropertyTiling.Tile.ITile)">
+            <summary>
+            Select a tile from a tile set that matches the exact properties and edges of a given tile
+            </summary>
+            <param name="tileSet"></param>
+            <param name="tile"></param>
+            <returns></returns>
+        </member>
+        <member name="T:PropertyTiling.TileSetExtractor.ITileSetExtractor">
+            <summary>
+            Extract a tileset given a tiling
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TileSetExtractor.ITileSetExtractor.ExtractTileSet(PropertyTiling.Tiling.IGridTiling)">
+            <summary>
+            Extract a tileset given a tiling
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.TileSetExtractor.UniqueTileSetExtractor">
+            <summary>
+            Extract unique tiles form a tiling. Uniqueness depends on the properties and edges of a tile. Two tiles are
+            considered not unique, if both tiles have the same number of IEdge, each IEdge has the same number of IProperty,
+            each IProperty on each edge has the same name and value. And if both tiles have the same number of IProperty,
+            each IProperty has the same name and value.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TileSetExtractor.UniqueTileSetExtractor.ExtractTileSet(PropertyTiling.Tiling.IGridTiling)">
+            <summary>
+            Extract unique tiles form a tiling
+            </summary>
+            <param name="gridTiling">A gridTiling</param>
+            <returns>An IEnumerable of ITiles</returns>
+        </member>
+        <member name="T:PropertyTiling.TileSet.CompositeTileSet">
+            <summary>
+            A collection of tileSets that act as a single tileSet
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TileSet.CompositeTileSet.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.CompositeTileSet.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.CompositeTileSet.Description">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.CompositeTileSet.Width">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.CompositeTileSet.Height">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.CompositeTileSet.DefaultTile">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.CompositeTileSet.Keywords">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.CompositeTileSet.#ctor(System.String,System.String,System.Single,System.Single,PropertyTiling.Tile.ITile,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Constructor of the tileset
+            </summary>
+            <param name="name"></param>
+            <param name="description"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="defaultTile"></param>
+            <param name="keywords"></param>
+        </member>
+        <member name="M:PropertyTiling.TileSet.CompositeTileSet.AddTileSet(PropertyTiling.TileSet.ITileSet)">
+            <summary>
+            Add a tileset into this composite tileset
+            </summary>
+            <param name="tileSet"></param>
+        </member>
+        <member name="P:PropertyTiling.TileSet.CompositeTileSet.TileSets">
+            <summary>
+            Iterate over all the tileSets in this class
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.TileSet.ITileSet">
+            <summary>
+            A collection of tiles
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TileSet.ITileSet.Name">
+            <value>
+            Get the name for the tile set
+            </value>
+        </member>
+        <member name="P:PropertyTiling.TileSet.ITileSet.Description">
+            <summary>
+            A short text description of the tile set.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TileSet.ITileSet.Width">
+            <summary>
+            The width of each tile in the tile set.
+            </summary>
+            <remarks>This should really be a float.</remarks>
+        </member>
+        <member name="P:PropertyTiling.TileSet.ITileSet.Height">
+            <summary>
+            The height of each tile in the tile set.
+            </summary>
+            <remarks>This should really be a float.</remarks>
+        </member>
+        <member name="P:PropertyTiling.TileSet.ITileSet.DefaultTile">
+            <summary>
+            An ITile to return if GetTile or GetMatchingTiles does not have a valid tile.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TileSet.ITileSet.Keywords">
+            <summary>
+            A list of strings that describe the tile set.
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.TileSet.TileSet">
+            <summary>
+            A list implementation of the tileset
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TileSet.TileSet.Width">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.TileSet.Height">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.TileSet.DefaultTile">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.TileSet.Keywords">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.TileSet.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.TileSet.Description">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.#ctor(System.String,System.String,System.Single,System.Single,PropertyTiling.Tile.ITile,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Constructor of the tileset
+            </summary>
+            <param name="name"></param>
+            <param name="description"></param>
+            <param name="width"></param>
+            <param name="height"></param>
+            <param name="defaultTile"></param>
+            <param name="keywords"></param>
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.Add(PropertyTiling.Tile.ITile)">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.Contains(PropertyTiling.Tile.ITile)">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.CopyTo(PropertyTiling.Tile.ITile[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.Remove(PropertyTiling.Tile.ITile)">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.TileSet.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.TileSet.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.IndexOf(PropertyTiling.Tile.ITile)">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.Insert(System.Int32,PropertyTiling.Tile.ITile)">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TileSet.TileSet.RemoveAt(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.TileSet.TileSet.Item(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="T:PropertyTiling.Tile.AbstractTile">
+            <summary>
+            An implementation of a basic tile. This class holds information about a tile, its IProperty and IEdge.
+            It is an abstract tile with no art information.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTile.#ctor(System.Collections.Generic.IEnumerable{PropertyTiling.Edge.IEdge},System.Collections.Generic.Dictionary{System.Type,System.Object},System.Collections.Generic.Dictionary{System.String,System.Type})">
+            <summary>
+            Create a tile with given edges and properties
+            </summary>
+            <param name="allEdges">The edges that belong to a tile</param>
+            <param name="allProperties">All properties that belongs to the edge</param>
+            <param name="propertyNamesAndTypes">Names of all properties in the tile along with their types</param>
+            <remarks>Made internal to prevent creation of TileEdge outside of <see cref="T:PropertyTiling.Tile.AbstractTileBuilder"/></remarks>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTile.GetTileProperties``1">
+            <summary>
+            All properties that describe the tile with given type
+            </summary>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>A list of properties of type T</returns>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTile.GetTilePropertyNames">
+            <summary>
+            Names of all properties in this tile
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of property names</returns>
+        </member>
+        <member name="P:PropertyTiling.Tile.AbstractTile.Edges">
+            <summary>
+            All edges in the tile
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Tile.AbstractTile.NumOfEdges">
+            <summary>
+            Number of edges in the tile
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTile.GetEdgeByDirection(PropertyTiling.Utility.EdgeDirection)">
+            <summary>
+            Get an edge of the tile with given direction
+            </summary>
+            <param name="edgeDirection">The direction of an edge</param>
+            <returns>A tile edge with the given direction, null if it does not exist</returns>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTile.GetEdgePropertiesByDirection``1(PropertyTiling.Utility.EdgeDirection)">
+            <summary>
+            Get all edge properties of type T of the tile with given direction
+            </summary>
+            <param name="edgeDirection">The direction of an edge</param>
+            <returns>A all edge properties of type T with the given direction, null if it does not exist</returns>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTile.GetAllPropertyTypes">
+            <summary>
+            Return a collection of property types that exist in the tile
+            </summary>
+            <returns>a collection of types that exist in the tile</returns>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTile.FindPropertyByName``1(System.String)">
+            <summary>
+            Find a property of type <typeparamref name="T"/> with name <paramref name="propertyName"/>
+            </summary>
+            <param name="propertyName">Name of a property</param>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>
+            A property of type <typeparamref name="T"/> with name <paramref name="propertyName"/>.
+            Null if not found
+            </returns>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTile.ToString">
+            <summary>
+            Returns the property values with comma seperated format, property names are sorted alphabetically.
+            </summary>
+            <returns>A comma seperated string of values</returns>
+        </member>
+        <member name="T:PropertyTiling.Tile.AbstractTileBuilder">
+            <summary>
+            A tile builder class that can build an ITile using the Tile implementation.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTileBuilder.GetTile">
+            <summary>
+            Get the current abstract tile
+            </summary>
+            <returns>An abstract tile</returns>c
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTileBuilder.AddAnEdge(PropertyTiling.Edge.IEdge)">
+            <summary>
+            Add an edge to the tile.
+            </summary>
+            <param name="edge">An edge that has a different direction than any other added edge</param>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTileBuilder.AddProperties``1(System.Collections.Generic.IList{PropertyTiling.Property.IProperty{``0}})">
+            <summary>
+            Add a list of properties to the tile edge
+            </summary>
+            <param name="newProperties">A list of properties of given type</param>
+            <typeparam name="T">The type of the properties </typeparam>
+        </member>
+        <member name="M:PropertyTiling.Tile.AbstractTileBuilder.AddProperty``1(PropertyTiling.Property.IProperty{``0})">
+            <summary>
+            Add a single property to the edge
+            </summary>
+            <param name="newProperty">A new property with a type T</param>
+            <typeparam name="T">The type of the property</typeparam>
+        </member>
+        <member name="T:PropertyTiling.Tile.ArtTile`1">
+            <summary>
+            Represents a tile that holds both an abstract tile and an artwork of type T
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Tile.ArtTile`1.ArtWork">
+            <summary>
+            A piece of artwork associated with a tile
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tile.ArtTile`1.GetTileProperties``1">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.Tile.ArtTile`1.GetTilePropertyNames">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.Tile.ArtTile`1.Edges">
+            <inheritdoc />
+        </member>
+        <member name="P:PropertyTiling.Tile.ArtTile`1.NumOfEdges">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.Tile.ArtTile`1.GetEdgeByDirection(PropertyTiling.Utility.EdgeDirection)">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.Tile.ArtTile`1.GetEdgePropertiesByDirection``1(PropertyTiling.Utility.EdgeDirection)">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.Tile.ArtTile`1.GetAllPropertyTypes">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.Tile.ArtTile`1.FindPropertyByName``1(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:PropertyTiling.Tile.ArtTileBuilder`1">
+            <summary>
+            A builder to build a tile with art
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tile.ArtTileBuilder`1.BuildArtTile(PropertyTiling.Tile.AbstractTile,`0)">
+            <summary>
+            Build an art tile with a ITile and a artwork
+            </summary>
+            <param name="tile">An abstract tile with properties and edges</param>
+            <param name="artWork">An artwork of type T.</param>
+            <returns></returns>
+        </member>
+        <member name="T:PropertyTiling.Tile.ITile">
+            <summary>
+            Interface for a tile, a tile can hold many generic properties and many edges
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tile.ITile.GetTileProperties``1">
+            <summary>
+            All properties in this tile can be described as a comprehensive list of the attributes that define its
+            characteristics. They can be used to specify the size, shape, color, texture, and other properties of the tile.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tile.ITile.GetTilePropertyNames">
+            <summary>
+            Names of all properties in this tile
+            </summary>
+            <returns>An <see cref="T:System.Collections.Generic.IEnumerable`1"/> of property names</returns>
+        </member>
+        <member name="P:PropertyTiling.Tile.ITile.Edges">
+            <summary>
+            All edges on this tile can be described as the boundaries that define its shape and size.
+            They can be used to specify the orientation of the tile and its position, as well as the
+            connections it has with other tiles.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Tile.ITile.NumOfEdges">
+            <summary>
+            Number of edges on this tile.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tile.ITile.GetEdgeByDirection(PropertyTiling.Utility.EdgeDirection)">
+            <summary>
+            Get an edge of the tile with given direction
+            </summary>
+            <param name="edgeDirection">The direction of an edge</param>
+            <returns>A tile edge with the given direction, null if it does not exist</returns>
+        </member>
+        <member name="M:PropertyTiling.Tile.ITile.GetEdgePropertiesByDirection``1(PropertyTiling.Utility.EdgeDirection)">
+            <summary>
+            Get all edge properties of type T of the tile with given direction
+            </summary>
+            <param name="edgeDirection">The direction of an edge</param>
+            <returns>A all edge properties of type T with the given direction, null if it does not exist</returns>
+        </member>
+        <member name="M:PropertyTiling.Tile.ITile.GetAllPropertyTypes">
+            <summary>
+            Return a collection of property types that exist in the tile
+            </summary>
+            <returns>a collection of types that exist in the tile</returns>
+        </member>
+        <member name="M:PropertyTiling.Tile.ITile.FindPropertyByName``1(System.String)">
+            <summary>
+            Find a property of type <typeparamref name="T"/> with name <paramref name="propertyName"/>
+            </summary>
+            <param name="propertyName">Name of a property</param>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>
+            A property of type <typeparamref name="T"/> with name <paramref name="propertyName"/>.
+            Null if not found
+            </returns>
+        </member>
+        <member name="T:PropertyTiling.TilingBuilder.ExplicitGridTilingBuilder">
+            <summary>
+            Explicit TilingBuilder where you can control each tile placement
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingBuilder.ExplicitGridTilingBuilder.Width">
+            <summary>
+            Width of the tiling
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingBuilder.ExplicitGridTilingBuilder.Height">
+            <summary>
+            Height of the tiling
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TilingBuilder.ExplicitGridTilingBuilder.#ctor(System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="width"></param>
+            <param name="height"></param>
+        </member>
+        <member name="M:PropertyTiling.TilingBuilder.ExplicitGridTilingBuilder.CreateGridTiling">
+            <inheritdoc />
+        </member>
+        <member name="M:PropertyTiling.TilingBuilder.ExplicitGridTilingBuilder.SetTile(PropertyTiling.Tile.ITile,System.Int32,System.Int32)">
+            <summary>
+            Set the tile of a tiling when given a position
+            </summary>
+            <param name="tile">a tile </param>
+            <param name="column">column of the tile to be set</param>
+            <param name="row">row of the tile to be set</param>
+        </member>
+        <member name="M:PropertyTiling.TilingBuilder.ExplicitGridTilingBuilder.Clear">
+            <inheritdoc />
+        </member>
+        <member name="T:PropertyTiling.TilingBuilder.IGridTilingBuilder">
+            <summary>
+            An interface to create a GridTiling
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TilingBuilder.IGridTilingBuilder.CreateGridTiling">
+            <summary>
+            Create a GridTiling
+            </summary>
+            <returns>An IGridTiling</returns>
+        </member>
+        <member name="M:PropertyTiling.TilingBuilder.IGridTilingBuilder.Clear">
+            <summary>
+            Clear the tilingBuilder
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator.BoundaryWidth">
+            <summary>
+            Get or set the width of the boundary to be enumerated
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator.Current">
+            <inheritdoc/>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator.#ctor(System.Int32)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="boundaryWidth">The width of the boundary in the number of tiles</param>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.BoundaryGridTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:PropertyTiling.TilingEnumerator.IGridTilingEnumerator">
+            <summary>
+            Interface for all tiling Enumerators.
+            </summary>
+            <remarks>Can be used to control the order or tiles and whether a tile is enumerated or not.</remarks>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.IGridTilingEnumerator.Width">
+            <summary>
+            The number of columns in the tiling that will be enumerated.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.IGridTilingEnumerator.Height">
+            <summary>
+            The number of rows in the tiling that will be enumerated.
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.TilingEnumerator.PropertyGridTilingEnumerator`1">
+            <summary>
+            Enumerate a tiling and only returns a tile if a tile has a given property
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.PropertyGridTilingEnumerator`1.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.PropertyGridTilingEnumerator`1.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.PropertyGridTilingEnumerator`1.Current">
+            <summary>
+            The current cell in the enumeration
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.PropertyGridTilingEnumerator`1.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.PropertyGridTilingEnumerator`1.#ctor(PropertyTiling.Tiling.IGridTiling,PropertyTiling.Property.IProperty{`0})">
+            <summary>
+            Constructor. It needs a tiling and a property
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.PropertyGridTilingEnumerator`1.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.PropertyGridTilingEnumerator`1.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.PropertyGridTilingEnumerator`1.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:PropertyTiling.TilingEnumerator.SequentialGridTilingEnumerator">
+            <summary>
+            Simple class to walk through a tiling  a (int column, int row) of the grid location.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.SequentialGridTilingEnumerator.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.SequentialGridTilingEnumerator.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.SequentialGridTilingEnumerator.Current">
+            <summary>
+            The current cell in the enumeration
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingEnumerator.SequentialGridTilingEnumerator.System#Collections#IEnumerator#Current">
+            <inheritdoc/>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.SequentialGridTilingEnumerator.#ctor">
+            <summary>
+            Constructor. Need the Width and Height set.
+               Design Note: Not set in the constructor since the tiling is not known.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.SequentialGridTilingEnumerator.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.SequentialGridTilingEnumerator.MoveNext">
+            <inheritdoc/>
+        </member>
+        <member name="M:PropertyTiling.TilingEnumerator.SequentialGridTilingEnumerator.Reset">
+            <inheritdoc/>
+        </member>
+        <member name="T:PropertyTiling.TilingRenderer.ITilingRenderer">
+            <summary>
+            Render an abstract tiling with art
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingRenderer.ITilingRenderer.TileSet">
+            <summary>
+            Tileset to choose tiles from
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingRenderer.ITilingRenderer.TilingEnumerator">
+            <summary>
+            Tiling enumerator
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingRenderer.ITilingRenderer.TileSelector">
+            <summary>
+            Tile Selector
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.TilingRenderer.ITilingRenderer.Tiling">
+            <summary>
+            A tiling that needs to be rendered
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TilingRenderer.ITilingRenderer.Render">
+            <summary>
+            Render a tiling using a tile Set, a tiling enumerator and a tile selector
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.Tiling.GridTiling">
+            <summary>
+            A generic implementation of ITiling that uses a 2d array to store tiles
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tiling.GridTiling.#ctor(PropertyTiling.Tile.ITile[0:,0:])">
+            <summary>
+            A constructor for tiling.
+            </summary>
+            <param name="tiles">Tiles for the tiling</param>
+            <remarks>Please do not create GridTiling outside of <see cref="T:PropertyTiling.TilingBuilder.IGridTilingBuilder"/></remarks>
+        </member>
+        <member name="M:PropertyTiling.Tiling.GridTiling.Tile(System.Int32,System.Int32)">
+            <summary>
+            Given the cell location in a tiling, return the valid tile at that location.
+            </summary>
+            <param name="column">The column location.</param>
+            <param name="row">The row location.</param>
+            <returns>A valid tile stored at the specified location</returns>
+        </member>
+        <member name="P:PropertyTiling.Tiling.GridTiling.Width">
+            <summary>
+            Get the number of columns in the tiling.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Tiling.GridTiling.Height">
+            <summary>
+            Get the number of rows in the tiling.
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.Tiling.IGridTiling">
+            <summary>
+            A grid tiling is a class that determines the placement of tiles within a grid. Each cell within the grid is identified
+            by a unique location, represented by the coordinates (i,j). The tiling class stores a collection of tiles that are
+            eligible for placement within each cell.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Tiling.IGridTiling.Width">
+            <summary>
+            Get the number of columns in the tiling.
+            </summary>
+        </member>
+        <member name="P:PropertyTiling.Tiling.IGridTiling.Height">
+            <summary>
+            Get the number of rows in the tiling.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.Tiling.IGridTiling.Tile(System.Int32,System.Int32)">
+            <summary>
+            Given the cell location in a tiling, return the valid tile at that location.
+            </summary>
+            <param name="column">The column location.</param>
+            <param name="row">The row location.</param>
+            <returns>A valid tile stored at the specified location</returns>
+        </member>
+        <member name="T:PropertyTiling.Utility.EdgeDirection">
+            <summary>
+            A monolithic enum that specifies where each edge of a tile is facing can be described as a comprehensive enumeration
+            of all possible edge directions. It can be used to define the orientation of each tile in the grid and to specify
+            how it is connected to other tiles.
+            </summary>
+        </member>
+        <member name="F:PropertyTiling.Utility.EdgeDirection.West">
+            <summary>
+            West/Left  or West direction 
+            </summary>
+        </member>
+        <member name="F:PropertyTiling.Utility.EdgeDirection.North">
+            <summary>
+            Top/Up or North direction
+            </summary>
+        </member>
+        <member name="F:PropertyTiling.Utility.EdgeDirection.East">
+            <summary>
+            East/Right or East Direction
+            </summary>
+        </member>
+        <member name="F:PropertyTiling.Utility.EdgeDirection.South">
+            <summary>
+            Bottom/Down or South direction
+            </summary>
+        </member>
+        <member name="F:PropertyTiling.Utility.EdgeDirection.NorthWest">
+            <summary>
+            NorthWest/UpperLeft or NorthWest direction
+            </summary>
+        </member>
+        <member name="F:PropertyTiling.Utility.EdgeDirection.SouthWest">
+            <summary>
+            SouthWest/LowerLeft direction
+            </summary>
+        </member>
+        <member name="F:PropertyTiling.Utility.EdgeDirection.NorthEast">
+            <summary>
+            NorthEast/UpperRight direction
+            </summary>
+        </member>
+        <member name="F:PropertyTiling.Utility.EdgeDirection.SouthEast">
+            <summary>
+            SouthEast/LowerRight direction
+            </summary>
+        </member>
+        <member name="T:PropertyTiling.TileMatcher.TileSetFilterer">
+            <summary>
+            A class used to find tiles is a tile set that match desired properties.
+            </summary>
+        </member>
+        <member name="M:PropertyTiling.TileMatcher.TileSetFilterer.GetMatchingTilesWithAProperty``1(System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile},PropertyTiling.Property.IProperty{``0},System.Collections.Generic.IComparer{PropertyTiling.Property.IProperty{``0}})">
+            <summary>
+            Provide a collection of tiles that have at least the same property as the ones specified in the collection,
+            but may also have additional properties.
+            </summary>
+            <param name="tileSet">A tile set</param>
+            <param name="property">The property used to match the tile</param>
+            <param name="propertyComparer">A property comparer used to compare the values of the property</param>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>A collection of tiles that posses the given property.</returns>
+        </member>
+        <member name="M:PropertyTiling.TileMatcher.TileSetFilterer.GetMatchingTilesWithATile(System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile},PropertyTiling.Tile.ITile,System.Collections.Generic.IComparer{PropertyTiling.Tile.ITile})">
+            <summary>
+            Provide a collection of tiles that is the same as the given tile.
+            </summary>
+            <param name="tileSet">A tileset to search for qualifying tiles</param>
+            <param name="tileComparison">A tile used for comparison, we find tiles that have the same edges
+            and properties as this tile</param>
+            <param name="tileComparer">A comparer to determine what does the same mean when comparing two tiles</param>
+            <returns>An IEnumerable of tiles that is the same as the given tile for comparison</returns>
+        </member>
+        <member name="M:PropertyTiling.TileMatcher.TileSetFilterer.TryGetMatchingTilesWithATile(System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile},PropertyTiling.Tile.ITile,System.Collections.Generic.IComparer{PropertyTiling.Tile.ITile},System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile}@)">
+            <summary>
+            Provide a collection of tiles that is the same as the given tile. Return true if found, false if not found
+            </summary>
+            <param name="tileSet">A tileset to search for qualifying tiles</param>
+            <param name="tileComparison">A tile used for comparison, we find tiles that have the same edges
+            and properties as this tile</param>
+            <param name="tileComparer">A comparer to determine what does the same mean when comparing two tiles</param>
+            <param name="tiles">An enumuerable of tiles that is updated to contain all qualifying tiles</param>
+            <returns>True of qualifying tiles are found. False if they are not.</returns>
+        </member>
+        <member name="M:PropertyTiling.TileMatcher.TileSetFilterer.TryGetMatchingTilesWithAProperty``1(System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile},PropertyTiling.Property.IProperty{``0},System.Collections.Generic.IComparer{PropertyTiling.Property.IProperty{``0}},System.Collections.Generic.IList{PropertyTiling.Tile.ITile}@)">
+            <summary>
+            Provide a collection of tiles that have at least the same property as the ones specified in the collection,
+            but may also have additional properties. And returns true.
+            Return false if not found.
+            </summary>
+            <param name="tileSet">A tile set </param>
+            <param name="property">The property used to match the tile</param>
+            <param name="propertyComparer">A property comparer used to compare the values of the property</param>
+            <param name="tiles">A collection of tiles </param>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>True if tiles are found, false if they are not found</returns>
+        </member>
+        <member name="M:PropertyTiling.TileMatcher.TileSetFilterer.GetMatchingTilesWithAnEdge(System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile},PropertyTiling.Edge.IEdge,System.Collections.Generic.IComparer{PropertyTiling.Edge.IEdge})">
+            <summary>
+            Provide a collection of tiles that have at least the same edge as the ones specified in the collection,
+            but may also have additional edges. And returns true.
+            </summary>
+            <param name="tileSet">A tile set</param>
+            <param name="edge">The edge used to match the tile</param>
+            <param name="edgeComparer">An edge comparer used to compare the values of the edges</param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyTiling.TileMatcher.TileSetFilterer.TryGetMatchingTilesWithAnEdge(System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile},PropertyTiling.Edge.IEdge,System.Collections.Generic.IComparer{PropertyTiling.Edge.IEdge},System.Collections.Generic.IList{PropertyTiling.Tile.ITile}@)">
+            <summary>
+            Provide a collection of tiles that have at least the same edge as the ones specified in the collection,
+            but may also have additional edges. And returns true.
+            Return false if not found.
+            </summary>
+            <param name="tileSet">A tile set</param>
+            <param name="edge">The edge used to match the tile</param>
+            <param name="edgeComparer">An edge comparer used to compare the values of the edges</param>
+            /// <param name="tiles">A collection of tiles </param>
+            <returns></returns>
+        </member>
+        <member name="M:PropertyTiling.TileMatcher.TileSetFilterer.FilterOutTilesWithAProperty``1(System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile},PropertyTiling.Property.IProperty{``0},System.Collections.Generic.IComparer{PropertyTiling.Property.IProperty{``0}})">
+            <summary>
+            Provide a collection of tiles that do not possess the same property as the provided property,
+            </summary>
+            <param name="tileSet">A tile set</param>
+            <param name="property">A list of properties used to match the tile</param>
+            <param name="propertyComparer">A property comparer used to compare the values of the property</param>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>A collection of tiles that do not possess the given property</returns>
+        </member>
+        <member name="M:PropertyTiling.TileMatcher.TileSetFilterer.FilterOutTilesWithAnEdgeProperty``1(System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile},PropertyTiling.Property.IProperty{``0},System.Collections.Generic.IComparer{PropertyTiling.Property.IProperty{``0}})">
+            <summary>
+            Provide a collection of tiles that do not possess the same edge property as the provided property,
+            </summary>
+            <param name="tileSet">A tile set</param>
+            <param name="property">A list of properties used to match the tile</param>
+            <param name="propertyComparer">A property comparer used to compare the values of the property</param>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>A collection of tiles that do not possess the given property</returns>
+        </member>
+        <member name="M:PropertyTiling.TileMatcher.TileSetFilterer.FilterOutTilesWithAPropertyOnAnEdge``1(System.Collections.Generic.IEnumerable{PropertyTiling.Tile.ITile},PropertyTiling.Utility.EdgeDirection,PropertyTiling.Property.IProperty{``0},System.Collections.Generic.IComparer{PropertyTiling.Property.IProperty{``0}})">
+            <summary>
+            Provide a collection of tiles that do not possess the same edge property on the given as the provided property,
+            </summary>
+            <param name="tileSet">A tile set</param>
+            <param name="edgeDirection">An edge direction to identify an edge</param>
+            <param name="property">A list of properties used to match the tile</param>
+            <param name="propertyComparer">A property comparer used to compare the values of the property</param>
+            <typeparam name="T">The type of the property</typeparam>
+            <returns>A collection of tiles that do not possess the given property</returns>
+        </member>
+    </members>
+</doc>
