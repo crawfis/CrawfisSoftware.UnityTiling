@@ -1,4 +1,5 @@
-﻿using CrawfisSoftware.Collections.Maze;
+﻿using CrawfisSoftware.Maze;
+
 using UnityEngine;
 
 namespace CrawfisSoftware.UnityTiling
@@ -9,11 +10,11 @@ namespace CrawfisSoftware.UnityTiling
         [SerializeField] private MazeBuilderProviderScriptableAbstract previousMazeBuilderProvider;
         [SerializeField] protected int startColumn = 1;
         [SerializeField] protected int endColumn = 1;
-        public MazeBuilderAbstract<int,int> MazeBuilder { get; protected set; }
+        public IMazeBuilder<int, int> MazeBuilder { get; protected set; }
 
         public void CreateMaze(System.Random randomGenerator)
         {
-            if(previousMazeBuilderProvider != null)
+            if (previousMazeBuilderProvider != null)
                 previousMazeBuilderProvider?.CreateMaze(randomGenerator);
             CreateMazeGraph(previousMazeBuilderProvider, randomGenerator);
         }

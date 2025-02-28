@@ -1,5 +1,7 @@
-﻿using CrawfisSoftware.Collections.Maze;
+﻿using CrawfisSoftware.Maze;
+
 using System;
+
 using UnityEngine;
 
 namespace CrawfisSoftware.UnityTiling
@@ -19,7 +21,7 @@ namespace CrawfisSoftware.UnityTiling
 
         internal override void CreateMazeGraph(MazeBuilderProviderScriptableAbstract mazeBuilderProvider, System.Random randomGenerator)
         {
-            MazeBuilder = new MazeBuilderExplicit<int, int>(_numberOfColumns, _numberOfRows);
+            MazeBuilder = new MazeBuilder<int, int>(_numberOfColumns, _numberOfRows);
 
             if (_openAllCells) MazeBuilder.OpenRegion(0, _numberOfRows * _numberOfColumns - 1);
             MazeBuilder.StartCell = startColumn;

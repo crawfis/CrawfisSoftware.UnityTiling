@@ -10,7 +10,7 @@ namespace CrawfisSoftware.UnityTiling
         internal override void CreateMazeGraph(MazeBuilderProviderScriptableAbstract mazeBuilderProvider, System.Random randomGenerator)
         {
             var loop = new LoopGeneratorSideWinder<int, int>(mazeBuilderProvider.MazeBuilder);
-            loop.CreateMaze();
+            loop.CarveLoop();
             this.MazeBuilder = mazeBuilderProvider.MazeBuilder;
         }
     }

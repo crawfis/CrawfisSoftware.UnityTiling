@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using CrawfisSoftware.Collections.Maze;
+using CrawfisSoftware.Maze;
 using CrawfisSoftware.Tiling;
 using CrawfisSoftware.Tiling.TileSets;
 using CrawfisSoftware.Tiling.TilingBuilders;

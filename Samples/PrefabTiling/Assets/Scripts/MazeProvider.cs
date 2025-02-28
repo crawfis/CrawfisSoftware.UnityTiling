@@ -1,4 +1,4 @@
-﻿using CrawfisSoftware.Collections.Maze;
+﻿using CrawfisSoftware.Maze;
 //using CrawfisSoftware.PCG;
 using UnityEngine;
 

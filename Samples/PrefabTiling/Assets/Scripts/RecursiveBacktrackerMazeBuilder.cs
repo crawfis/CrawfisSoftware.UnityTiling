@@ -1,4 +1,5 @@
-﻿using CrawfisSoftware.Collections.Maze;
+﻿using CrawfisSoftware.Maze;
+using CrawfisSoftware.Maze.PerfectMazes;
 
 using UnityEngine;
 
@@ -11,14 +12,13 @@ namespace CrawfisSoftware.UnityTiling
         {
             int width = mazeBuilderProvider.MazeBuilder.Width;
             int height = mazeBuilderProvider.MazeBuilder.Height;
-            var backTracker = new MazeBuilderRecursiveBacktracker<int, int>(mazeBuilderProvider.MazeBuilder);
-            backTracker.CreateMaze(true);
+            var mazeBuilder = mazeBuilderProvider.MazeBuilder;
+            mazeBuilder.RecursiveBacktracking(mazeBuilder.StartCell, false);
             //mazeBuilder.MergeDeadEnds();
-            mazeBuilderProvider.MazeBuilder.RemoveDeadEnds();
-            mazeBuilderProvider.MazeBuilder.OpenRegion(width * 3 + 3, width * 5 + 5);
-            mazeBuilderProvider.MazeBuilder.BlockRegion(width * 8 + 3, width * 12 + 5);
-            mazeBuilderProvider.MazeBuilder.MakeBidirectionallyConsistent();
-            this.MazeBuilder = mazeBuilderProvider.MazeBuilder;
+            mazeBuilder.RemoveDeadEnds();
+            mazeBuilder.OpenRegion(width * 3 + 3, width * 5 + 5);
+            mazeBuilder.BlockRegion(width * 8 + 3, width * 12 + 5);
+            mazeBuilder.MakeBidirectionallyConsistent();
         }
     }
 }
