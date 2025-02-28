@@ -67,7 +67,7 @@
             A function that takes the row and column of a cell in the maze and returns an array of 4 integers that represent the color of the tile.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.#ctor(CrawfisSoftware.Collections.Maze.Maze{System.Int32,System.Int32},CrawfisSoftware.Tiling.ITiling2D)">
+        <member name="M:CrawfisSoftware.Tiling.TilingBuilders.MazeWrapperTilingBuilder.#ctor(CrawfisSoftware.Maze.Maze{System.Int32,System.Int32},CrawfisSoftware.Tiling.ITiling2D)">
             <summary>
             Constructor.
             </summary>
