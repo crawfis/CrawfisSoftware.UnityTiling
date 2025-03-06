@@ -4,7 +4,7 @@
         <name>CrawfisSoftware.GraphPCG</name>
     </assembly>
     <members>
-        <member name="T:CrawfisSoftware.PCG.BitEnumerators">
+        <member name="T:CrawfisSoftware.Path.BitPattern.BitEnumerators">
             <summary>
             Two static utility methods for enumerating Bit patterns, plus an additional 
             set-up method that can be used to trade-off memory versus computation. If 
@@ -12,7 +12,7 @@
             calling AllOdd or AllEven.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.PCG.BitEnumerators.AllEven(System.Int32)">
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitEnumerators.AllEven(System.Int32)">
             <summary>
             Algorithm to iterate over all bit patterns up to the specified width that have an
             even number of 1's.
@@ -21,7 +21,7 @@
             <returns>An enumerated stream of ints, where each value has an even number of 1's.</returns>
             <remarks>This method is NP in runtime, as is the number of return values!</remarks>
         </member>
-        <member name="M:CrawfisSoftware.PCG.BitEnumerators.AllOdd(System.Int32)">
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitEnumerators.AllOdd(System.Int32)">
             <summary>
             Algorithm to iterate over all bit patterns up to the specified width that have an
             odd number of 1's.
@@ -30,7 +30,7 @@
             <returns>An enumerated stream of ints, where each value has an odd number of 1's.</returns>
             <remarks>This method is NP in runtime, as is the number of return values!</remarks>
         </member>
-        <member name="M:CrawfisSoftware.PCG.BitEnumerators.ExpandPreComputedTables(System.Int32)">
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitEnumerators.ExpandPreComputedTables(System.Int32)">
             <summary>
             Precompute the enumeration for small N.
             </summary>
@@ -38,12 +38,587 @@
             Due to CLR array size limits, this value is clamped to 28.</param>
             <remarks>This algorithm is 1) NP in run time and 2) NP in memory!</remarks>
         </member>
-        <member name="M:CrawfisSoftware.PCG.BitEnumerators.PopCount(System.UInt32)">
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitEnumerators.PopCount(System.UInt32)">
             <summary>
             Returns the population count (number of bits set) of a mask.
             Similar in behavior to the x86 instruction POPCNT.
             </summary>
             <param name="value">The value.</param>
+        </member>
+        <member name="T:CrawfisSoftware.Path.BitPattern.BitUtility">
+            <summary>
+            A static utility class for bit manipulation
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitUtility.IsBitSet(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Check if the posth bit in inflow is 1
+            </summary>
+            <param name="inflow">bit to check</param>
+            <param name="pos">position to check</param>
+            <param name="width">the width of a bit pattern</param>
+            <returns></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitUtility.BlockBit(System.Numerics.BigInteger,System.Int32)">
+            <summary>
+            Set the posth bit in bit to 0
+            </summary>
+            <param name="bit">bits to manipulate</param>
+            <param name="pos">position to block</param>
+            <returns>a bit with posth bit set to 0</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitUtility.BlockBit(System.Int32,System.Int32)">
+            <summary>
+            Set the posth bit in bit to 0
+            </summary>
+            <param name="bit">bits to manipulate</param>
+            <param name="pos">position to block</param>
+            <returns>a bit with posth bit set to 0</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitUtility.OpenBit(System.Numerics.BigInteger,System.Int32)">
+            <summary>
+            Set the posth bit in bit to 1
+            </summary>
+            <param name="bit">bits to manipulate</param>
+            <param name="pos">position to open</param>
+            <returns>a bit with posth bit set to 1</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitUtility.OpenBit(System.Int32,System.Int32)">
+            <summary>
+            Set the posth bit in bit to 1
+            </summary>
+            <param name="bit">bits to manipulate</param>
+            <param name="pos">position to open</param>
+            <returns>a bit with posth bit set to 1</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitUtility.PrintFlow(System.Int32,System.Int32)">
+            <summary>
+            Print the given bit pattern with given width
+            </summary>
+            <param name="flow">bit pattern to print</param>
+            <param name="width">the width of the bit pattern</param>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitUtility.BlockHighestSetBit(System.Int32)">
+            <summary>
+            Set the highest set bet of a bit pattern to 0
+            </summary>
+            <param name="bit">the bit to change</param>
+            <returns>changed bit pattern</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitUtility.BlockLowestSetBit(System.Int32)">
+            <summary>
+            Set the lowest set bet of a bit pattern to 0
+            </summary>
+            <param name="bit">the bit to change</param>
+            <returns>changed bit pattern</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.BitUtility.ConcatinateMultipleBits(System.Collections.Generic.IList{System.Int32},System.Int32)">
+            <summary>
+            Merge multiple bits of width into a single bit
+            </summary>
+            <param name="bits">bits to merge</param>
+            <param name="width">width of the bit pattern</param>
+            <returns>merged bits</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.BitPattern.EnumerationUtilities">
+            <summary>
+            Static class to provide some useful enumeration utilities.
+            </summary>
+        </member>
+        <member name="T:CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator">
+            <summary>
+            Defines a function that takes in the state of the Path enumeration including a 
+            possible new row or vertical bits and returns true if the user wants to allow it, false otherwise.
+            This is useful to define constraints on thepath enumeration.
+            </summary>
+            <param name="pathID">A unique pathID for each path being enumerated.</param>
+            <param name="rowIndex">The index of the row currently being enumerated.</param>
+            <param name="bitsToValidate">The candiate vertical bits to accept or reject.</param>
+            <param name="verticalBitsGrid">The state of the vertical paths up to this row index.</param>
+            <param name="horizontalBitsGrid">The state of the horizontal paths up to this row index.</param>
+            <param name="componentsGrid">The state of the components up to this row index.</param>
+            <returns>True if this row should be included in the enumeration. False otherwise.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.EnumerationUtilities.ValidateAndUpdateComponents(System.Int32,System.Int32,System.Collections.Generic.IList{System.Collections.Generic.IList{System.Int32}},System.Int32,System.Int32@,System.Int32)">
+            <summary>
+            Checks two rows to see if they are valid. If so, components from the first row are matched (or merged) and
+            new component numbers are created (as well as new loops). 
+            </summary>
+            <param name="inFlows">Incoming row of vertical edges</param>
+            <param name="outFlows">Outgoing row of vertical edges</param>
+            <param name="componentsGrid">The verticalGrid of component numbers for each inflow edge on each row</param>
+            <param name="index">The current row index</param>
+            <param name="horizontalSpans">A bit vector of new horizontal edges created by the component matching,
+            merging and creation</param>
+            <param name="maxNestedComponents">A constraint to check on the maximum allowed nested loops for this row.</param>
+            <returns>True is the outFlows row is a valid row based on the inFlows row.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.EnumerationUtilities.ValidateAndUpdateComponentsCarryOverBit(System.Numerics.BigInteger,System.Numerics.BigInteger,System.Collections.Generic.IList{System.Collections.Generic.IList{System.Int32}},System.Int32,System.Numerics.BigInteger@,System.Int32)">
+            <summary>
+            Checks two rows to see if they are valid. If so, components from the first row are matched (or merged) and
+            new component numbers are created (as well as new loops). 
+            </summary>
+            <param name="inFlows">Incoming row of vertical edges</param>
+            <param name="outFlows">Outgoing row of vertical edges</param>
+            <param name="componentsGrid">The verticalGrid of component numbers for each inflow edge on each row</param>
+            <param name="index">The current row index</param>
+            <param name="horizontalSpans">A bit vector of new horizontal edges created by the component matching,
+            merging and creation</param>
+            <param name="maxNestedComponents">A constraint to check on the maximum allowed nested loops for this row.</param>
+            <returns>True is the outFlows row is a valid row based on the inFlows row.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.EnumerationUtilities.TrimToSpan(System.Numerics.BigInteger,System.Int32,System.Int32)">
+            <summary>
+            Trim the bit pattern to the span between start and end (inclusive)
+            </summary>
+            <param name="bitPattern"></param>
+            <param name="start"></param>
+            <param name="end"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.EnumerationUtilities.CountSetBits(System.Numerics.BigInteger)">
+            <summary>
+            Count the number of set bits in the bit pattern
+            </summary>
+            <param name="n">Base 10 representation of bits</param>
+            <returns></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.EnumerationUtilities.RandomOddBitPattern(System.Int32,System.Random,System.Int32)">
+            <summary>
+            Generate a random bit pattern with an odd number of set bits under given width
+            </summary>
+            <param name="width">Maximum number of digits permitted in a bit pattern</param>
+            <param name="random">Random number generator </param>
+            <param name="setBit">Pre-set bit in the bit pattern</param>
+            <returns></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.EnumerationUtilities.RandomEvenBitPattern(System.Int32,System.Random,System.Int32)">
+            <summary>
+            Generate a random bit pattern with an even number of set bits under given width
+            </summary>
+            <param name="width">Maximum number of digits permitted in a bit pattern</param>
+            <param name="random">Random number generator </param>
+            <param name="setBit">Pre-set bit in the bit pattern</param>
+            <returns></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.EnumerationUtilities.RandomBitPattern(System.Int32,System.Random,System.Int32,System.Int32)">
+            <summary>
+            Generate a random bit pattern with an given number of set bits under given width
+            </summary>
+            <param name="width">Maximum number of digits permitted in a bit pattern</param>
+            <param name="random">Random number generator </param>
+            <param name="numOfSetBit">Random number generator </param>
+            <param name="setBit">Pre-set bit in the bit pattern</param>
+            <returns></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.EnumerationUtilities.NumberOfDistinctValues(System.Collections.Generic.IEnumerable{System.Int32})">
+            <summary>
+            Counts the number of distinct numbers in the List.
+            </summary>
+            <param name="list">An IEnumerable of int's</param>
+            <returns>The number of distinct values within the list.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.BitPattern.OutflowState">
+            <summary>
+            Enum of possible directions an inflow can go.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.OutflowStates.OldDetermineOutflowStates(System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            This method will eliminate invalid states between two inflows based on positions and
+            components. All possible combinations can then be tried for each span
+            So there would be 3^N possible state cases. 
+            </summary>
+            <param name="positions">The positions of the inflows.</param>
+            <param name="components">The component numbers of the inflows (after any merges).</param>
+            <returns>A vector of states flags.</returns>
+            <remarks>The case of a single space between two inflows is not handled here. So the
+            set of possibilities may be slightly less if positions[i]+2 == positions[i+1]
+            as the combination go right (for i) and go left (for i+1) is invalid. This is handled in
+            the span enumeration once we fix a state for inflow i.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.OutflowStates.DetermineOutflowStates(System.Int32,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Enumerate all rows that have the desired inflows and outflow states (left, up, right). All merges
+            are marked with states dead-goes-right and dead-goes-left.
+            </summary>
+            <param name="width">The width of the row.</param>
+            <param name="positions">The positions of the inflows.</param>
+            <param name="components">List of component numbers for each position.</param>
+            <returns>An Enumerable of the valid row directions for each inflow position.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.OutflowStates.DetermineOutflowStates(System.Int32,System.Collections.Generic.List{System.Int32})">
+            <summary>
+            Enumerate all rows that have the desired inflows and outflow states (left, up, right). All merges
+            are marked with states dead-goes-right and dead-goes-left.
+            </summary>
+            <param name="width">The width of the row.</param>
+            <param name="positions">The positions of the inflows.</param>
+            <returns>An Enumerable of the valid row directions for each inflow position.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.BitPattern.SpanEnumeration">
+            <summary>
+            Enumerate all valid path (or loop) fragments, given the desired outflow state of the
+            last bit and the outflow start of the previous span (the start bit location).
+            </summary>
+            <remarks>Bit order for a span goes from right to left. N...0</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.SpanEnumeration.#ctor(System.Int32,CrawfisSoftware.Path.BitPattern.OutflowState,System.Int32,CrawfisSoftware.Path.BitPattern.OutflowState)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="start">The starting bit location (not included in the span).</param>
+            <param name="startState">The OutflowState state of the start location (or previous span).</param>
+            <param name="end">The ending bit location.</param>
+            <param name="endState">The end bit's OutflowState.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.SpanEnumeration.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="T:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator">
+            <summary>
+            Static class used to enumerate rows with an inFlow constraint.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.PointToOddTable">
+            <summary>
+            Point the pre-computed tables to odd tables.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.PointToEvenTable">
+            <summary>
+            Point the pre-computed tables to even tables.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.ValidRowList(System.Int32,System.Int32)">
+            <summary>
+            Get the valid vertical outputs given a vertical input.
+            </summary>
+            <param name="width">The width of the row</param>
+            <param name="row">The inflow bits.</param>
+            <returns>A list of possible outputs.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.OddRowList(System.Int32,System.Int32)">
+            <summary>
+            Get the valid vertical outputs given a vertical input. Valid outputs must have an odd number of bits.
+            </summary>
+            <param name="width">The width of the row</param>
+            <param name="row">The inflow bits.</param>
+            <returns>A list of possible outputs.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.EvenRowList(System.Int32,System.Int32)">
+            <summary>
+            Get the valid vertical outputs given a vertical input. Valid outputs must have an even number of bits.
+            </summary>
+            <param name="width">The width of the row</param>
+            <param name="row">The inflow bits.</param>
+            <returns>A list of possible outputs.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.BuildOddTables(System.Int32)">
+            <summary>
+            Create pre-computed tables for paths, which have an odd number of inflows.
+            </summary>
+            <param name="width">The width of the row, cannot exceed 16.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="width"/> is less than or equal to <c>16</c>.
+            </exception>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.BuildEvenTables(System.Int32)">
+            <summary>
+            Create pre-computed tables for loops, which have an even number of inflows.
+            </summary>
+            <param name="width">The width of the row</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="width"/> is less than or equal to <c>16</c>.
+            </exception>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.BuildOddTablesWithConstraints(System.Int32,System.Func{System.Int32,System.Boolean})">
+            <summary>
+            Create pre-computed tables for paths, which have an odd number of inflows.
+            </summary>
+            <param name="width">The width of the row</param>
+            <param name="oracle">Function that returns true if this outflow configuration is desirable.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="width"/> is less than or equal to <c>16</c>.
+            </exception>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.BuildEvenTablesWithConstraints(System.Int32,System.Func{System.Int32,System.Boolean})">
+            <summary>
+            Create pre-computed tables for loops or paths which do not have a start and end on opposite grid edges, which have an even number of inflows.
+            </summary>
+            <param name="width">The width of the row</param>
+            <param name="oracle">Function that returns true if this outflow configuration is desirable.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            <paramref name="width"/> is less than or equal to <c>16</c>.
+            </exception>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.GetRandomRow(System.Int32,System.Int32,System.Random)">
+            <summary>
+            Get a random row that is a valid result with the given inflows.
+            </summary>
+            <param name="width">The width of the row</param>
+            <param name="inFlows">A bit pattern of the inflows in the row</param>
+            <param name="random">A random number generator</param>
+            <returns></returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.ValidRows(System.Int32,System.Int32,CrawfisSoftware.Path.BitPattern.OutflowState,CrawfisSoftware.Path.BitPattern.OutflowState)">
+            <summary>
+            Iterate over all valid rows given a row's inflows
+            </summary>
+            <param name="width">The width of the row</param>
+            <param name="inFlows">A bit pattern of the inflows in the row</param>
+            <param name="leftEdgeState">The Outflow state of the first outflow.</param>
+            <param name="rightEdgeState">The outflow state for the last outflow.</param>
+            <returns>An enumerable of integers that represent the state of the row.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.BitPattern.ValidPathRowEnumerator.InflowsFromBits(System.Int32,System.Numerics.BigInteger)">
+            <summary>
+            Returns the column indices of the inflows of a row
+            </summary>
+            <param name="width">The width of the row</param>
+            <param name="row">The inflow bit pattern</param>
+            <returns></returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.LoopEnumerator">
+            <summary>
+            Class to sample a path from top to bottom.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.LoopEnumerator.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean})">
+            <summary>
+            
+            </summary>
+            <param name="width">The width of the underlying verticalGrid.</param>
+            <param name="height">The height of the underlying verticalGrid</param>
+            <param name="random">Random number generator</param>
+            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
+            <param name="verticalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far</param>
+            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Path.LoopEnumerator.Enumerate">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.LoopSampler">
+            <summary>
+            Class to sample a path from top to bottom.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.LoopSampler.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean},CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator,CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator)">
+            <summary>
+            
+            </summary>
+            <param name="width">The width of the underlying verticalGrid.</param>
+            <param name="height">The height of the underlying verticalGrid</param>
+            <param name="random">Random number generator</param>
+            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
+            <param name="verticalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far</param>
+            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Path.LoopSampler.Sample">
+            <summary>
+            Iterate over all non-cyclical paths from a starting cell to an ending cell on an open verticalGrid.
+            </summary>
+            <param name="start">The column index of the starting cell on the first row (row 0).</param>
+            <param name="end">The column index of the ending cell on the last row (row height-1)</param>
+            <returns>A value tuple of a list of vertical bits and a list of horizontal bits.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.LoopSampler.GetWidth">
+            <summary>
+            Return the width of the LoopSampler
+            </summary>
+            <returns>The width of the LoopSampler</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.LoopSamplerCarryOverBit">
+            <summary>
+            Class to sample a path from top to bottom.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.LoopSamplerCarryOverBit.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean},CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator,CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator)">
+            <summary>
+            
+            </summary>
+            <param name="width">The width of the underlying verticalGrid.</param>
+            <param name="height">The height of the underlying verticalGrid</param>
+            <param name="random">Random number generator</param>
+            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
+            <param name="verticalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far</param>
+            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Path.LoopSamplerCarryOverBit.Sample(System.Int32)">
+            <summary>
+            Iterate over all non-cyclical paths from a starting cell to an ending cell on an open verticalGrid.
+            </summary>
+            <param name="start">The column index of the starting cell on the first row (row 0).</param>
+            <param name="end">The column index of the ending cell on the last row (row height-1)</param>
+            <param name="numColumns">Numeber of columns, each column has a width of the given table</param>
+            <returns>A value tuple of a list of vertical bits and a list of horizontal bits.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.LoopSamplerCarryOverBit.GetWidth">
+            <summary>
+            Return the width of the LoopSampler
+            </summary>
+            <returns>The width of the LoopSampler</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.PathEnumerationBottomToTop">
+            <summary>
+            Static class to enumerate paths
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.PathEnumerationBottomToTop.AllPaths(System.Int32,System.Int32,System.Int32,System.Int32,System.Func{System.Int32,System.Boolean},CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator,CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator)">
+            <summary>
+            Iterate over all non-cyclical paths from a starting cell to an ending cell on an open verticalGrid.
+            </summary>
+            <param name="width">The width of the underlying verticalGrid.</param>
+            <param name="height">The height of the underlying verticalGrid</param>
+            <param name="start">The column index of the starting cell on the first row (row 0).</param>
+            <param name="end">The column index of the ending cell on the last row (row height-1)</param>
+            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
+            <param name="rowCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
+            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
+            <returns>A value tuple of a list of vertical bits and a list of horizontal bits.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.PathGenerator">
+            <summary>
+            Create a path using the Path enumerator logic
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.PathGenerator.#ctor(System.Int32,System.Int32,System.Random)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="width">The width of the underlying grid</param>
+            <param name="height">The height of the underlying grid</param>
+            <param name="random">A random number generator</param>
+            <remarks>Width must be less than 32.</remarks>
+        </member>
+        <member name="M:CrawfisSoftware.Path.PathGenerator.GenerateRandomPath(System.Int32,System.Int32,System.Collections.Generic.IList{System.Int32}@,System.Collections.Generic.IList{System.Int32}@)">
+            <summary>
+            Generate a random path from the bottom edge to the top edge
+            </summary>
+            <param name="start">The column index of the starting cell</param>
+            <param name="end">The column index of the ending cell</param>
+            <param name="verticalPaths">A bit pattern of each row that represents the vertical edges of the path</param>
+            <param name="horizontalPaths">A bit pattern of each row that represents the horizontal edges of the path</param>
+        </member>
+        <member name="T:CrawfisSoftware.Path.PathSamplerArbitrary">
+            <summary>
+            Class to sample a path from top to bottom.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.PathSamplerArbitrary.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean},CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator,CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator)">
+            <summary>
+            
+            </summary>
+            <param name="width">The width of the underlying verticalGrid.</param>
+            <param name="height">The height of the underlying verticalGrid</param>
+            <param name="random">Random number generator</param>
+            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
+            <param name="verticalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far</param>
+            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Path.PathSamplerArbitrary.Sample(System.ValueTuple{System.Int32,System.Int32},System.ValueTuple{System.Int32,System.Int32})">
+            <summary>
+            Iterate over all non-cyclical paths from a starting cell to an ending cell on an open verticalGrid.
+            </summary>
+            <param name="start">The column index of the starting cell on the first row (row 0).</param>
+            <param name="end">The column index of the ending cell on the last row (row height-1)</param>
+            <returns>A value tuple of a list of vertical bits and a list of horizontal bits.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.PathSamplerBottomToTop">
+            <summary>
+            Class to sample a path from top to bottom.
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.PathSamplerBottomToTop.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean},CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator,CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator)">
+            <summary>
+            
+            </summary>
+            <param name="width">The width of the underlying verticalGrid.</param>
+            <param name="height">The height of the underlying verticalGrid</param>
+            <param name="random">Random number generator</param>
+            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
+            <param name="verticalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far</param>
+            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
+            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
+        </member>
+        <member name="M:CrawfisSoftware.Path.PathSamplerBottomToTop.Sample(System.Int32,System.Int32)">
+            <summary>
+            Iterate over all non-cyclical paths from a starting cell to an ending cell on an open verticalGrid.
+            </summary>
+            <param name="start">The column index of the starting cell on the first row (row 0).</param>
+            <param name="end">The column index of the ending cell on the last row (row height-1)</param>
+            <returns>A value tuple of a list of vertical bits and a list of horizontal bits.</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.PathSamplerBottomToTop.GetWidth">
+            <summary>
+            Return the width of the LoopSampler
+            </summary>
+            <returns>The width of the LoopSampler</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Path.SweepingMetrics">
+            <summary>
+            A metric class that calculates the metrics as we sweep up the grid.
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Path.SweepingMetrics.TotalLen">
+            <summary>
+            Total length of the path or loop
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Path.SweepingMetrics.Straights">
+            <summary>
+            Total straights in the path or loop
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Path.SweepingMetrics.Turns">
+            <summary>
+            Total turns in the path or loop
+            </summary>
+        </member>
+        <member name="P:CrawfisSoftware.Path.SweepingMetrics.UTuns">
+            <summary>
+            Total UTuns in the path or loop
+            </summary>
+        </member>
+        <member name="M:CrawfisSoftware.Path.SweepingMetrics.#ctor(System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="width"></param>
+        </member>
+        <member name="M:CrawfisSoftware.Path.SweepingMetrics.ToString">
+            <summary>
+            Convert the metrics as string
+            </summary>
+            <returns>String format of the metric</returns>
+        </member>
+        <member name="M:CrawfisSoftware.Path.SweepingMetrics.CalculateMetricCurrentRow(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="inflow"></param>
+            <param name="outflow"></param>
+            <param name="horizontalSpan"></param>
+        </member>
+        <member name="M:CrawfisSoftware.Path.SweepingMetrics.Copy">
+            <summary>
+            
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:CrawfisSoftware.PCG.CellularAutomata">
             <summary>
@@ -207,128 +782,6 @@
             <returns>The summation of the kernel values where the cells are true.</returns>
             <exception cref="T:System.ArgumentOutOfRangeException">Throws an exception if the filter size or column / row are wrong.</exception>
         </member>
-        <member name="T:CrawfisSoftware.PCG.EnumerationUtilities">
-            <summary>
-            Static class to provide some useful enumeration utilities.
-            </summary>
-        </member>
-        <member name="T:CrawfisSoftware.PCG.EnumerationUtilities.Validator">
-            <summary>
-            Defines a function that takes in the state of the Path enumeration including a 
-            possible new row or vertical bits and returns true if the user wants to allow it, false otherwise.
-            This is useful to define constraints on thepath enumeration.
-            </summary>
-            <param name="pathID">A unique pathID for each path being enumerated.</param>
-            <param name="rowIndex">The index of the row currently being enumerated.</param>
-            <param name="bitsToValidate">The candiate vertical bits to accept or reject.</param>
-            <param name="verticalBitsGrid">The state of the vertical paths up to this row index.</param>
-            <param name="horizontalBitsGrid">The state of the horizontal paths up to this row index.</param>
-            <param name="componentsGrid">The state of the components up to this row index.</param>
-            <returns>True if this row should be included in the enumeration. False otherwise.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.EnumerationUtilities.ValidateAndUpdateComponents(System.Int32,System.Int32,System.Collections.Generic.IList{System.Collections.Generic.IList{System.Int32}},System.Int32,System.Int32@,System.Int32)">
-            <summary>
-            Checks two rows to see if they are valid. If so, components from the first row are matched (or merged) and
-            new component numbers are created (as well as new loops). 
-            </summary>
-            <param name="inFlows">Incoming row of vertical edges</param>
-            <param name="outFlows">Outgoing row of vertical edges</param>
-            <param name="componentsGrid">The verticalGrid of component numbers for each inflow edge on each row</param>
-            <param name="index">The current row index</param>
-            <param name="horizontalSpans">A bit vector of new horizontal edges created by the component matching,
-            merging and creation</param>
-            <param name="maxNestedComponents">A constraint to check on the maximum allowed nested loops for this row.</param>
-            <returns>True is the outFlows row is a valid row based on the inFlows row.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.EnumerationUtilities.ValidateAndUpdateComponentsCarryOverBit(System.Numerics.BigInteger,System.Numerics.BigInteger,System.Collections.Generic.IList{System.Collections.Generic.IList{System.Int32}},System.Int32,System.Numerics.BigInteger@,System.Int32)">
-            <summary>
-            Checks two rows to see if they are valid. If so, components from the first row are matched (or merged) and
-            new component numbers are created (as well as new loops). 
-            </summary>
-            <param name="inFlows">Incoming row of vertical edges</param>
-            <param name="outFlows">Outgoing row of vertical edges</param>
-            <param name="componentsGrid">The verticalGrid of component numbers for each inflow edge on each row</param>
-            <param name="index">The current row index</param>
-            <param name="horizontalSpans">A bit vector of new horizontal edges created by the component matching,
-            merging and creation</param>
-            <param name="maxNestedComponents">A constraint to check on the maximum allowed nested loops for this row.</param>
-            <returns>True is the outFlows row is a valid row based on the inFlows row.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.EnumerationUtilities.TrimToSpan(System.Numerics.BigInteger,System.Int32,System.Int32)">
-            <summary>
-            Trim the bit pattern to the span between start and end (inclusive)
-            </summary>
-            <param name="bitPattern"></param>
-            <param name="start"></param>
-            <param name="end"></param>
-            <returns></returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.EnumerationUtilities.CountSetBits(System.Numerics.BigInteger)">
-            <summary>
-            Count the number of set bits in the bit pattern
-            </summary>
-            <param name="n">Base 10 representation of bits</param>
-            <returns></returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.EnumerationUtilities.RandomOddBitPattern(System.Int32,System.Random,System.Int32)">
-            <summary>
-            Generate a random bit pattern with an odd number of set bits under given width
-            </summary>
-            <param name="width">Maximum number of digits permitted in a bit pattern</param>
-            <param name="random">Random number generator </param>
-            <param name="setBit">Pre-set bit in the bit pattern</param>
-            <returns></returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.EnumerationUtilities.RandomEvenBitPattern(System.Int32,System.Random,System.Int32)">
-            <summary>
-            Generate a random bit pattern with an even number of set bits under given width
-            </summary>
-            <param name="width">Maximum number of digits permitted in a bit pattern</param>
-            <param name="random">Random number generator </param>
-            <param name="setBit">Pre-set bit in the bit pattern</param>
-            <returns></returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.EnumerationUtilities.RandomBitPattern(System.Int32,System.Random,System.Int32,System.Int32)">
-            <summary>
-            Generate a random bit pattern with an given number of set bits under given width
-            </summary>
-            <param name="width">Maximum number of digits permitted in a bit pattern</param>
-            <param name="random">Random number generator </param>
-            <param name="numOfSetBit">Random number generator </param>
-            <param name="setBit">Pre-set bit in the bit pattern</param>
-            <returns></returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.EnumerationUtilities.NumberOfDistinctValues(System.Collections.Generic.IEnumerable{System.Int32})">
-            <summary>
-            Counts the number of distinct numbers in the List.
-            </summary>
-            <param name="list">An IEnumerable of int's</param>
-            <returns>The number of distinct values within the list.</returns>
-        </member>
-        <member name="T:CrawfisSoftware.PCG.LoopEnumerator">
-            <summary>
-            Class to sample a path from top to bottom.
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.LoopEnumerator.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean})">
-            <summary>
-            
-            </summary>
-            <param name="width">The width of the underlying verticalGrid.</param>
-            <param name="height">The height of the underlying verticalGrid</param>
-            <param name="random">Random number generator</param>
-            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
-            <param name="verticalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far</param>
-            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.LoopEnumerator.Enumerate">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:CrawfisSoftware.PCG.LoopGeneratorSideWinder`2">
             <summary>
             Generate a random loop on a grid that consists of two paths that merge at
@@ -370,74 +823,36 @@
             Get or set whether to reset the start to the leftmost cell in the loop on the bottom row and the rightmost cell on the top row that are within the loop.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.PCG.LoopGeneratorSideWinder`2.#ctor(CrawfisSoftware.Maze.IMazeBuilder{`0,`1},System.Boolean,System.Boolean)">
+        <member name="M:CrawfisSoftware.PCG.LoopGeneratorSideWinder`2.#ctor(System.Boolean,System.Boolean)">
             <summary>
             Constructor
             </summary>
-            <param name="mazeBuilder">IMazeBuilder to use.</param>
             <param name="ignoreStartEnd">Boolean indicating whether to ignore the start and end cells when generating the maze.</param>
             <param name="resetStartEnd">Boolean indicating whether to reset the start to the leftmost cell in the loop on the bottom row and 
             the end to the rightmost cell on the top row.</param>
         </member>
-        <member name="M:CrawfisSoftware.PCG.LoopGeneratorSideWinder`2.CarveLoop(System.Boolean)">
+        <member name="M:CrawfisSoftware.PCG.LoopGeneratorSideWinder`2.CarveLoop(CrawfisSoftware.Maze.IMazeBuilder{`0,`1},System.Boolean)">
             <summary>
             Create a maze using the Sidewinder algorithm
             </summary>
+            <param name="mazeBuilder">IMazeBuilder to use.</param>
             <param name="preserveExistingCells">Boolean indicating whether to only replace maze cells that are undefined.
             Default is false.</param>
         </member>
-        <member name="T:CrawfisSoftware.PCG.LoopSampler">
+        <member name="T:CrawfisSoftware.PCG.MazeBuilder.Loop">
             <summary>
-            Class to sample a path from top to bottom.
+            Extensions for IMazeBuilder for loop and path sampling algorithm.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.PCG.LoopSampler.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean},CrawfisSoftware.PCG.EnumerationUtilities.Validator,CrawfisSoftware.PCG.EnumerationUtilities.Validator)">
+        <member name="M:CrawfisSoftware.PCG.MazeBuilder.Loop.CreateLoop``2(CrawfisSoftware.Maze.IMazeBuilder{``0,``1},System.Boolean)">
             <summary>
-            
+            Create a loop maze using the loop sweeping algorithm and may take a while.
             </summary>
-            <param name="width">The width of the underlying verticalGrid.</param>
-            <param name="height">The height of the underlying verticalGrid</param>
-            <param name="random">Random number generator</param>
-            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
-            <param name="verticalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far</param>
-            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.LoopSampler.Sample">
-            <summary>
-            Iterate over all non-cyclical paths from a starting cell to an ending cell on an open verticalGrid.
-            </summary>
-            <param name="start">The column index of the starting cell on the first row (row 0).</param>
-            <param name="end">The column index of the ending cell on the last row (row height-1)</param>
-            <returns>A value tuple of a list of vertical bits and a list of horizontal bits.</returns>
-        </member>
-        <member name="T:CrawfisSoftware.PCG.LoopSamplerCarryOverBit">
-            <summary>
-            Class to sample a path from top to bottom.
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.LoopSamplerCarryOverBit.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean},CrawfisSoftware.PCG.EnumerationUtilities.Validator,CrawfisSoftware.PCG.EnumerationUtilities.Validator)">
-            <summary>
-            
-            </summary>
-            <param name="width">The width of the underlying verticalGrid.</param>
-            <param name="height">The height of the underlying verticalGrid</param>
-            <param name="random">Random number generator</param>
-            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
-            <param name="verticalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far</param>
-            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.LoopSamplerCarryOverBit.Sample(System.Int32)">
-            <summary>
-            Iterate over all non-cyclical paths from a starting cell to an ending cell on an open verticalGrid.
-            </summary>
-            <param name="start">The column index of the starting cell on the first row (row 0).</param>
-            <param name="end">The column index of the ending cell on the last row (row height-1)</param>
-            <param name="numColumns">Numeber of columns, each column has a width of the given table</param>
-            <returns>A value tuple of a list of vertical bits and a list of horizontal bits.</returns>
+            <param name="mazeBuilder">A maze builder</param>
+            <param name="preserveExistingCells">Boolean indicating whether to only replace maze cells that are undefined.
+            Default is false.</param>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
         </member>
         <member name="T:CrawfisSoftware.PCG.MazeWrapperFromGridBitArrays`2">
             <summary>
@@ -463,87 +878,6 @@
             indicate a passage should be carved to the next row (i,j)->(i,j+1). Bits are read right to left as the grid goes left to right.</param>
             <param name="horizontalPaths">A list of rows, where each row has a bitpattern. 1's in the bit pattern 
             indicate a passage should be carved to the next cell (i,j)->(i+1,j). Bits are read right to left as the grid goes left to right.</param>
-        </member>
-        <member name="T:CrawfisSoftware.PCG.OutflowState">
-            <summary>
-            Enum of possible directions an inflow can go.
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.OutflowStates.OldDetermineOutflowStates(System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
-            <summary>
-            This method will eliminate invalid states between two inflows based on positions and
-            components. All possible combinations can then be tried for each span
-            So there would be 3^N possible state cases. 
-            </summary>
-            <param name="positions">The positions of the inflows.</param>
-            <param name="components">The component numbers of the inflows (after any merges).</param>
-            <returns>A vector of states flags.</returns>
-            <remarks>The case of a single space between two inflows is not handled here. So the
-            set of possibilities may be slightly less if positions[i]+2 == positions[i+1]
-            as the combination go right (for i) and go left (for i+1) is invalid. This is handled in
-            the span enumeration once we fix a state for inflow i.</remarks>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.OutflowStates.DetermineOutflowStates(System.Int32,System.Collections.Generic.List{System.Int32},System.Collections.Generic.List{System.Int32})">
-            <summary>
-            Enumerate all rows that have the desired inflows and outflow states (left, up, right). All merges
-            are marked with states dead-goes-right and dead-goes-left.
-            </summary>
-            <param name="width">The width of the row.</param>
-            <param name="positions">The positions of the inflows.</param>
-            <param name="components">List of component numbers for each position.</param>
-            <returns>An Enumerable of the valid row directions for each inflow position.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.OutflowStates.DetermineOutflowStates(System.Int32,System.Collections.Generic.List{System.Int32})">
-            <summary>
-            Enumerate all rows that have the desired inflows and outflow states (left, up, right). All merges
-            are marked with states dead-goes-right and dead-goes-left.
-            </summary>
-            <param name="width">The width of the row.</param>
-            <param name="positions">The positions of the inflows.</param>
-            <returns>An Enumerable of the valid row directions for each inflow position.</returns>
-        </member>
-        <member name="T:CrawfisSoftware.PCG.PathEnumerationBottomToTop">
-            <summary>
-            Static class to enumerate paths
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.PathEnumerationBottomToTop.AllPaths(System.Int32,System.Int32,System.Int32,System.Int32,System.Func{System.Int32,System.Boolean},CrawfisSoftware.PCG.EnumerationUtilities.Validator,CrawfisSoftware.PCG.EnumerationUtilities.Validator)">
-            <summary>
-            Iterate over all non-cyclical paths from a starting cell to an ending cell on an open verticalGrid.
-            </summary>
-            <param name="width">The width of the underlying verticalGrid.</param>
-            <param name="height">The height of the underlying verticalGrid</param>
-            <param name="start">The column index of the starting cell on the first row (row 0).</param>
-            <param name="end">The column index of the ending cell on the last row (row height-1)</param>
-            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
-            <param name="rowCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
-            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
-            <returns>A value tuple of a list of vertical bits and a list of horizontal bits.</returns>
-        </member>
-        <member name="T:CrawfisSoftware.PCG.PathGenerator">
-            <summary>
-            Create a path using the Path enumerator logic
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.PathGenerator.#ctor(System.Int32,System.Int32,System.Random)">
-            <summary>
-            Constructor
-            </summary>
-            <param name="width">The width of the underlying grid</param>
-            <param name="height">The height of the underlying grid</param>
-            <param name="random">A random number generator</param>
-            <remarks>Width must be less than 32.</remarks>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.PathGenerator.GenerateRandomPath(System.Int32,System.Int32,System.Collections.Generic.IList{System.Int32}@,System.Collections.Generic.IList{System.Int32}@)">
-            <summary>
-            Generate a random path from the bottom edge to the top edge
-            </summary>
-            <param name="start">The column index of the starting cell</param>
-            <param name="end">The column index of the ending cell</param>
-            <param name="verticalPaths">A bit pattern of each row that represents the vertical edges of the path</param>
-            <param name="horizontalPaths">A bit pattern of each row that represents the horizontal edges of the path</param>
         </member>
         <member name="T:CrawfisSoftware.PCG.PathGeneratorSideWinder`2">
             <summary>
@@ -571,47 +905,25 @@
             to the next row (returns row+1).
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.PCG.PathGeneratorSideWinder`2.#ctor(CrawfisSoftware.Maze.IMazeBuilder{`0,`1})">
+        <member name="M:CrawfisSoftware.PCG.PathGeneratorSideWinder`2.#ctor">
             <summary>
             Constructor.
             </summary>
-            <param name="mazeBuilder">An IMazeBuilder.</param>
         </member>
         <member name="M:CrawfisSoftware.PCG.PathGeneratorSideWinder`2.CarvePath(CrawfisSoftware.Maze.IMazeBuilder{`0,`1},System.Boolean)">
-            <inheritdoc/>
-        </member>
-        <member name="T:CrawfisSoftware.PCG.PathSamplerBottomToTop">
             <summary>
-            Class to sample a path from top to bottom.
+            Generate a path from the start column on the bottom row to the end column
             </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.PathSamplerBottomToTop.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean},CrawfisSoftware.PCG.EnumerationUtilities.Validator,CrawfisSoftware.PCG.EnumerationUtilities.Validator)">
-            <summary>
-            
-            </summary>
-            <param name="width">The width of the underlying verticalGrid.</param>
-            <param name="height">The height of the underlying verticalGrid</param>
-            <param name="random">Random number generator</param>
-            <param name="globalConstraintsOracle">Optional function to specify some global constraints on the outflows of a row.</param>
-            <param name="verticalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate row value (vertical bits), all verticalBits so far, all horizontal bits so far, all components so far</param>
-            <param name="horizontalCandidateOracle">Function that returns true or false whether this row is desired. Parameters are: the pathID, the row number,
-            the current candidate value (horizontal bits), all verticalBits so far, all horizontal bits so far, all components so far.</param>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.PathSamplerBottomToTop.Sample(System.Int32,System.Int32)">
-            <summary>
-            Iterate over all non-cyclical paths from a starting cell to an ending cell on an open verticalGrid.
-            </summary>
-            <param name="start">The column index of the starting cell on the first row (row 0).</param>
-            <param name="end">The column index of the ending cell on the last row (row height-1)</param>
-            <returns>A value tuple of a list of vertical bits and a list of horizontal bits.</returns>
+            <param name="mazeBuilder">An IMazeBuilder.</param>
+            <param name="preserveExistingCells">Boolean indicating whether to only replace maze cells that are undefined.
+            Default is false.</param>
         </member>
         <member name="T:CrawfisSoftware.PCG.PathSamplerBottomToTopCarryOverBit">
             <summary>
             Class to sample a path from top to bottom.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.PCG.PathSamplerBottomToTopCarryOverBit.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean},CrawfisSoftware.PCG.EnumerationUtilities.Validator,CrawfisSoftware.PCG.EnumerationUtilities.Validator)">
+        <member name="M:CrawfisSoftware.PCG.PathSamplerBottomToTopCarryOverBit.#ctor(System.Int32,System.Int32,System.Random,System.Func{System.Int32,System.Boolean},CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator,CrawfisSoftware.Path.BitPattern.EnumerationUtilities.Validator)">
             <summary>
             
             </summary>
@@ -689,179 +1001,20 @@
             <param name="preserveExistingCells">If true, _occupied with existing
             values already set will not be affected.</param>
         </member>
-        <member name="T:CrawfisSoftware.PCG.SpanEnumeration">
+        <member name="T:CrawfisSoftware.MazeBuilder.Path">
             <summary>
-            Enumerate all valid path (or loop) fragments, given the desired outflow state of the
-            last bit and the outflow start of the previous span (the start bit location).
-            </summary>
-            <remarks>Bit order for a span goes from right to left. N...0</remarks>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.SpanEnumeration.#ctor(System.Int32,CrawfisSoftware.PCG.OutflowState,System.Int32,CrawfisSoftware.PCG.OutflowState)">
-            <summary>
-            Constructor.
-            </summary>
-            <param name="start">The starting bit location (not included in the span).</param>
-            <param name="startState">The OutflowState state of the start location (or previous span).</param>
-            <param name="end">The ending bit location.</param>
-            <param name="endState">The end bit's OutflowState.</param>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.SpanEnumeration.GetEnumerator">
-            <inheritdoc/>
-        </member>
-        <member name="T:CrawfisSoftware.PCG.SweepingMetrics">
-            <summary>
-            A metric class that calculates the metrics as we sweep up the grid.
+            Extensions for IMazeBuilder for loop and path sampling algorithm.
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.PCG.SweepingMetrics.TotalLen">
+        <member name="M:CrawfisSoftware.MazeBuilder.Path.CreatePath``2(CrawfisSoftware.Maze.IMazeBuilder{``0,``1},System.Boolean)">
             <summary>
-            Total length of the path or loop
+            Create a path maze using the sweeping algorithm and may take a while.
             </summary>
-        </member>
-        <member name="P:CrawfisSoftware.PCG.SweepingMetrics.Straights">
-            <summary>
-            Total straights in the path or loop
-            </summary>
-        </member>
-        <member name="P:CrawfisSoftware.PCG.SweepingMetrics.Turns">
-            <summary>
-            Total turns in the path or loop
-            </summary>
-        </member>
-        <member name="P:CrawfisSoftware.PCG.SweepingMetrics.UTuns">
-            <summary>
-            Total UTuns in the path or loop
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.SweepingMetrics.#ctor(System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="width"></param>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.SweepingMetrics.ToString">
-            <summary>
-            Convert the metrics as string
-            </summary>
-            <returns>String format of the metric</returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.SweepingMetrics.CalculateMetricCurrentRow(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="inflow"></param>
-            <param name="outflow"></param>
-            <param name="horizontalSpan"></param>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.SweepingMetrics.Copy">
-            <summary>
-            
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="T:CrawfisSoftware.PCG.ValidPathRowEnumerator">
-            <summary>
-            Static class used to enumerate rows with an inFlow constraint.
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.PointToOddTable">
-            <summary>
-            Point the pre-computed tables to odd tables.
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.PointToEvenTable">
-            <summary>
-            Point the pre-computed tables to even tables.
-            </summary>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.ValidRowList(System.Int32,System.Int32)">
-            <summary>
-            Get the valid vertical outputs given a vertical input.
-            </summary>
-            <param name="width">The width of the row</param>
-            <param name="row">The inflow bits.</param>
-            <returns>A list of possible outputs.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.OddRowList(System.Int32,System.Int32)">
-            <summary>
-            Get the valid vertical outputs given a vertical input. Valid outputs must have an odd number of bits.
-            </summary>
-            <param name="width">The width of the row</param>
-            <param name="row">The inflow bits.</param>
-            <returns>A list of possible outputs.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.EvenRowList(System.Int32,System.Int32)">
-            <summary>
-            Get the valid vertical outputs given a vertical input. Valid outputs must have an even number of bits.
-            </summary>
-            <param name="width">The width of the row</param>
-            <param name="row">The inflow bits.</param>
-            <returns>A list of possible outputs.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.BuildOddTables(System.Int32)">
-            <summary>
-            Create pre-computed tables for paths, which have an odd number of inflows.
-            </summary>
-            <param name="width">The width of the row, cannot exceed 16.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-            <paramref name="width"/> is less than or equal to <c>16</c>.
-            </exception>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.BuildEvenTables(System.Int32)">
-            <summary>
-            Create pre-computed tables for loops, which have an even number of inflows.
-            </summary>
-            <param name="width">The width of the row</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-            <paramref name="width"/> is less than or equal to <c>16</c>.
-            </exception>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.BuildOddTablesWithConstraints(System.Int32,System.Func{System.Int32,System.Boolean})">
-            <summary>
-            Create pre-computed tables for paths, which have an odd number of inflows.
-            </summary>
-            <param name="width">The width of the row</param>
-            <param name="oracle">Function that returns true if this outflow configuration is desirable.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-            <paramref name="width"/> is less than or equal to <c>16</c>.
-            </exception>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.BuildEvenTablesWithConstraints(System.Int32,System.Func{System.Int32,System.Boolean})">
-            <summary>
-            Create pre-computed tables for loops or paths which do not have a start and end on opposite grid edges, which have an even number of inflows.
-            </summary>
-            <param name="width">The width of the row</param>
-            <param name="oracle">Function that returns true if this outflow configuration is desirable.</param>
-            <exception cref="T:System.ArgumentOutOfRangeException">
-            <paramref name="width"/> is less than or equal to <c>16</c>.
-            </exception>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.GetRandomRow(System.Int32,System.Int32,System.Random)">
-            <summary>
-            Get a random row that is a valid result with the given inflows.
-            </summary>
-            <param name="width">The width of the row</param>
-            <param name="inFlows">A bit pattern of the inflows in the row</param>
-            <param name="random">A random number generator</param>
-            <returns></returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.ValidRows(System.Int32,System.Int32,CrawfisSoftware.PCG.OutflowState,CrawfisSoftware.PCG.OutflowState)">
-            <summary>
-            Iterate over all valid rows given a row's inflows
-            </summary>
-            <param name="width">The width of the row</param>
-            <param name="inFlows">A bit pattern of the inflows in the row</param>
-            <param name="leftEdgeState">The Outflow state of the first outflow.</param>
-            <param name="rightEdgeState">The outflow state for the last outflow.</param>
-            <returns>An enumerable of integers that represent the state of the row.</returns>
-        </member>
-        <member name="M:CrawfisSoftware.PCG.ValidPathRowEnumerator.InflowsFromBits(System.Int32,System.Numerics.BigInteger)">
-            <summary>
-            Returns the column indices of the inflows of a row
-            </summary>
-            <param name="width">The width of the row</param>
-            <param name="row">The inflow bit pattern</param>
-            <returns></returns>
+            <param name="mazeBuilder">A maze builder</param>
+            <param name="preserveExistingCells">Boolean indicating whether to only replace maze cells that are undefined.
+            Default is false.</param>
+            <typeparam name="N">The type used for node labels</typeparam>
+            <typeparam name="E">The type used for edge weights</typeparam>
         </member>
     </members>
 </doc>

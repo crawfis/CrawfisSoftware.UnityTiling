@@ -170,7 +170,7 @@
             Maze builder extensions that rasterize a <c>DungeonGraph</c>'s, <c>GridRoom</c>'s and <c>PassageRasterizerType</c> connections.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.RasterizeDungeon``4(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{``0,``1},CrawfisSoftware.Dungeons.DungeonGraph{CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Dungeons.GridPassageConnectionData{``3}},System.Boolean)">
+        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.RasterizeDungeon``4(CrawfisSoftware.Maze.IMazeBuilder{``0,``1},CrawfisSoftware.Dungeons.DungeonGraph{CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Dungeons.GridPassageConnectionData{``3}},System.Boolean)">
             <summary>
             Take a dungeon graph with <c>GridRoom<typeparamref name="R"/></c> node data and <c>GridPassageConnectionData<typeparamref name="C"/></c> connection data and rasterize it into a maze.
             </summary>
@@ -182,7 +182,7 @@
             <param name="dungeonGraph">A dungeon graph or <c>GridRoom</c>'s and <c>GridPassageConnectionData</c>.</param>
             <param name="preserveExistingCells">Boolean indicating whether to only replace maze cells that are undefined.</param>
         </member>
-        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.CarvePassage``3(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{``0,``1},CrawfisSoftware.Dungeons.PassageRasterizerType,CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Maze.MazePathCost{``0,``1})">
+        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.CarveCorridor``3(CrawfisSoftware.Maze.IMazeBuilder{``0,``1},CrawfisSoftware.Dungeons.PassageRasterizerType,CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Maze.MazePathCost{``0,``1})">
             <summary>
             Carve out a rectangular room.
             </summary>
@@ -195,7 +195,7 @@
             <param name="room2">A <c>GridRoom</c> to carve to.</param>
             <param name="mazePathCost">An <c>MazePathCost</c> used to determine the cost of an edge (if needed - can be null).</param>
         </member>
-        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.CarveGridRoom``3(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{``0,``1},CrawfisSoftware.Dungeons.GridRoom{``2})">
+        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.CarveGridRoom``3(CrawfisSoftware.Maze.IMazeBuilder{``0,``1},CrawfisSoftware.Dungeons.GridRoom{``2})">
             <summary>
             Carve out a rectangular room.
             </summary>
@@ -205,7 +205,7 @@
             <param name="mazeBuilder">The underlying MazeBuilder</param>
             <param name="room">A <c>GridRoom</c> to carve from.</param>
         </member>
-        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.CarveShortestPath``3(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{``0,``1},CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Collections.Graph.EdgeCostDelegate{``1},System.Boolean)">
+        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.CarveShortestPath``3(CrawfisSoftware.Maze.IMazeBuilder{``0,``1},CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Collections.Graph.EdgeCostDelegate{``1},System.Boolean)">
             <summary>
             Create a grid path between rooms using a shortest path algorithm.
             </summary>
@@ -218,7 +218,7 @@
             <param name="edgeCostFunction">An <c>EdgeCostDelegate</c> used to determine the cost of an edge.</param>
             <param name="preserveExistingCells">Boolean indicating whether to only replace maze cells that are undefined.</param>
         </member>
-        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.CarveElbowPassage``3(CrawfisSoftware.Collections.Maze.MazeBuilderAbstract{``0,``1},CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Dungeons.GridRoom{``2},System.Boolean)">
+        <member name="M:CrawfisSoftware.Dungeons.DungeonMazeBuilder.CarveElbowPassage``3(CrawfisSoftware.Maze.IMazeBuilder{``0,``1},CrawfisSoftware.Dungeons.GridRoom{``2},CrawfisSoftware.Dungeons.GridRoom{``2},System.Boolean)">
             <summary>
             Create a grid path with two straight line segments.
             </summary>
@@ -307,6 +307,16 @@
             Defined algorithms for connecting two rooms.
             </summary>
         </member>
+        <member name="F:CrawfisSoftware.Dungeons.PassageRasterizerType.None">
+            <summary>
+            No Connection. Rooms abut each other or useful for other connection types outside of this class.
+            </summary>
+        </member>
+        <member name="F:CrawfisSoftware.Dungeons.PassageRasterizerType.Opening">
+            <summary>
+            There is just an opening or door.
+            </summary>
+        </member>
         <member name="F:CrawfisSoftware.Dungeons.PassageRasterizerType.Unspecified">
             <summary>
             No algorithm selected.
@@ -332,49 +342,60 @@
             Use a random walk
             </summary>
         </member>
-        <member name="T:CrawfisSoftware.Dungeons.RandomSpatialLayout`2">
+        <member name="T:CrawfisSoftware.Dungeons.SpatialRoomGeneratorDelegate`2">
+            <summary>
+            A delegate to generate a room in a grid.
+            </summary>
+            <typeparam name="R">The type used for room data</typeparam>
+            <typeparam name="Q">The type used for resulting GridRoom data</typeparam>
+            <param name="roomData">An AbstractRoom{R}.</param>
+            <param name="room">Outputs a GridRoom{Q}.</param>
+            <returns>True is the room was able to be generated. False otherwise.</returns>
+        </member>
+        <member name="T:CrawfisSoftware.Dungeons.RandomSpatialLayout`3">
             <summary>
             A class to randomly place rooms in a grid.
             </summary>
             <typeparam name="R">The type used for room data</typeparam>
             <typeparam name="C">The type used for connection data</typeparam>
+            <typeparam name="Q">The type used for resulting GridRoom data</typeparam>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.GridWidth">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.GridWidth">
             <summary>
             Get the width of the grid
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.GridHeight">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.GridHeight">
             <summary>
             Get the height of the grid
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.SpatialRoomGenerator">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.SpatialRoomGenerator">
             <summary>
             Get or set the room generator function. It should return a GridRoom given and AbstractRoom.
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.RoomMoatSize">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.RoomMoatSize">
             <summary>
             Get or set the outside wall buffer size
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.RasterType">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.RasterType">
             <summary>
             Get or set the type of rasterizer to use for the passage.
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.MaxNumberOfTriesPerRoom">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.MaxNumberOfTriesPerRoom">
             <summary>
             Get or set the maximum number of tries to place a room.
             </summary>
         </member>
-        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.RandomGenerator">
+        <member name="P:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.RandomGenerator">
             <summary>
             Get or set the random number generator.
             </summary>
         </member>
-        <member name="M:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.#ctor(System.Int32,System.Int32,CrawfisSoftware.Dungeons.DungeonGraph{`0,`1})">
+        <member name="M:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.#ctor(System.Int32,System.Int32,CrawfisSoftware.Dungeons.DungeonGraph{`0,`1})">
             <summary>
             Constructor.
             </summary>
@@ -382,7 +403,7 @@
             <param name="gridHeight">The height of the desired grid.</param>
             <param name="dungeonGraph">The initial (abstract) <c>DungeonGrid</c>.</param>
         </member>
-        <member name="M:CrawfisSoftware.Dungeons.RandomSpatialLayout`2.RandomRoomPlacement">
+        <member name="M:CrawfisSoftware.Dungeons.RandomSpatialLayout`3.PlaceRooms">
             <summary>
             Randomly place the rooms in the grid.
             </summary>

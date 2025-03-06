@@ -7,13 +7,16 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "CrawfisSoftware.Dungeons/1.0.0": {
+      "CrawfisSoftware.Maze/1.0.0": {
         "dependencies": {
+          "CrawfisSoftware.Collections": "1.0.0",
+          "CrawfisSoftware.Graph": "1.0.0",
+          "CrawfisSoftware.Grid": "1.0.0",
           "CrawfisSoftware.IGraph": "1.0.0",
-          "CrawfisSoftware.Maze": "1.0.0"
+          "CrawfisSoftware.Path": "1.0.0"
         },
         "runtime": {
-          "CrawfisSoftware.Dungeons.dll": {}
+          "CrawfisSoftware.Maze.dll": {}
         }
       },
       "CrawfisSoftware.Collections/1.0.0": {
@@ -56,21 +59,6 @@
           }
         }
       },
-      "CrawfisSoftware.Maze/1.0.0": {
-        "dependencies": {
-          "CrawfisSoftware.Collections": "1.0.0",
-          "CrawfisSoftware.Graph": "1.0.0",
-          "CrawfisSoftware.Grid": "1.0.0",
-          "CrawfisSoftware.IGraph": "1.0.0",
-          "CrawfisSoftware.Path": "1.0.0"
-        },
-        "runtime": {
-          "CrawfisSoftware.Maze.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": "1.1.0.0"
-          }
-        }
-      },
       "CrawfisSoftware.Path/1.0.0": {
         "dependencies": {
           "CrawfisSoftware.Grid": "1.0.0"
@@ -85,7 +73,7 @@
     }
   },
   "libraries": {
-    "CrawfisSoftware.Dungeons/1.0.0": {
+    "CrawfisSoftware.Maze/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -106,11 +94,6 @@
       "sha512": ""
     },
     "CrawfisSoftware.IGraph/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "CrawfisSoftware.Maze/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

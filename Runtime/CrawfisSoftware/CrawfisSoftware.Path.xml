@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>CrawfisSoftware.Paths</name>
+        <name>CrawfisSoftware.Path</name>
     </assembly>
     <members>
         <member name="T:CrawfisSoftware.Collections.Path.GridLoopMetrics`2">

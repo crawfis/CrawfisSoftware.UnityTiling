@@ -47,8 +47,7 @@
         },
         "runtime": {
           "CrawfisSoftware.Tiling.dll": {
-            "assemblyVersion": "1.0.0",
-            "fileVersion": ""
+            "fileVersion": "0.0.0.0"
           }
         }
       },
@@ -116,9 +115,9 @@
           }
         }
       },
-      "CrawfisSoftware.Paths/1.1.0.0": {
+      "CrawfisSoftware.Path/1.1.0.0": {
         "runtime": {
-          "CrawfisSoftware.Paths.dll": {
+          "CrawfisSoftware.Path.dll": {
             "assemblyVersion": "1.1.0.0",
             "fileVersion": "1.1.0.0"
           }
@@ -191,7 +190,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CrawfisSoftware.Paths/1.1.0.0": {
+    "CrawfisSoftware.Path/1.1.0.0": {
       "type": "reference",
       "serviceable": false,
       "sha512": ""

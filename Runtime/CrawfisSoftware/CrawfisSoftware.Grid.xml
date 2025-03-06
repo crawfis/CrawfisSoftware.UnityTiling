@@ -103,6 +103,13 @@
             <returns>True if the specified direction is a T-junction.</returns>
             <remarks>Will not work with Undefines. Use IMazeBuilder.RemoveUndefines to remove these first.</remarks>
         </member>
+        <member name="M:CrawfisSoftware.Collections.Graph.DirectionExtensions.NumberOfExits(CrawfisSoftware.Collections.Graph.Direction)">
+            <summary>
+            Counts the number of directions in the specified direction.
+            </summary>
+            <param name="direction">The direction to test</param>
+            <returns>The count of directions.</returns>
+        </member>
         <member name="T:CrawfisSoftware.Collections.Graph.GetGridLabel`1">
             <summary>
             A delegate for specifying the function used to retrieve

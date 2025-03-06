@@ -7,12 +7,12 @@
   "targets": {
     ".NETStandard,Version=v2.1": {},
     ".NETStandard,Version=v2.1/": {
-      "CrawfisSoftware.Paths/1.0.0": {
+      "CrawfisSoftware.Path/1.0.0": {
         "dependencies": {
           "CrawfisSoftware.Grid": "1.0.0"
         },
         "runtime": {
-          "CrawfisSoftware.Paths.dll": {}
+          "CrawfisSoftware.Path.dll": {}
         }
       },
       "CrawfisSoftware.Collections/1.0.0": {
@@ -58,7 +58,7 @@
     }
   },
   "libraries": {
-    "CrawfisSoftware.Paths/1.0.0": {
+    "CrawfisSoftware.Path/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
